@@ -1,0 +1,169 @@
+/*auto-complete starts*/
+$(function(){
+var srch_indx = -1;
+$(".srchBox-input").keyup(function(e){
+try{
+if( $('.srchBox-input').val().length < 2 ) return false;
+if(e.which == 38){
+srch_indx--;
+if(srch_indx < 0) srch_indx = 0;
+srchBox_selChange();
+} else if(e.which == 40){
+srch_indx++;
+if(srch_indx > $('#optBox').find('.capitals').length - 1){
+srch_indx = $('#optBox').find('.capitals').length-1;
+}
+srchBox_selChange();
+} else if(e.which == 27){
+srch_indx = -1;
+srchBox_Close();
+} else if(e.which == 13){
+if(srch_indx > -1){
+if($('#optBox').find('.capitals').hasClass('selected')){
+$('#optBox').find('.selected').click();
+srch_indx=-1;
+$('#optBox').find('.capitals').removeClass('selected');
+}
+}
+} else{
+srch_indx = -1;
+var pattern=$('.srchBox-input').val();
+
+if(pattern.toLowerCase().indexOf("hero hon") != -1){
+pattern = pattern.replace(/hero honda/gi, "Hero");
+pattern = pattern.replace(/hero hond/gi, "Hero");
+pattern = pattern.replace(/hero hon/gi, "Hero");
+}
+var patternNosp = pattern.replace(/ /gi,"");
+var patArr = pattern.split(new RegExp('\\s+', 'g'));
+var rgEx = "";
+for(var m = 0; m < patArr.length;m++) rgEx += "(?=.*\\b" + patArr[m] + ")";
+var re1 = new RegExp( (rgEx + ".+"), "gi" );
+var re2 = new RegExp(patternNosp, "gi");
+var options = '<div id="optBox"><ul>';
+for(var currCmp in arrModel){
+if(pattern){
+var mdlArr = arrModel[currCmp];
+for(var k = 0; mdlArr && mdlArr.length > 0 && k < mdlArr.length; k++){
+var currMdl = mdlArr[k];
+if(currMdl == 'Other') continue;
+var vers = currCmp+"_"+currMdl;
+if(arrVersion[vers] && arrVersion[vers].length > 0){
+for(var j=0; j < arrVersion[vers].length; j++){
+var currVer = arrVersion[vers][j];
+if(currVer == 'Other') continue;
+var itemFullName = (currCmp+' '+currVer);
+var itemFullNameNosp = itemFullName.replace(/ /gi,"");
+var currVerNosp = currVer.replace(/ /gi,"");
+if(itemFullName.replace(/-/gi,"").match(re1) || currVer.replace(/-/gi,"").match(re1) || itemFullNameNosp.match(re2) || currVerNosp.match(re2) || itemFullName.replace(/-/gi," ").match(re1) || currVer.replace(/-/gi," ").match(re1) || itemFullNameNosp.replace(/-/gi,"").match(re2) || currVerNosp.replace(/-/gi,"").match(re2)){
+options += "<li class='capitals'>"+itemFullName+"</li>";
+}
+}
+} else{
+var itemFullName = (currCmp+' '+currMdl);
+var itemFullNameNosp = itemFullName.replace(/ /gi,"");
+var currMdlNosp = currMdl.replace(/ /gi,"");
+if(itemFullName.match(re1) || currMdl.match(re1) || itemFullNameNosp.match(re2) || currMdlNosp.match(re2) || itemFullName.replace(/-/gi," ").match(re1) || currMdl.replace(/-/gi," ").match(re1) || itemFullNameNosp.replace(/-/gi,"").match(re2) || currMdlNosp.replace(/-/gi,"").match(re2)){
+options += "<li class='capitals'>"+itemFullName+"</li>";
+}
+}
+}
+if(currCmp.match(re1) || currCmp.replace(/ /gi,"").match(re2)) options += "<li class='capitals'>"+currCmp+"</li>";
+} else{
+options += "<li class='capitals'>"+currCmp+"</li>";
+}
+}
+options += '</ul></div>';
+$('#optBox').replaceWith(options);
+}
+$('body').click(function(e){
+try{
+if($("#optBox .capitals").length > 0){
+srchBox_Close();
+}
+}catch(e){}
+});
+$("#optBox .capitals").click(function(){
+try{
+var model = $(this).text();
+$(".srchBox-input").val(model);
+srchBox_Close();
+$('#autoSrchForm').submit();
+}catch(e){}
+});
+$("#optBox .capitals").mouseover(function(){
+try{
+$('#optBox').find('.capitals').removeClass('selected');
+$(this).addClass('selected');
+//$(".srchBox-input").val( $("#optBox .selected").text());
+}catch(e){}
+});
+}catch(e){}
+});
+function srchBox_selChange(){
+try{
+$('#optBox').find('.capitals').removeClass('selected');
+$('#optBox').find('.capitals').eq(srch_indx).addClass('selected');
+$(".srchBox-input").val( $("#optBox .selected").text());
+$('#optBox').scrollTop($('.selected').offset().top - $('.selected').height() - $('#optBox').height() + $('#optBox').scrollTop() - 2);
+} catch(e){}
+}
+});
+function srchBox_Close(){
+$('#optBox').hide();
+}
+/*auto-complete ends*/
+/*BACK TO TOP JS*/
+if($('#back-to-top').length){
+var scrollTrigger = 600,
+backToTop = function (){
+var scrollTop = $(window).scrollTop();
+if(scrollTop > scrollTrigger){
+$('#back-to-top').addClass('show');
+}else{
+$('#back-to-top').removeClass('show');
+}
+};
+backToTop();
+$(window).on('scroll',function(){
+backToTop();
+});
+$('#back-to-top').on('click',function(e){
+e.preventDefault();
+$('html,body').animate({scrollTop:0},700);});
+}
+/*pwa start*/
+let deferredPrompt;
+try{
+window.addEventListener('beforeinstallprompt',(event)=>{
+try{
+deferredPrompt=event;
+document.querySelectorAll('.pwaInstallLink').forEach(link=>{
+link.style.display='block';
+});
+}catch(e){
+}
+});
+function installPWA(){
+try{
+if(deferredPrompt){
+deferredPrompt.prompt();
+deferredPrompt.userChoice.then(()=>{
+deferredPrompt=null;
+});
+}
+}catch(e){
+}
+}
+document.querySelectorAll('.pwaInstallLink').forEach(link=>{
+link.addEventListener('click',(event)=>{
+try{
+event.preventDefault();
+installPWA();
+}catch(e){
+}
+});
+});
+}catch(e){
+}
+/*pwa ends*/

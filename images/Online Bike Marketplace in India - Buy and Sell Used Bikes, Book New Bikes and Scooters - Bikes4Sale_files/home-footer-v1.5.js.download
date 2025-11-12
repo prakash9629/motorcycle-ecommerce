@@ -1,0 +1,172 @@
+setS("#usedstateD",null,null,g_sess_state);
+setS("#usedstateM",null,null,g_sess_state);
+function usedadvSearch(stat,budg){
+var link = '/used/buy/';
+var defItemName = "bikes";
+if(trim($(stat).val())){link += defItemName + "-in-" + getSEOUrl(trim($(stat).val())) + "/";}
+if(trim($(budg).val())){link += '?price=' + trim($(budg).val());}
+location.href = link;
+}
+function setBrand(itemType,newCompany){
+var selType = $(itemType).val();
+var options='<option value="">Select Brand</option>';
+var mdlArr=newArrModel[selType];
+if(mdlArr){
+for(var k=0;k < mdlArr.length;k++){
+options+='<option value="'+getSEOUrl(mdlArr[k])+'" ';
+options+='>'+mdlArr[k]+'</option>';
+}
+}
+$(newCompany).html(options);
+}
+function newadvSearch(itemType,newCompany){
+try{
+location.href = getSearchLinkAdv($(itemType).val(), $(newCompany).val(), '');
+}catch(e){
+}
+}
+function setBc(company,selVal){
+if(!company) return false;
+try{
+var options='<option value="">Select Brand</option>';
+for(var ele in specArrModel){
+options+='<option value="'+ele+'" ';
+if(selVal && selVal==ele) options+='selected="selected"';
+options+='>'+ele+'</option>';
+}
+var mdlArr=specArrModel[$(company).val()];
+if(mdlArr && mdlArr.length==0)
+$('.item-model-box').css('visibility','hidden');
+else
+$('.item-model-box').css('visibility','visible');
+if($(company).val()=='Other' || selVal=='Other' ||(mdlArr && mdlArr.length==0)){
+$('.other-full-name').text('');
+$('.other-box').fadeIn('slow');
+}
+$(company).html(options);
+} catch(e){
+}
+}
+function setMc(company,model,version,bYear,selVal){
+try{
+if(!company || !model) return false;
+var options='<option value="">Select Model</option>';
+var mdlArr=specArrModel[$(company).val()];
+if(mdlArr){
+for(var k=0;k < mdlArr.length;k++){
+options+='<option value="'+mdlArr[k]+'" ';
+if(selVal && selVal==mdlArr[k]) options+='selected="selected"';
+options+='>'+mdlArr[k]+'</option>';
+}
+}
+if(mdlArr && mdlArr.length==0)
+$('.item-model-box').css('visibility','hidden');
+else
+$('.item-model-box').css('visibility','visible');
+if($(company).val()=='Other' || $(model).val()=='Other' || selVal=='Other' ||(mdlArr && mdlArr.length==0)){
+$('.other-full-name').text('');
+$('.other-box').fadeIn('slow');
+}else{
+$('.other-box').hide();
+}
+$(model).html(options);
+} catch(e){
+}
+}
+function setComparePic(company,model,pic,nam){
+try{
+if(!company || !model || !pic || !nam) return false;
+var itemName = $(company).val() + ' ' + $(model).val();
+var imgSrc = '/pictures/default/'+getSEOUrl(itemName)+'/'+getSEOUrl(itemName)+'-640.jpg';
+$(pic).prop('src',imgSrc);
+$(pic).prop('alt',itemName);
+$(nam).text(itemName);
+}catch(e){
+}
+}
+function getCompLinkAdv(comp1, modl1, comp2, modl2){
+}
+function goToComp(){
+var link = '/compare';
+var a = '/';
+var comp1 = $('#company1').val();
+var comp2 = $('#company2').val();
+var modl1 = $('#model1').val();
+var modl2 = $('#model2').val();
+var c1 = getSEOUrl(($('#company1').val() || '') + ' ' + ($('#model1').val() || ''));
+var c2 = getSEOUrl(($('#company2').val() || '') + ' ' + ($('#model2').val() || ''));
+if(comp1 && modl1){link += a + c1;a = '/';}
+if(comp2 && modl2){link += a + c2;a = '/';}
+location.href = link;
+}
+setBc("#company1",'KTM');
+setBc("#company2",'Bajaj');
+setMc("#company1","#model1","#version1",null,'Duke 200');
+setMc("#company2","#model2","#version2",null,'Pulsar 200 NS');
+function gotoDealer(){
+try{
+var dealBrand = trim($("#dealer-list").val());
+location.href = "/new-bike-showrooms/" + (dealBrand ? ("dealer/" + dealBrand + "/") : "") + (g_sess_state ? "#" + g_sess_state : "");
+}catch(e){}
+}
+$('.slider-style1').owlCarousel({
+loop:true,
+margin:10,
+navigation:true,
+pagination:false,
+nav:true,
+items:5,
+responsive:{
+0:{items:2},
+482:{items:2},
+768:{items:3},
+992:{items:4},
+1200:{items:5},
+2000:{items:5}
+}
+});
+$('.slider-style2').owlCarousel({
+loop:true,
+margin:10,
+navigation:true,
+pagination:false,
+nav:true,
+items:4,
+responsive:{
+0:{items:2},
+482:{items:2},
+768:{items:3},
+992:{items:4},
+2000:{items:5}
+}
+});
+$('.slider-style3').owlCarousel({
+loop:true,
+margin:10,
+navigation:true,
+pagination:false,
+nav:true,
+items:4,
+responsive:{
+0:{items:3},
+482:{items:3},
+768:{items:3},
+992:{items:3},
+2000:{items:3}
+}
+});
+$('.slider-style4').owlCarousel({
+loop:true,
+margin:10,
+navigation:true,
+pagination:false,
+nav:true,
+items:4,
+responsive:{
+0:{items:3},
+482:{items:3},
+768:{items:4},
+992:{items:5},
+2000:{items:5}
+}
+});

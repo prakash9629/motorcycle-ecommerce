@@ -1,0 +1,2253 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.container{
+    width: 100%;
+     overflow-x: auto;
+    overflow-y: hidden;
+    /* background-color: red; */
+    height: 4700px;
+    /* height: auto; */
+}
+
+.first{
+    /* background-color: red; */
+    margin-top: 10px;
+    font-family: "Rubik", sans-serif;
+}
+#img1{
+    width: 200px;
+    height: 40px;
+    margin-left: 90px;
+}
+img + p{
+    font-size: 11px;
+    text-align: right;
+}
+
+.text1{
+    width: 450px;
+    height: 70px;
+    /* background-color: red; */
+    border-radius: 5px;
+    
+    position: relative;
+    right: 80px;
+}
+
+nav1{
+    display: flex;
+    background-color:#0B3A72;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    width: 100%;
+    height: 80px;
+}
+
+#text-3{
+    width: 450px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 15px;
+    padding-left: 8px;
+    margin-top: 5px;
+
+}
+#but1{
+    width: 80px;
+    height: 47px;
+    font-size: 20px;
+    border-radius: 4px;
+    border: none;
+    background-color:#65ABF5;
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 7px;
+    /* margin-top: 7px; */
+   
+}
+
+#areas{
+    width: 130px;
+    height: 40px;
+    font-weight: 200;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    padding: 8px;
+    /* position: relative; */
+    /* right:20px; */
+    overflow-y: hidden;
+    /* margin-right: 80px; */
+
+}
+
+
+.login{
+    width: 100px;
+    height: 50px;
+    margin: 30px 70px 0px 0px ;
+    font-size: 20px;
+}
+
+.menu-bar{
+    opacity: -1;
+}
+
+#sign{
+    height: 30px;
+    background-color: #0B3A72;
+    border: none;
+    font-size: 16px;
+    font-weight: 300;
+    color: #fff;
+}
+#user{
+    /* color:#0B3A72; */
+    background-color:#0B3A72;
+    
+}
+
+nav2{
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 18px;
+    color: #4A4A4A;
+    padding: 0px 160px;
+    padding-right: 350px;
+}
+
+nav2 a:hover{
+    height: 100%;
+    
+}
+a{
+    text-decoration: none;
+    color: #FFf;
+}
+nav2 a{
+    color: #4A4A4A;
+    /* margin-bottom: 20px; */
+}
+
+ nav2 a:hover{
+    background-color: #65ABF5;
+    color: white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    
+
+}
+
+.bike{
+    width: 100%;
+    height: 550px;
+    /* background-image: linear-gradient (rgba(0,0,0,0.5)), linear-gradient (rgba(0,0,0,0.5)),url(images/star\ bike.webp); */
+    background: url(images/star\ bike.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: white;
+    position: relative;
+
+    
+}
+
+
+.content1{
+    margin-left: 350px;
+    padding-top: 50px;
+    font-family: "Rubik", sans-serif;
+}
+#sell{
+    font-size: 60px;
+    /* top: 10px; */
+    /* font-weight: bold; */
+}
+#since{
+    font-size: 60px;
+    margin-top: 17px;
+}
+#portal{
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.demo1{
+  
+    width: 28%;
+    height: 50px;
+    border-radius: 15px;
+    background-color: #0B3A72;
+    list-style-type: none;
+    padding: 16px;
+    margin-top: 40px;
+    margin-left: 350px;
+}
+.demo1 a{
+    padding-left: 20px;
+
+}
+
+.orange{
+    display: flex;
+    
+    
+}
+
+
+.buy1,.find{
+    width: 320px;
+    height: 80px;
+    font-size: 30px;
+    padding: 15px 20px;
+    background-color: #FF8300;
+    color: #FFFFFF;
+    border-radius: 5px;
+}
+.buy1{
+    position: relative;
+    left: 50px;
+    bottom: 100px;
+}
+.find{
+    position: relative;
+    left: 450px;
+    bottom: 100px;
+}
+
+.selection{
+    display: flex;
+}
+
+.select2{
+    width: 630px;
+    height: 100px;
+    background-color:#fff;
+    position: relative;
+    border: 1px solid whitesmoke;
+    bottom: 120px;
+    left: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* box-shadow: 0px 5px; */
+
+}
+#budget{
+    width: 250px;
+    height: 60px;
+    border-radius: 5px;
+    color: #696969;
+    font-size: 20px;
+    padding-left: 8px;
+    margin-left: 15px;
+    /* margin-top: 15px; */
+    /* position: absolute; */
+}
+#areas2{
+    width: 250px;
+    height: 60px;
+    border-radius: 5px;
+    color:#696969;
+    font-size: 20px;
+    padding-left: 8px;
+    /* position: absolute; */
+}
+#but2,#but3{
+    width: 90px;
+    height: 60px;
+    text-align: center;
+    background-color: #65ABF5;
+    border-radius: 4px;
+    border: none;
+    padding: 4px;
+    /* position: relative;
+    bottom: 4px; */
+}
+
+.select3{
+    width: 630px;
+    height: 100px;
+    background-color:#fff;
+    position: relative;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    bottom: 120px;
+    left: 140px;
+
+}
+
+#type{
+     width: 250px;
+    height: 60px;
+    border-radius: 5px;
+    color: #696969;
+    font-size: 20px;
+    padding-left: 8px;
+    margin-left: 15px;
+    margin-top: 15px;
+
+}
+
+#brand{
+    width: 250px;
+    height: 60px;
+    border-radius: 5px;
+    color:#696969;
+    font-size: 20px;
+    padding-left: 8px;
+
+}
+
+#head1{
+     font-weight: 500;
+    color: #4A4A4A;
+    font-size: 20px;
+    /* position: relative;
+    bottom: 50px;
+    left: 100px; */
+    /* background-color: red; */
+    margin-bottom: 50px;
+    margin-left: 50px;
+    
+}
+
+.bikeshadow{
+    width: 100%;
+    height: 500px;
+    background-image:linear-gradient(rgb(241, 237, 237,0.5)),linear-gradient(rgb(241, 237, 237,0.5));
+    /* display: flex; */
+    /* justify-content: space-around; */
+}
+
+.bikeshadow2{
+    width: 70%;
+    height: 500px;
+     background-image:linear-gradient(rgb(241, 237, 237,0.5)),linear-gradient(rgb(241, 237, 237,0.5)),url(images/bg2.webp);
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+     padding-left: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* flex-wrap: wrap; */
+}
+
+.left{
+    font-size: 40px;
+    /* position: relative;
+    top: 200px; */
+    font-family:Arial, Helvetica, sans-serif;
+    width: 50%;
+}
+.right{
+    /* background-color: red; */
+    width: 40%;
+    padding-left: 20px;
+    /* margin-left: 200px; */
+}
+
+#para1{
+    font-size: 26px;
+    color: #4A4A4A;
+    /* position: relative;
+    top: 50px;
+    left: 300px; */
+}
+
+.para2{
+    width: 300px;
+    height: 350px;
+    background-color: red;
+    padding: 30px;
+    margin-top: 30px;
+    font-size: 23px;
+    color: #625F63;
+    background-color: #fff;
+    /* position: relative;
+    top: 100px;
+    left: 300px; */
+    
+}
+
+#but4{
+    color:#0054F2;
+    width: 175px;
+    height: 35px;
+    font-size: 14px;
+    border:3px solid #0054F2;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+#heading1{
+    display: flex;
+    height: 80px;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    gap: 55%;
+    /* background-color: red; */
+
+}
+
+.models1{
+    display: flex;
+    width: 80%;
+    max-height: 450px;
+    /* border: 2px solid red; */
+    border-radius: 10px;
+    padding: 20px 50px;
+    gap: 10px;
+    justify-content: space-between;
+    background-color: #fff;
+    margin: auto;
+    /* overflow-y: hidden;  */
+    overflow: auto;
+
+}
+.models1-webkit-scrollbar{
+    width: 0;
+}
+.head2 h3{
+    padding-left: 70px;
+    width: 300px;
+}
+
+.head2{
+    color: #4A4A4A;
+    font-weight: 500;
+    font-size: 23px;
+    margin-top: 30px;
+}
+#heading2 h3{
+    padding-bottom: 40px;
+}
+.view a{
+    color: #FF8300;
+    font-weight: bold;
+    font-size: 17px;
+    align-self: flex-end;
+    position: relative;
+    top: 80px;
+    right: 30px;
+}
+.view a:hover{
+    text-decoration: underline;
+}
+h4{
+    color: #625F63;
+}
+
+
+#img2{
+    height: 230px;
+    width: 220px;
+}
+
+.img1{
+    text-align: center;
+}
+
+#grat,#less{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 28px;
+    
+}
+#grat{
+    position: relative;
+    left: 88%;
+    bottom: 240px;
+}
+#less{
+    position: relative;
+    left: 110px;
+    top: 200px;
+
+}
+
+.but5{
+    width: 200px;
+    height: 30px;
+    border: 2px solid #FF8300;
+    color: #FF8300;
+    border-radius: 15px;
+    background-color: #fff;
+    margin-top: 10px;
+}
+.but5:hover{
+    background-color: #FF8300;
+    color: #fff;
+}
+
+.valuation{
+    width: 100%;
+    height: 450px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+.leftside{
+    width: 45%;
+    height: 440px;
+    background-color:#fff;
+    border-radius: 6px;
+    padding:  30px 50px;
+}
+
+.rightside{
+    width: 400px;
+    height: 440px;
+     border-radius: 6px;
+    background-color:#fff;
+    padding: 20px;
+}
+
+#heading2 h3{
+    color:#4A4A4A;
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 80px;
+}
+
+#want,#get{
+    color: #4A4A4A;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+#quot{
+    color: #696969;
+    text-align: justify;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+#select-brand,#select-value,#areas3,#year{
+    width: 250px;
+    height: 60px;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px;
+    color: #696969;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+#lab{
+    font-size: 20px;
+    font-weight: bold;
+    color: #696969;
+    margin-left: 130px;
+}
+input[type="email"]{
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 20px;
+    padding-left: 20px;
+    /* border: #696969; */
+}
+
+ .but6{
+    width:250px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 6px;
+    border: none;
+    background-color: #65ABF5;
+    color: #ffffff;
+    margin-top: 20px;
+    margin-left: 28%;
+}
+
+.rightside h3{
+    color: #4A4A4A;
+    font-size: 30px;
+    font-weight: bold;
+}
+#rto{
+    color: #FF8300;
+    font-size:  20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+#use{
+    color: #625F63;
+    font-size: 18px;
+    font-weight: bold;
+    width: 350px;
+    text-align: justify;
+    margin-top: 20px;
+}
+
+.symbal{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 80px;
+}
+#buy1{
+    font-size: 26px;
+    font-weight: bold;
+    /* position: relative; */
+    color: #4A4A4A;
+    margin-top: 50px;
+    margin-left: 90px;
+    /* left: 90px;
+    top: 50px; */
+}
+
+.symleft{
+    width: 300px;
+    height: 420px;
+    padding-left: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color:#FFf;
+    border-radius: 6px;
+}
+.symleft h3{
+    font-size: 25px;
+    margin-left: 50px;
+    margin-top: 10px;
+    color:#4A4A4A;
+}
+
+.symleft p{
+    border-bottom: 2px solid gray;
+    width: 200px;
+    margin-top: 30px;
+    color: #625F63;
+}
+.symleft p:hover{
+    transform: translatex(-10px);
+}
+
+.symright{
+    width: 700px;
+    height: 420px;
+    background-color:#fff;
+    border-radius: 7px;
+    padding-left: 40px;
+}
+.symright h3{
+    font-size: 25px;
+    color: #4A4A4A;
+    font-weight: bold;
+    margin-left: 170px;
+   margin-bottom: 20px;
+   margin-top: 10px;}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 30px;
+}
+.grid img{
+    border: none;
+    /* background: none; */
+    width: 140px;
+    height: 140px;
+    
+}
+.grid img:hover{
+    transform: scale(1.1,1.1);
+}
+.grid-hover:hover{
+    img + h5{
+        opacity: 5;
+}
+}
+
+img + h5{
+    margin-left: 35px;
+    font-size: 16px;
+    opacity: -2;
+    transition: transfrom 2s;
+}
+
+.salesbikes{
+    background-color:#eef1f4;
+    /* background-color: red; */
+    height: 1700px;
+}
+
+/* bg-img */
+
+.bg-img{
+    width: 100%;
+    height: 1000px;
+    background: url(./images/parallax.webp);
+    /* background: none; */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 50px 0px 0px;
+    margin-top: 50px;
+    /* position: fixed; */
+}
+
+/* bikesspecial */
+.bikes-special{
+    width: 80%;
+    height: 600px;
+    background-color: #fff;
+    
+    margin: auto;
+    margin-top: 20px;
+}
+
+#launch-bikes{
+    width: 80%;
+    height: 70px;
+    background-color: #0b3a72;
+    border-top: 10px solid orange;
+    margin-left: 10%;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #eef1f4;
+    text-align: center;
+    padding-top: 6px;
+    font-size: 25px;
+
+}
+
+.bikes-models{
+    display: flex;
+    justify-content: space-evenly;
+    height: 90px;
+    color: #0B3A72;
+    font-size: 20px;
+    /* background-color: yellow; */
+}
+.current-bikes,.upcoming-bikes{
+    padding-top: 25px;
+}
+.upcoming-bikes a,.current-bikes a{
+    color: #0B3A72;
+}
+.current-bikes:hover,.upcoming-bikes:hover{
+    border-bottom: 7px solid #337ab7;
+}
+.bike-1 img,.bike-2 img,.bike-3 img,.bike-4 img{
+    width: 230px;
+    height: 150px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 7px;
+}
+.bike-3 h3,.bike-4 h3,.bike-1 h3,.bike-2 h3{
+    padding-left: 20px;
+    padding-top: 30px;
+    color: #696969;
+}
+.bike-1 h2,.bike-2 h2{
+    font-size: 18px;
+    padding: 5px 20px;
+    color: #4A4A4A;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.bike-3 h2,.bike-4 h2{
+    font-size: 18px;
+    color: #4A4A4A;
+    padding-left: 20px;
+    padding-top: 5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.bikes-flex{
+    display: flex;
+    margin-top: 20px;
+}
+
+
+.bike-1,.bike-2,.bike-3,.bike-4{
+    width: 250px;
+    height: 300px;
+    background-color: #eef1f4;
+    margin-left: 30px;
+    box-shadow: 0px 5px 5px gray;
+
+}
+.bike-1:hover,.bike-2:hover,.bike-3:hover,.bike-4:hover{
+    transform: scale(1.05,1.05);
+}
+
+.latest a{
+    color: #337ab7;
+}
+.latest{
+    /* background-color: white; */
+    text-align: center;
+    margin-top: 140px;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+
+
+/* footer */
+
+footer{
+    width: 100%;
+    height: 350px;
+    background-color:#424a55;
+    /* margin-top: 50px; */
+}
+footer a:hover{
+    text-decoration:underline;
+
+}
+footer img{
+    margin:20px 40%;
+    border: none;
+    
+}
+
+.download{
+    display: flex;
+    justify-content: space-evenly;
+    /* flex-wrap: wrap; */
+    
+}
+.download h4{
+    color: white;
+    font-size: 20px;
+}
+.foot1{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.footer2{
+    width: 100%;
+    height: 200px;
+    background-color: #555c66;
+    text-align: center;
+    color: #eef1f4;
+}
+#carz,#bikez{
+    width: 230px;
+    height: 40px;
+    margin:20px 15px;
+}
+.fonts img{
+    width: 50px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+
+@media screen and (max-width:575px) {
+
+   
+    
+   #areas{
+        /* /* padding-right: 20px; */
+        background: none;
+        color:gainsboro; 
+       
+    }
+ 
+    
+   
+
+    #img1{
+        width: 170px;
+        margin-left: 10px;
+    }
+    .text1{
+       
+        display: none;
+    }
+    #user{
+        font-size: 14px;
+    }
+
+
+    .menu-bar{
+        opacity: 1;
+        position: relative;
+        right: 50px;
+        top: 5px;
+        font-size: 20px;
+        /* background-color: red; */
+    }
+
+    nav2 a{
+        margin-right: 10px;
+        height: 50%;
+        
+    }
+    nav2{
+    /* width: 100%; */
+    height: 35px;
+    width: 100%;
+    color: #4A4A4A;
+    padding: 0px 15px;
+    font-size: 10px;
+}
+
+.bike{
+    width:100%;
+    height: 450px;
+}
+.bike{
+    background-size: 100% 90%;
+}
+.content1{
+    margin-left: 25px;
+   
+}
+#sell,#since{
+    font-size: 50px;
+}
+.demo1{
+    width: 400px;
+    margin-left: 25px;
+}
+.buy1,.find{
+    margin-top: 50px;
+    width: 170px;
+    height: 50px;
+    font-size: 20px;
+    background-color:gainsboro;
+}
+.buy1:hover,.find:hover{
+    background-color: #FF8300;
+}
+.find{
+    
+    position: relative;
+    left: 40px;
+    /* display: none; */
+}
+.select2{
+    width: 500px;
+    height: 80px;
+    margin-top: 10px;
+  
+}
+#budget{
+    width: 170px;
+    height: 40px;
+}
+#areas2{
+    width: 150px;
+    height: 40px;
+   
+}
+#but2{
+    width: 70px;
+    height: 40px;
+   
+}
+.select3{
+    display: none;
+}
+#head1 h2{
+    font-size: 35px;
+    /* position: relative;
+    right: 70px; */
+
+}
+.bikeshadow{
+    height: 600px;
+}
+
+
+.left{
+    font-size: 33px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    /* background-color: red; */
+    height: 120px;
+    margin-left: 0px;
+    position: relative;
+    top: 20px;
+    right: 80px; 
+    /* text-align: justify; */
+}
+ .right{
+     position: relative;
+    right: 100px;
+
+} 
+#para1{
+    width: 350px;
+   
+}
+
+.para2{
+   
+    position: relative;
+    top: 50px;
+    height: 300px;
+}
+.salesbikes{
+    margin-top: 100px;
+}
+.head2 h3{
+    font-size: 25px;
+}
+.head2 h2{
+    /* background-color: red; */
+    width: 1300px;
+    text-align: justify;
+}
+
+.models1{
+    padding-left: 10px;
+    /* margin-left: 85px; */
+    margin: auto;
+    width:250px;
+    /* background-color: red; */
+}
+#less{
+    position: relative;
+    left: 5px;
+}
+.grat{
+    position: relative;
+    right: 20px;
+}
+
+#heading2{
+    /* background-color: red; */
+    margin-bottom: 10px;
+    /* padding-right: 0px; */
+}
+.valuation{
+    width: 100%;
+    height: 450px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* gap: 100px; */
+}
+
+.leftside{
+    width: 90%;
+    height: 500px;
+    background-color:#fff;
+    padding:  30px 50px;
+}
+
+.rightside{
+    margin-top: 20px;
+    height: 380px;
+}
+
+#select-brand,#select-value,#areas3,#year{
+    width: 160px;
+    margin-left: 0px;
+}
+#lab{
+    margin-left: 0px;
+}
+input[type="email"]{
+     position: relative;
+     left: 90px;
+     bottom: 20px;
+}
+
+ .but6{
+    margin-top: 0px;
+    margin-left: 14%;
+}
+#heading3{
+    margin-top: 600px;
+}
+.symbal{
+    flex-wrap: wrap;
+}
+.symbal h3{
+    margin-left: 70px;
+}
+.grid{
+    gap: 10px;
+    padding-right: 40px;
+}
+.grid-hover img{
+    width: 100px;
+}
+.bikes-flex{
+    flex-wrap: wrap;
+    /* gap: 5px; */
+}
+.bike-1,.bike-2,.bike-3,.bike-4{
+    width: 160px;
+    height: 300px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+.bike-1 img,.bike-2 img,.bike-3 img,.bike-4 img{
+    width: 140px;
+}
+.bikes-special{
+    height: 850px; 
+}
+.latest{
+    margin-top: 30px;
+}
+footer img{
+    margin:20px 20%;
+    
+}
+
+
+.footer2{
+  height: 300px;
+  padding-top: 60px;
+}
+#carz,#bikez{
+    width: 200px;
+    height: 40px;
+    margin:10px 15px;
+}
+.car-bike{
+    display: flex;
+
+}
+.download{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-left: 80px;
+    gap: 50px;
+}
+.bikeshadow2{
+    display: grid;
+    grid-template-columns: 700px;
+    gap: 30px;
+}
+footer{
+    width: 100%;
+    height: 600px;
+    background-color:#424a55;
+    /* margin-top: 50px; */
+}
+.container{
+    /* overflow-y:hidden; */
+    /* width: 576px; */
+    overflow-x: hidden;
+    height: 6200px;
+    /* height: auto; */
+}
+
+    
+}
+/* @media quary mini lap size */
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+
+  nav1 {
+   
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+
+  #img1 {
+    width: 180px;
+    height: auto;
+    margin-left: 0px;
+  }
+
+  .text1 {
+    width: 200px;
+    margin-left: 70px;
+    display: none;
+    /* background-color: red; */
+
+  }
+  #text-3{
+    width: 180px;
+     font-size: 12px;
+     font-weight: bold;
+    /* background-color: red; */
+    margin-left: 20px;
+  }
+  #but1{
+    width: 30px;
+  }
+  .select1{
+    /* background-color: red; */
+    /* margin-left: 70px; */
+     margin-right: 70px;
+     margin-left: 190px;
+  }
+  #areas{
+    color:white;
+    background: none;
+  }
+ 
+ 
+
+  .login {
+    font-size: 20px;
+    font-family:inherit;
+    font-weight: 600px;
+    width: 300px;
+    height: 50px;
+    margin-bottom: 10px;
+    /* background-color: red; */
+    margin-left: -50px;
+    height: 30px;
+    /* float: left; */
+  }
+  #user{
+    margin-right: 80px;
+    font-size: 17px;
+    padding-bottom: 5px;
+  }
+  .menu-bar{
+    margin-right: 250px;
+    margin-left: -60px;
+    margin-top: 15px;
+    opacity: 3;
+    font-size: 25px;
+    /* background-color: red; */
+  }
+  
+  #page1-connect{
+    padding-left: 30px;
+    /* margin-bottom:  -20px; */
+    position: relative;
+    bottom: 25px;
+  }
+
+  nav2 {
+    font-size: 13px;
+    height: 40px;
+    padding: 0 30px;
+    justify-content: space-between;
+    /* background-color:rgba(101, 171, 245, 0.48); */
+    background-color: #65ABF5;
+    
+  }
+
+  nav2 a {
+    padding: 5px 10px;
+    color: white;
+  }
+
+  /*  Hero Section */
+  .bike {
+    height: 700px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* background-size: cover; */
+  }
+
+  .content1 {
+    margin-left: 60px;
+    padding-top: 140px;
+    /* margin-top: 100px; */
+  }
+
+  #sell,
+  #since {
+    font-size: 45px;
+  }
+   #since{
+     padding-bottom: 50px;
+   }
+
+  .demo1 {
+    width: 40%;
+    margin-left: 60px;
+    font-size: 11px;
+    padding-left: 0px;
+    font-weight: bold;
+    height: 45px;
+  }
+
+  .buy1,
+  .find {
+    width: 170px;
+    height: 60px;
+    font-size: 17px;
+    bottom: 80px;
+    left: 145px;
+    background-color: white;
+    color: black;
+  }
+   .buy1:hover,
+  .find:hover{
+    background-color: orange;
+  }
+
+  .find {
+    left: 100px;
+  }
+
+  /*  Selection Section */
+  .selection {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width:600px
+  }
+
+  .select2 {
+    width: 70%;
+    height: auto;
+    padding: 10px;
+    left: 55px;
+    bottom: 85px;
+    height: 50px;
+
+  }
+  .select3{
+    display: none;
+  }
+
+  .salesbikes{
+    height: 1800px;
+  }
+
+  #budget,
+  #areas2,
+  #type,
+  #brand {
+    width: 40%;
+    height: 40px;
+    font-size: 16px;
+  }
+  #but2{
+    height: 40px;
+  }
+
+  /*  Bike Shadow  */
+ 
+ .bikeshadow{
+    height: 700px;
+    /* background: url('./images/bg-mbl.webp'); */
+     background-image:linear-gradient(rgb(241, 237, 237,0.5)),linear-gradient(rgb(241, 237, 237,0.5)),url(images/bg-mbl.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+ }
+
+  .bikeshadow2 {
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    padding: 0;
+    padding-left: 180px;
+    padding-top: 50px;
+    gap: 60px;
+    text-align: center;
+  }
+  .models1{
+    width: 525px;
+    height: 400px;
+  }
+  #less{
+    color: red;
+    /* background-color: red; */
+    position: relative;
+    left: 20px;
+  }
+  .view a{
+    position: relative;
+    right: 100px;
+    bottom: 60px;
+    font-size: 13px;
+    display: none;
+  }
+  
+ 
+  .left {
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .right {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .para2 {
+    width: 100%;
+    height: 400px;
+    margin: 20px auto;
+  }
+
+  /*  Valuation Section */
+  .valuation {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: 300px;
+    /* background-color: yellow; */
+    height: 500px;
+  }
+
+  .leftside,
+  .rightside {
+    width: 90%;
+    height: auto;
+  }
+  .rightside {
+    width: 90%;
+    margin: auto;
+    padding-left: 150px;
+    margin-left: 5%;
+  }
+
+  input[type="email"],
+  #select-brand,
+  #select-value,
+  #areas3,
+  #year {
+    width: 45%;
+    margin: 10px 10px;
+  }
+
+  .but6 {
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    margin: 20px 35%;
+  }
+  #heading3{
+    /* background-color: red; */
+    margin-top: 350px;
+  }
+
+  /* Grid & Symbal Section */
+  .symbal {
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+  }
+  .symleft h3{
+    margin: auto;
+    font-size: 28px;
+  }
+
+  .grid {
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    padding-left: 20px;
+  }
+
+  .grid img {
+    width: 100px;
+    height: 100px;
+  }
+
+  /*  Bikes Section */
+  .bikes-flex {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    height: 800px;
+    background-color:#eef1f4;
+  }
+  .bg-img{
+    height: 1100px;
+  }
+
+  .bike-1,
+  .bike-2,
+  .bike-3,
+  .bike-4 {
+    width: 35%;
+    height: 280px;
+  }
+
+  .bike-1 img,
+  .bike-2 img,
+  .bike-3 img,
+  .bike-4 img {
+    width: 180px;
+    height: 120px;
+  }
+  .latest{
+    /* background-color: red; */
+    position: relative;
+    bottom: 200px;
+    font: 25px;
+  }
+
+  /*  Footer */
+  footer {
+    height: auto;
+    margin-top: -30px;
+    padding-bottom: 40px;
+    padding-top: 30px;
+  }
+
+  .download {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-left: 150px;
+    gap: 70px;
+  }
+
+  .footer2 {
+    height: auto;
+    padding: 20px;
+  }
+
+  footer img {
+    margin: 20px auto;
+    display: block;
+  }
+
+  .container {
+    /* overflow-x: hidden; */
+    height: 6550px;
+  }
+}
+
+/* @media quary 991px */
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  
+  /* Example adjustments */
+  .container {
+    height: 4770px;
+    width: 100%;
+    /* overflow-x: hidden; */
+  }
+
+  nav {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+  nav2{
+    background-color: #fff;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 500px;
+    height: 40px;
+    padding: 0 40px;
+    gap: 25px;
+    justify-content: center;
+  }
+  nav2 a{
+    color: gray;
+  }
+
+  .text1 {
+    width: 700px;
+    margin-left: 70px;
+    /* background-color: red; */
+    margin-top: 10px;
+
+  }
+  #text-3{
+    width: 260px;
+    height: 40px;
+    margin-left: 20px;
+  }
+  #but1{
+    width: 50px;
+    height: 37px;
+  }
+  .select1{
+     margin-right: 60px;
+  }
+  #areas{
+    color:black;
+  }
+  .login {
+    font-size: 17px;
+    width: 300px;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-left: -40px;
+    height: 30px;
+  }
+  .bike{
+    height: 400px;
+  }
+  
+  .content1 {
+    margin-left: 170px;
+    padding-top: 60px;
+    /* margin-top: 100px; */
+  }
+  
+  #sell,
+  #since {
+    font-size: 35px;
+  }
+   #portal{
+     font-size: 18px;
+     font-weight: 300;
+   }
+
+  .demo1 {
+    width: 45%;
+    margin-left: 160px;
+    font-size: 17px;
+    padding-left: 5px;
+    font-weight: bold;
+    margin-top: 15px;
+    height: 45px;
+  }
+   
+   
+  .buy1{
+    position: relative;
+    left: -170px;
+    bottom: 0px;
+    top: 50px;
+    font-size: 20px;
+    /* width: 300px; */
+}
+.find{
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+    top: 50px;
+    font-size: 20px;
+}
+
+.orange{
+    display: flex;
+    justify-content: center;
+    padding-left: 250px;
+    padding-right: 250px;
+    background-color: #eef1f4;
+}
+
+ .selection {
+    flex-direction: row;
+    display: flex;
+    /* gap: 300px; */
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    background-color: #eef1f4;
+  }
+   .select2{
+    width:400px;
+    height: 70px;
+    padding: 10px;
+    left: -10px;
+    bottom: -10px;
+    height: 60px;
+}
+  .select3{
+    width: 400px;
+    position: relative;
+    left: 0px;
+    top: 10px;
+    height: 60px;
+  }
+ #budget,
+  #areas2,
+  #type,
+  #brand {
+    width: 35%;
+    height: 40px;
+    font-size: 16px;
+  }
+  #but2,#but3{
+    height: 40px;
+    width: 50px;
+  }
+
+  #head1{
+    /* background-color: red; */
+    margin-left: 100px;
+    margin-top: 50px;
+    font-size: 18px;
+  }
+
+
+
+  /*Bike Shadow */
+ 
+ .bikeshadow{
+    height: 700px;
+    /* background: url('./images/bg-mbl.webp'); */
+     background-image:linear-gradient(rgb(241, 237, 237,0.5)),linear-gradient(rgb(241, 237, 237,0.5));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* margin-top: -50px; */
+    
+ }
+
+  .bikeshadow2 {
+    flex-direction: column;
+     background-image:linear-gradient(rgb(241, 237, 237,0.5)),linear-gradient(rgb(241, 237, 237,0.5)),url(images/bg2.webp);
+    align-items: center;
+    height: 700px;
+    /* padding: 0; */
+    padding-left: 180px;
+    padding-top: 50px;
+    gap: 60px;
+    text-align: center;
+  }
+.left {
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+  }
+
+  .right {
+    width: 65%;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .para2 {
+    width: 100%;
+    height: 400px;
+    font-size: 20px;
+    margin: 20px auto;
+    border-radius: 6px;
+    text-align: justify;
+    padding-left: 50px;
+  }
+  .para2 li{
+    padding-bottom: 30px;
+  }
+  .para2 li::marker{
+    color:#0054F2;
+    /* font-size: 10px; */
+
+  }
+  #but4{
+    margin-top: 0px;
+    border: 1px solid #0054F2;
+    background-color: white;
+  }
+   .view a{
+    position: relative;
+    right: 100px;
+    bottom: 60px;
+    font-size: 16px;
+    font-family:inherit;
+    font-weight: 500;
+    /* display: none; */
+  }
+  .view a:hover{
+     text-decoration: none;
+  }
+  .models1{
+    width: 756px;
+    height: 400px;
+  }
+  #less{
+    left: 60px;
+    top: 240px;
+  }
+
+  /*  Valuation  */
+
+   .valuation{
+    width: 100%;
+    height: 550px;
+    display: flex;
+    gap: 15px;
+    flex-direction: row;
+    justify-content: center;
+    /* gap: 100px; */
+ }
+
+
+ .leftside{
+    width: 55%;
+    height: 490px;
+    background-color:#fff;
+    border-radius: 6px;
+    padding:  30px 50px;
+}
+
+.rightside{
+    width: 250px;
+    height: 400px;
+     border-radius: 6px;
+    background-color:#fff;
+    padding: 20px;
+}
+#lab{
+    margin-left: 60px;
+    font-family:inherit;
+    font-weight: 500px;
+    font-size: 18px;
+}
+.rightside h3{
+    font-size: 25px ;
+    text-align: center;
+    
+}
+ 
+ 
+
+ #use{
+    font-size: 17px;
+    text-align: justify;
+    padding-right: 150px;
+    font-family:serif;
+    font-weight: 500px;
+} 
+input[type="email"],
+  #select-brand,
+  #select-value,
+  #areas3,
+  #year {
+    width: 43%;
+    margin: 10px 10px;
+     font-family:inherit;
+    font-weight: 500px;
+  }
+  input[type="email"]{
+    font-size:19px;
+    padding-left: 10px;
+    width: 45%;
+    border: 1px solid #696969;
+  }
+  #want,#quat{
+    font-family: inherit;
+    font-weight: 500;
+  }
+  #want{
+    font-weight: bold;
+  } 
+  .rightside img{
+    width: 200px;
+    margin-bottom: 20px;
+  }
+
+  .but6 {
+    width: 270px;
+    height: 50px;
+    font-size: 22px;
+    margin: 10px 13% 60px;
+  } 
+  .symbal{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 80px;
+}
+.salesbikes{
+  height: 2000px;
+}
+.symleft{
+  width: 23%;
+  padding-left: 15px;
+}
+.symleft h3{
+  font-size: 20px;
+  margin-left: 20px;
+  margin-top: 25px;
+  margin-bottom: 40px;
+  
+}
+.symright{
+  width: 55%;
+}
+.symright h3{
+  margin-left: 70px;
+  margin-top: 20px;
+}
+.symleft p{
+    border-bottom: 2px solid gray;
+    width: 180px;
+    font-size: 16px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    color: #625F63;
+}
+.symleft p:hover{
+    transform:scale(1.04,1.04);
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    margin-left: 0px;
+}
+.grid img{
+    width: 130px;
+    height: 130px;
+    margin-bottom: 15px;
+
+    
+}
+.grid-hover{
+  height: 170px;
+}
+.grid img:hover{
+    transform: scale(1.1,1.1);
+}
+
+.bike-1,
+  .bike-2,
+  .bike-3,
+  .bike-4 {
+    width: 20%;
+    height: 280px;
+  }
+
+  .bike-1 img,
+  .bike-2 img,
+  .bike-3 img,
+  .bike-4 img {
+    width: 140px;
+    height: 120px;
+  }
+  .bg-img{
+    height: 800px;
+  }
+
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+}
+
+/* @media quary 992 to 1199px */
+@media screen and (min-width:992px)and (max-width:1199px){
+ 
+  .text1{
+    /* background-color: yellow; */
+    margin-left: 100px;
+    width:400px
+  }
+  #text-3{
+    width: 400px;
+  }
+   nav2{
+    font-size: 17px;
+    padding: 0 70px;
+    height: 40px;
+    gap: 40px;
+    justify-content: center;
+  }
+  nav2 a{
+    color: gray;
+    font-weight: 400px;
+  }
+  .bike{
+    height: 430px;
+  }
+  .content1{
+    margin-left: 190px;
+  }
+  #sell,#since{
+    font-size: 35px;
+    margin-top: 10px;
+  }
+  #portal{
+    font-size: 17px;
+  }
+  .demo1{
+    margin-left: 190px;
+    width: 420px;
+    margin-top: 10px;
+    border-radius: 20px;
+    height: 40px;
+    padding-top: 10px;
+  }
+  .buy1,.find{
+    left: 100px;
+    width: 220px;
+    font-size: 20px;
+  }
+  .find{
+    left: 400px;
+  }
+  .select2{
+    width: 480px;
+    height: 80px;
+    left:100px;
+  }
+  .select3{
+    width: 480px;
+    height: 80px;
+    left: 140px;
+  }
+  #budget,#areas2,#type,#brand{
+    width: 180px;
+  }
+#but2,#but3{
+  width: 70px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+.selection{
+  background-color:#eef1f4;
+}
+.orange{
+  background-color:#eef1f4;
+}
+#head1{
+  margin-top: 0px;
+  background-color:#eef1f4;
+  width: 100%;
+  height: 100px;
+  margin-left: 0px;
+  padding-left: 100px;
+}
+.bikeshadow2{
+  margin-top: -50px;
+}
+.bikeshadow{
+    width: 100%;
+    height: 500px;
+    background-image:linear-gradient(rgb(241, 237, 237,0.5)),linear-gradient(rgb(241, 237, 237,0.5));
+    /* display: flex; */
+    /* justify-content: space-around; */
+}
+
+.bikeshadow2{
+    width: 80%;
+    height: 500px;
+     background-image:linear-gradient(rgb(241, 237, 237,0.5)),linear-gradient(rgb(241, 237, 237,0.5)),url(images/bg2.webp);
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+     padding-left: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* flex-wrap: wrap; */
+}
+
+.left{
+   
+    width: 60%;
+    font-weight: bold;
+    font-size: 30px;
+}
+.right{
+    
+}
+#para1{
+  width: 500px;
+  margin-top: 50px;
+}
+.para2 {
+    width: 100%;
+    height: 400px;
+    font-size: 18px;
+    margin: 20px auto;
+    border-radius: 6px;
+    text-align: justify;
+    padding-left: 50px;
+  }
+  .para2 li{
+    padding-bottom: 30px;
+  }
+  .para2 li::marker{
+    color:#0054F2;
+    /* font-size: 10px; */
+
+  }
+    #but4{
+    margin-top: 0px;
+    border: 1px solid #0054F2;
+    background-color: white;
+  }
+  .view a{
+    position: relative;
+    right: 100px;
+    bottom: 60px;
+    font-size: 16px;
+    font-family:inherit;
+    font-weight: 500;
+    /* display: none; */
+  }
+  .view a:hover{
+     text-decoration: none;
+  }
+  .models1{
+    width: 963px;
+    height: 400px;
+    padding-left:30px
+  }
+  #less{
+    left: 60px;
+    top: 240px;
+  }
+
+  /*  Valuation  */
+
+   .valuation{
+    width: 100%;
+    height: 550px;
+    display: flex;
+    gap: 15px;
+    flex-direction: row;
+    justify-content: center;
+    /* gap: 100px; */
+ }
+
+
+ .leftside{
+    width: 55%;
+    height: 490px;
+    background-color:#fff;
+    border-radius: 6px;
+    padding:  30px 50px;
+}
+
+.rightside{
+    width: 250px;
+    height: 400px;
+     border-radius: 6px;
+    background-color:#fff;
+    padding: 20px;
+}
+#lab{
+    margin-left: 110px;
+    font-family:inherit;
+    font-weight: 500px;
+    font-size: 15px;
+}
+.rightside h3{
+    font-size: 25px ;
+    text-align: center;
+    
+}
+ 
+ 
+
+ #use{
+    font-size: 17px;
+    text-align: justify;
+    padding-right: 150px;
+    font-family:serif;
+    font-weight: 500px;
+} 
+input[type="email"],
+  #select-brand,
+  #select-value,
+  #areas3,
+  #year {
+    width: 43%;
+    margin: 10px 10px;
+     font-family:inherit;
+    font-weight: 500px;
+  }
+  input[type="email"]{
+    font-size:19px;
+    padding-left: 10px;
+    width: 40%;
+    border: 1px solid #696969;
+  }
+  #want,#quat{
+    font-family: inherit;
+    font-weight: 500;
+  }
+  #want{
+    font-weight: bold;
+  } 
+  .rightside img{
+    width: 200px;
+    margin-bottom: 20px;
+  }
+
+  .but6 {
+    width: 290px;
+    height: 50px;
+    font-size: 22px;
+    margin: 10px 20% 60px;
+  } 
+   .symbal{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 80px;
+}
+.salesbikes{
+  height: 2000px;
+}
+.symleft{
+  width: 23%;
+  padding-left: 20px;
+}
+.symleft h3{
+  font-size: 25px;
+  margin-left: 20px;
+  margin-top: 25px;
+  margin-bottom: 40px;
+  
+}
+.symright{
+  width: 55%;
+}
+.symright h3{
+  margin-left: 70px;
+  margin-top: 20px;
+}
+.symleft p{
+    border-bottom: 2px solid gray;
+    width: 180px;
+    font-size: 18px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    color: #625F63;
+}
+.symleft p:hover{
+    transform:scale(1.04,1.04);
+}
+
+.grid{
+    gap: 30px;
+    margin-left: 0px;
+}
+.grid img{
+    width: 130px;
+    height: 120px;
+    margin-bottom: 0px;
+
+    
+}
+.grid-hover{
+  height: 170px;
+}
+.bike-1,
+  .bike-2,
+  .bike-3,
+  .bike-4 {
+    width: 21%;
+  }
+
+  .bike-1 img,
+  .bike-2 img,
+  .bike-3 img,
+  .bike-4 img {
+    width: 180px;
+  }
+  .bg-img{
+    height: 900px;
+  }
+  .container{
+    height: 4630px;
+  }
+
+  
+}

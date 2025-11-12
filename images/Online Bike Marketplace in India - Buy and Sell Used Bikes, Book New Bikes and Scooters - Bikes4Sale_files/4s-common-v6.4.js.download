@@ -1,0 +1,1570 @@
+function trim(str){return str.replace(/^\s+|\s+$/g,'');}
+function isEmail(str){var regex=/^[-_.a-z0-9]+@[-_a-z0-9]+[.][-_.a-z0-9]+$/i;return regex.test(str);}
+function isNo(str){var regex=/^[0-9]+$/;return regex.test(str);}
+function urlPresent(str){
+if(str.search(/fuck/i) !=-1) return false;
+if(str.search(/asshole/i) !=-1) return false;
+if(str.search(/http:/i) !=-1) return false;
+if(str.search(/https:/i) !=-1) return false;
+if(str.search(/www./i) !=-1) return false;
+if(str.search(/viagra/i) !=-1) return false;
+if(str.search(/doxycycline/i) !=-1) return false;
+if(str.search(/flagyl/i) !=-1) return false;
+if(str.search(/acomplia/i) !=-1) return false;
+if(str.search(/penis/i) !=-1) return false;
+if(str.search(/erythromycin/i) !=-1) return false;
+if(str.search(/adipex/i) !=-1) return false;
+if(str.search(/valium/i) !=-1) return false;
+if(str.search(/tramadol/i) !=-1) return false;
+if(str.search(/vicodin/i) !=-1) return false;
+if(str.search(/bastard/i) !=-1) return false;
+if(str.search(/madarchod/i) !=-1) return false;
+if(str.search(/behenchod/i) !=-1) return false;
+if(str.search(/chutiya/i) !=-1) return false;
+if(str.search(/bhosadi/i) !=-1) return false;
+if(str.search(/bhosdi/i) !=-1) return false;
+return true;
+}
+function jQcheck(jQObj){if(!urlPresent(jQObj.val())){alert("Invalid Entry. Website links and abusive words are not allowed.");jQObj.focus();return false;}return true;}
+function check(chkObj){if(!urlPresent(chkObj.value)){alert("Invalid Entry. Website links and abusive words are not allowed.");chkObj.focus();return false;}return true;}
+function populateNos(dropDown,start,end,preSelect){
+var opStr='';
+if(typeof(popNosFirstOptTxtStr) == "string") opStr+='<option value="">'+popNosFirstOptTxtStr+'</option>';
+for(var i=end;i>=start;i--){
+opStr+='<option value="'+i+'"';
+if(i==preSelect) opStr+=' selected="selected"';
+opStr+='>'+i+'</option>';
+}
+$(dropDown).html(opStr);
+}
+var arrMonths=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function populateMonths(dropDown,preSelect){
+var opStr='';
+$.each(arrMonths,function(i,mon){
+opStr+='<option value="'+mon+'"';
+if(mon==$.trim(preSelect)) opStr+=' selected="selected"';
+opStr+='>'+mon+'</option>';
+});
+$(dropDown).append(opStr);
+}
+function getSearchLink(stat,city,comp,modl,vers,link,delr){
+var a='?';
+link=trim(link || 'buy.php');
+stat=trim(stat || '');
+city=trim(city || '');
+comp=trim(comp || '');
+modl=trim(modl || '');
+vers=trim(vers || '');
+delr=trim(delr || '');
+if(stat){link+=a+'st='+stat;a='&';}
+if(city){link+=a+'ct='+city;a='&';}
+if(comp){link+=a+'cp='+comp;a='&';}
+if(modl){link+=a+'ml='+modl;a='&';}
+if(vers){link+=a+'vr='+vers;a='&';}
+if(delr){link+=a+'dr='+delr;a='&';}
+return link;
+}
+var arrStaDis={
+'Andhra Pradesh':['Alluri Sitharama Raju','Anakapalli','Anantapur','Annamayya','Bapatla','Chittoor','Dr BR Ambedkar Konaseema','East Godavari','Eluru','Guntur','Kadapa','Kakinada','Krishna','Kurnool','Nandyal','Nellore','NTR','Palnadu','Parvathipuram Manyam','Prakasam','Sri Potti Sriramulu Nellore','Sri Sathya Sai','Srikakulam','Tirupati','Vijayawada','Visakhapatnam','Vizianagaram','West Godavari','YSR'],
+'Andaman Nicobar':['Port Blair','South Andaman','North and Middle Andaman','Andaman','Nicobar'],
+'Arunachal Pradesh':['Anjaw','Bichom','Changlang','Dibang Valley','East Kameng','East Siang','Itanagar','Kamle','Keyi Panyor','Kra Daadi','Kurung Kumey','Lepa Rada','Lohit','Longding','Lower Dibang Valley','Lower Siang','Lower Subansiri','Namsai','Pakke Kessang','Papum Pare','Shi Yomi','Siang','Tawang','Tirap','Upper Siang','Upper Subansiri','West Kameng','West Siang'],
+'Assam':['Bajali','Baksa','Barpeta','Biswanath','Bongaigaon','Cachar','Charaideo','Chirang','Darrang','Dhemaji','Dhubri','Dibrugarh','Dima Hasao','Goalpara','Golaghat','Guwahati','Hailakandi','Hojai','Jorhat','Kamrup Metropolitan','Kamrup','Karbi Anglong','Karimganj','Kokrajhar','Lakhimpur','Majuli','Morigaon','Nagaon','Nalbari','Sivasagar','Sonitpur','South Salmara-Mankachar','Tamulpur','Tinsukia','Udalguri','West Karbi Anglong'],
+'Bihar':['Araria','Arwal','Aurangabad','Banka','Begusarai','Bhagalpur','Bhojpur','Buxar','Darbhanga','EastChamparan','Gaya','Gopalganj','Jamui','Jehanabad','Kaimur','Katihar','Khagaria','Kishanganj','Lakhisarai','Madhepura','Madhubani','Munger','Muzaffarpur','Nalanda','Nawada','Patna','Purnia','Rohtas','Saharsa','Samastipur','Saran','Sheikhpura','Sheohar','Sitamarhi','Siwan','Supaul','Vaishali','West Champaran'],
+'Chandigarh':[],
+'Chhattisgarh':['Balod','Baloda Bazar','Balrampur','Bastar','Bemetara','Bijapur','Bilaspur','Dantewada','Dhamtari','Durg','Gariaband','Gaurela Pendra Marwahi','Jagdalpur','Janjgir-Champa','Jashpur','Kabirdham','Kanker','Khairagarh Chhuikhadan Gandai','Kondagaon','Korba','Korea','Mahasamund','Manendragarh Chirmiri Bharatpur','Mohla Manpur Ambagarh Chowki','Mungeli','Narayanpur','Raigarh','Raipur','Rajnandgaon','Sakti','Sarangarh Bilaigarh','Sukma','Surajpur','Surguja'],
+'Dadra Nagar Haveli':['Silvassa','Dadra Nagar Haveli'],
+'Daman n Diu':['Daman','Diu'],
+'Delhi':['Central Delhi','East Delhi','New Delhi','North Delhi','North East Delhi','North West Delhi','South Delhi','South East Delhi','South West Delhi','Shahdara','West Delhi'],
+'Goa':['Panaji','Margao','OldGoa','North Goa','South Goa'],
+'Gujarat':['Ahmedabad','Amreli','Anand','Aravalli','Banas Kantha','Bharuch','Bhavnagar','Botad','Chhota Udaipur','Dahod','Dang','Devbhoomi Dwarka','Gandhinagar','Gir Somnath','Jamnagar','Junagadh','Kachchh','Kheda','Mahesana','Mahisagar','Morbi','Narmada','Navsari','Panch Mahals','Patan','Porbandar','Rajkot','Sabar Kantha','Surat','Surendranagar','Tapi','Vadodara','Valsad'],
+'Haryana':['Ambala','Bhiwani','Charkhi Dadri','Faridabad','Fatehabad','Gurgaon','Hisar','Jhajjar','Jind','Kaithal','Karnal','Kurukshetra','Mahendragarh','Mewat','Nuh','Palwal','Panchkula','Panipat','Rewari','Rohtak','Sirsa','Sonipat','Yamunanagar'],
+'Himachal Pradesh':['Bilaspur','Chamba','Hamirpur','Kangra','Kinnaur','Kullu','Lahaul Spiti','Mandi','Shimla','Sirmaur','Solan','Una'],
+'Jammu Kashmir':['Anantnag','Bandipora','Baramulla','Budgam','Doda','Ganderbal','Jammu','Kathua','Kishtwar','Kulgam','Kupwara','Poonch','Pulwama','Rajauri','Ramban','Reasi','Samba','Shopian','Srinagar','Udhampur'],
+'Jharkhand':['Bokaro','Chatra','Deoghar','Dhanbad','Dumka','East Singhbhum','Garhwa','Giridih','Godda','Gumla','Hazaribag','Jamshedpur','Jamtara','Koderma','Khunti','Latehar','Lohardaga','Pakur','Palamu','Ramgarh','Ranchi','Sahibganj','Seraikela','Saraikela Kharsawan','Simdega','West Singhbhum'],
+'Karnataka':['Bangalore','Bagalkot','Belgaum','Bellary','Bidar','Bijapur','Chamrajnagar','Chickmagalur','Chikballapur','Chitradurga','Dakshina Kannada','Davangere','Dharwad','Gadag','Gulbarga','Hassan','Haveri','Kalaburagi','Kodagu','Kolar','Koppal','Mandya','Mangalore','Mysore','North Kannada','Raichur','Ramanagara','Shimoga','South Kannada','Tumkur','Udupi','Uttara Kannada','Vijayanagara','Vijayapura','Yadgir'],
+'Kerala':['Alappuzha','Ernakulam','Idukki','Kannur','Kasargod','Kollam','Kottayam','Kozhikode','Malappuram','Palakkad','Pathanamthitta','Thrissur','Trivandrum','Wayanad'],
+'Ladakh':['Changthang','Dras','Kargil','Leh','Nubra','Sham','Zanskar'],
+'Lakshadweep':['Kavaratti','Lakshadweep'],
+'Madhya Pradesh':['Agar Malwa','Alirajpur','Anuppur','Ashoknagar','Balaghat','Barwani','Betul','Bhind','Bhopal','Burhanpur','Chhatarpur','Chhindwara','Damoh','Datia','Dewas','Dhar','Dindori','Guna','Gwalior','Harda','Hoshangabad','Indore','Jabalpur','Jhabua','Katni','Khandwa','Khargone','Maihar','Mauganj','Mandla','Mandsaur','Morena','Narmadapuram','Narsinghpur','Neemuch','Niwari','Panna','Pandhurna','Raisen','Rajgarh','Ratlam','Rewa','Sagar','Satna','Sehore','Seoni','Shahdol','Shajapur','Sheopur','Shivpuri','Sidhi','Singrauli','Tikamgarh','Ujjain','Umaria','Vidisha'],
+'Maharashtra':['Ahilyanagar','Ahmednagar','Akola','Amravati','Aurangabad','Beed','Bhandara','Buldhana','Chandrapur','Chhatrapati Sambhajinagar','Dhule','Gadchiroli','Gondia','Hingoli','Jalgaon','Jalna','Kolhapur','Latur','Mumbai','Navi Mumbai','Nagpur','Nanded','Nandurbar','Nashik','Osmanabad','Palghar','Parbhani','Pune','Pimpri-Chinchwad','Raigad','Ratnagiri','Sangli','Satara','Sindhudurg','Solapur','Thane','Wardha','Washim','Yavatmal'],
+'Manipur':['Bishnupur','Chandel','Churachandpur','Imphal','Imphal East','Imphal West','Jiribam','Kakching','Kamjong','Kangpokpi','Noney','Pherzawl','Senapati','Tamenglong','Tengnoupal','Thoubal','Ukhrul'],
+'Meghalaya':['Shillong','East Garo Hills','North Garo Hills','South Garo Hills','South West Garo Hills','West Garo Hills','Jaintia Hills','East Jaintia Hills','West Jaintia Hills','East Khasi Hills','Eastern West Khasi Hills','South West Khasi Hills','West Khasi Hills','Ri Bhoi'],
+'Mizoram':['Aizawl','Champhai','Hnahthial','Khawzawl','Kolasib','Lawngtlai','Lunglei','Mamit','Saiha','Siaha','Saitual','Serchhip'],
+'Nagaland':['Chumoukedima','Dimapur','Kiphire','Kohima','Longleng','Meluri','Mokokchung','Mon','Niuland','Noklak','Peren','Phek','Shamator','Tseminyu','Tuensang','Wokha','Zunheboto'],
+'Orissa':['Angul','Bhubaneshwar','Balangir','Baleswar','Bargarh','Bhadrak','Boudh','Cuttack','Deogarh','Dhenkanal','Gajapati','Ganjam','Jagatsinghapur','Jajpur','Jharsuguda','Kalahandi','Kandhamal','Kendrapara','Kendujhar','Khordha','Koraput','Malkangiri','Mayurbhanj','Nabarangapur','Nayagarh','Nuapada','Puri','Rayagada','Sambalpur','Subarnapur','Sundergarh'],
+'Pondicherry':['Karaikal','Mahe','Pondicherry','Yanam'],
+'Punjab':['Amritsar','Bathinda','Barnala','Faridkot','Fatehgarh Sahib','Fazilka','Ferozepur','Gurdaspur','Hoshiarpur','Jalandhar','Kapurthala','Ludhiana','Malerkotla','Mansa','Moga','Mohali','Muktsar','Nawanshahr','Pathankot','Patiala','Rupnagar','Sangrur','Sahibzada Ajit Singh Nagar','Shaheed Bhagat Singh Nagar','Sri Muktsar Sahib','Tarn Taran'],
+'Rajasthan':['Ajmer','Alwar','Balotra','Banswara','Baran','Barmer','Beawar','Bharatpur','Bhilwara','Bikaner','Bundi','Chittorgarh','Churu','Dausa','Deeg','Dholpur','Didwana-Kuchaman','Dungarpur','Hanumangarh','Jaipur','Jaisalmer','Jalore','Jhalawar','Jhunjhunu','Jodhpur','Karauli','Khairthal-Tijara','Kota','Kotputli-Behror','Nagaur','Pali','Phalodi','Pratapgarh','Rajsamand','Salumbar','Sawai Madhopur','Sikar','Sirohi','Sri Ganganagar','Tonk','Udaipur'],
+'Sikkim':['Gangtok','Gyalshing','Mangan','Namchi','Pakyong','Soreng','East Sikkim','North Sikkim','South Sikkim','West Sikkim'],
+'Tamil Nadu':['Ariyalur','Chennai','Coimbatore','Chengalpattu','Cuddalore','Dharmapuri','Dindigul','Erode','Hosur','Kallakurichi','Kanchipuram','Kanyakumari','Karur','Krishnagiri','Madurai','Mayiladuthurai','Nagapattinam','Namakkal','Nilgiris','Perambalur','Pudukkottai','Ramanathapuram','Ranipet','Salem','Sivaganga','Tenkasi','Thanjavur','Theni','Thoothukudi','Tiruchirappalli','Tirunelveli','Tirupattur','Tiruvallur','Tiruvannamalai','Tirupur','Tiruvarur','Vellore','Viluppuram','Virudhunagar'],
+'Telangana':['Adilabad','Bhadradri Kothagudem','Hanamkonda','Hyderabad','Jagtial','Jangaon','Jayashankar Bhupalpally','Jogulamba Gadwal','Kamareddy','Karimnagar','Khammam','Komaram Bheem Asifabad','Mahabubabad','Mahabubnagar','Mancherial','Medak','Medchal','Medchal-Malkajgiri','Mulugu','Nagarkurnool','Nalgonda','Narayanpet','Nirmal','Nizamabad','Peddapalli','Rajanna Sircilla','Rangareddy','Sangareddy','Siddipet','Suryapet','Vikarabad','Wanaparthy','Warangal','Warangal Rural','Warangal Urban','Yadadri Bhuvanagiri'],
+'Tripura':['Agartala','Dhalai','Sipahijala','Khowai','Gomati','Unakoti','North Tripura','South Tripura','West Tripura'],
+'Uttar Pradesh':['Agra','Aligarh','Allahabad','Ambedkar Nagar','Amethi','Amroha','Auraiya','Ayodhya','Azamgarh','Badaun','Bagpat','Bahraich','Ballia','Balrampur','Banda','Barabanki','Bareilly','Basti','Bhadohi','Bijnor','Budaun','Bulandshahr','Chandauli','Chitrakoot','Deoria','Etah','Etawah','Faizabad','Farrukhabad','Fatehpur','Firozabad','Gautam Buddha Nagar','Ghaziabad','Ghazipur','Gonda','Gorakhpur','Greater Noida','Hamirpur','Hapur','Hardoi','Hathras','Jalaun','Jaunpur','Jhansi','Jyotiba Phule Nagar','Kannauj','Kanpur','Kanpur Dehat','Kanpur Nagar','Kasganj','Kaushambi','Kheri','Kushinagar','Lakhimpur Kheri','Lalitpur','Lucknow','Maharajganj','Mahoba','Mainpuri','Mathura','Mau','Meerut','Mirzapur','Moradabad','Muzaffarnagar','Noida','Pilibhit','Pratapgarh','Prayagraj','RaeBareli','Rampur','Saharanpur','Sambhal','Sant Kabir Nagar','Sant Ravidas Nagar','Shahjahanpur','Shamli','Shravasti','Siddharthnagar','Sitapur','Sonbhadra','Sultanpur','Unnao','Varanasi'],
+'Utarakhand':['Almora','Bageshwar','Chamoli','Champawat','Dehradun','Haridwar','Nainital','Pauri Garhwal','Pithoragarh','Rudraprayag','Tehri Garhwal','Udham Singh Nagar','Uttarkashi'],
+'West Bengal':['Alipurduar','Bankura','Bardhaman','Birbhum','Cooch Behar','Dakshin Dinajpur','Darjeeling','East Medinipur','Hooghly','Howrah','Jalpaiguri','Jhargram','Kalimpong','Kolkata','Malda','Murshidabad','Nadia','North 24 Parganas','North Dinajpur','Paschim Bardhaman','Paschim Medinipur','Purba Bardhaman','Purba Medinipur','Purulia','South 24 Parganas','South Dinajpur','Uttar Dinajpur','West Medinipur']
+};
+var arrDisTwn={
+'Andaman Nicobar_Nicobar':['Campbell Bay','Nicobar','Hut Bay','Kamorta','Katchal','Malacca','Nancowry','Teressa'],
+'Andaman Nicobar_North and Middle Andaman':['Bakultala','Billiground','Diglipur','Kadamtala','Khudirampur','Long Island','Madhupur','Mayabunder','Nimbutala','North and Middle Andaman','Panchawati','Rangat','Shibpur'],
+'Andaman Nicobar_South Andaman':['Aberdeen','Bambooflat','Chouldhari','Ferrargunj','Garacharma','Havelock Island','Humfreygunj','Little Andaman','Neil Island','Port Blair','Prothrapur','South Andaman','Tusnabad','Wandoor'],
+'Andhra Pradesh_Alluri Sitharama Raju':['Alluri Sitharama Raju','Aswapuram','Bhadrachalam','Chunchupalli','Kothagudem','Kusumanchi','Paloncha','Yellandu'],
+'Andhra Pradesh_Anakapalli':['Anakapalli','Bheemunipatnam','Chodavaram','Kothapeta','Madhurawada','Narsipatnam','Peddagantyada','Peddapalli','Ravikampadu','Sabbavaram','Tuni'],
+'Andhra Pradesh_Anantapur':['Anantapur','Dharmavaram','Gorantla','Gooty','Guntakal','Hindupur','Kadiri','Kakkalapalle','Kalyandurg','Narayanapuram','Pamidi','Papampeta','Rayadurgam','Tadipatri','Uravakonda','Yenumulapalle'],
+'Andhra Pradesh_Annamayya':['Annamayya','Chandragiri','Chilamathur','Nagari','Puthalapattu','Renigunta','Srikalahasti','Tirupati','Yerpedu'],
+'Andhra Pradesh_Bapatla':['Bapatla','Chandolu','Chirala','Peddaganjam','Peddanandipadu','Sarpavaram','Zamindar'],
+'Andhra Pradesh_Chittoor':['Chandragiri','Chilamathur','Chittoor','Madirepalle','Nagari','Peddapalle','Puthalapattu','Renigunta','Srikalahasti','Tirupati','Yerpedu'],
+'Andhra Pradesh_Dr BR Ambedkar Konaseema':['Amalapuram','Dr BR Ambedkar Konaseema','Kothapeta','Mummidivaram','Nellore','Peddagummadapu','Peddapuram','Rajole','Vijayapuri'],
+'Andhra Pradesh_East Godavari':['Chodavaram','East Godavari','Kothapeta','Mummidivaram','Peddapalli','Rajahmundry','Rampachodavaram','Tuni'],
+'Andhra Pradesh_Eluru':['Bantumilli','Chintalapudi','Denduluru','Eluru','Jangareddygudem','Nuzvid','Pedapadu','Tanuku'],
+'Andhra Pradesh_Guntur':['Chilakaluripet','Guntur','Macherla','Narasaraopet','Ponnuru','Repalle','Vinukonda'],
+'Andhra Pradesh_Kadapa':['Badvel','Jammalamadugu','Kadapa','Mydukur','Proddatur','Pulivendula','Rajampet'],
+'Andhra Pradesh_Kakinada':['Chodavaram','Kakinada','Kothapeta','Mummidivaram','Peddapalli','Rajahmundry','Rampachodavaram','Tuni'],
+'Andhra Pradesh_Krishna':['Avanigadda','Gannavaram','Jaggayyapet','Krishna','Machilipatnam','Mylavaram','Nandigama','Vatsavai','Vijayawada'],
+'Andhra Pradesh_Kurnool':['Adoni','Allagadda','Dhone','Duvvur','Kurnool','Pattikonda','Peddadoddi'],
+'Andhra Pradesh_Nandyal':['Allagadda','Atmakur','Banaganapalli','Bethamcherla','Dhone','Gadivemula','Gospadu','Nandikotkur','Nandyal','Panyam'],
+'Andhra Pradesh_Nellore':['Allur','Atmakur','Gudur','Kavali','Naidupet','Nellore','Srikalahasti','Sullurpet','Udayagiri','Venkatagiri'],
+'Andhra Pradesh_NTR':['Ibrahimpatnam','Jaggayyapet','Mylavaram','Nandigama','NTR','Tiruvuru','Vijayawada'],
+'Andhra Pradesh_Palnadu':['Chilakaluripet','Dachepalle','Gurazala','Macherla','Narasaraopet','Palnadu','Sattenapalle','Vinukonda'],
+'Andhra Pradesh_Parvathipuram Manyam':['Bobbili','Makkuva','Parvathipuram Manyam','Parvathipuram','Salur','Seethanagaram'],
+'Andhra Pradesh_Prakasam':['Chirala','Darsi','Giddalur','Kanigiri','Kandukur','Markapur','Ongole','Podili','Prakasam'],
+'Andhra Pradesh_Sri Potti Sriramulu Nellore':['Allur','Atmakur','Gudur','Kavali','Naidupet','Nellore','Srikalahasti','Sri Potti Sriramulu Nellore','Sullurpet','Udayagiri','Venkatagiri'],
+'Andhra Pradesh_Sri Sathya Sai':['Agali','Amadagur','Bukkapatnam','Dharmavaram','Gorantla','Hindupur','Kadiri','Kothacheruvu','Kundurpi','Madakasira','Obuladevaracheruvu','Parigi','Penukonda','Puttaparthi','Sri Sathya Sai','Tanakal','Talupula'],
+'Andhra Pradesh_Srikakulam':['Amadalavalasa','Ichchapuram','Narasannapeta','Palasa','Srikakulam','Tekkali'],
+'Andhra Pradesh_Vijayawada':['Ibrahimpatnam','Jaggayyapet','Mylavaram','Nandigama','Tiruvuru','Vijayawada'],
+'Andhra Pradesh_Visakhapatnam':['Anakapalle','Araku','Bheemunipatnam','Gajuwaka','Pendurthi','Visakhapatnam','Yelamanchili'],
+'Andhra Pradesh_Vizianagaram':['Bobbili','Cheepurupalli','Gajapathinagaram','Garividi','Salur','Vizianagaram'],
+'Andhra Pradesh_West Godavari':['Bhimavaram','Eluru','Jangareddygudem','Narasapuram','Palakollu','Tadepalligudem','Tanuku','West Godavari'],
+'Andhra Pradesh_YSR':['Badvel','Jammalamadugu','Kadapa','Mydukur','Proddatur','Pulivendula','Rayachoti','Vempalle','YSR'],
+'Arunachal Pradesh_Anjaw':['Anjaw','Chaglagam','Hawai','Hayuliang','Kibithoo','Metengliang','Walong'],
+'Arunachal Pradesh_Changlang':['Bordumsa','Changlang','Deban','Gandhigram','Jairampur','Kharsang','Manmao','Miao','Nampong','Vijaynagar'],
+'Arunachal Pradesh_Dibang Valley':['Abango','Alinye','Anelih','Anini','Bijari','Bolung','Desali','Dibang Valley','Elopa','Etalin','Hunli','Iduli','Jia','Kora','Koranu','Kronli','Meka','Paglam','Parbuk','Santipur'],
+'Arunachal Pradesh_East Kameng':['Bana','Bameng','Chayangtajo','East Kameng','Lada','Palizi','Pipu','Seppa','Thrizino','Veo'],
+'Arunachal Pradesh_East Siang':['Adipasi','Ayeng','Bilat','Boleng','Dalbing','Damro','Debing','East Siang','GTC','Hill Top','Kebang','Korang','Koyu','Ledum','Mebo','Miglung','Mikong','Mirem','Namsing','Nari','Ngopok','Oyan','Pangin','Pasighat','Rani','Renging','Riga','Ruksin','Yagrung'],
+'Arunachal Pradesh_Itanagar':['Banderdewa','Doimukh','Itanagar','Kimin','Naharlagun','Nirjuli'],
+'Arunachal Pradesh_Kamle':['Boasimla','Godak','Kamle','Ligu','Puchigeko','Raga','Tamen'],
+'Arunachal Pradesh_Kra Daadi':['Damin','Koloriang','Kra Daadi','Parsi-Parlo','Sangram','Sarli','Tali'],
+'Arunachal Pradesh_Kurung Kumey':['Chambang','Damin','Hiya','Kurung Kumey','Nyapin','Palin','Sangram','Sarli','Tali'],
+'Arunachal Pradesh_Lepa Rada':['Aalo','Jirdin','Kamba','Kaying','Lepa Rada','Ramo','Tadi'],
+'Arunachal Pradesh_Lohit':['Alubari','Changliang','Chowkham','Danglat','Gohaingaon','Innao','Kamlang Nagar','Kherem','Kumsai','Kumari Kachari','Lathao','Loiliang','Lohit','Lohitpur','Mahadevpur','Medo','Momong','Nanam','Peyong','Podumani','Sunpura','Tafragram','Tezu','Tindolong','Udaipur','Wakro','Yealing'],
+'Arunachal Pradesh_Longding':['Chubam','Kanubari','Longding','Niausa','Pongchau','Pumao','Wakka'],
+'Arunachal Pradesh_Lower Dibang Valley':['Abango','Anupam','Bijari','Bolung','Dambuk','Desali','Lower Dibang Valley','Elopa','Hunli','Iduli','Jia','Kora','Koranu','Kronli','Meka','Paglam','Parbuk','Roing','Santipur'],
+'Arunachal Pradesh_Lower Siang':['Bagra','Bame','Basar','Bene','Dali','Dari','Daring','Darka','Dego','Dipa','Garu','Gensi','Kaying','Kebang','Kora','Koyu','Likabali','Lower Siang','Mechuka','Monigong','Nari','Pangin','Payum','Pessing','Rumgong','Seram','Sibe','Tadi','Taram','Tato','Tirbin','Yomcha'],
+'Arunachal Pradesh_Lower Subansiri':['Boasimla','Godak','Hapoli','Ligu','Lower Subansiri','Puchigeko','Raga','Tamen','Yachuli','Ziro'],
+'Arunachal Pradesh_Namsai':['Chongkham','Chowkham','Empong','Lathao','Mahadevpur','Namsai','Piyong','Wakro'],
+'Arunachal Pradesh_Pakke Kessang':['Dissing Passo','Lada','Pakke Kessang','Pijerang','Seijosa'],
+'Arunachal Pradesh_Papum Pare':['Balijan','Banderdewa','Doimukh','Itanagar Capital Complex','Kheel','Kimin','Kokila','Midpu','Naharlagun','Nirjuli','Papum Pare','Sagalee','Yupia'],
+'Arunachal Pradesh_Shi Yomi':['Mechuka','Monigong','Pidi','Shi Yomi','Tadadege','Tato'],
+'Arunachal Pradesh_Siang':['Boleng','Kaying','Kebang','Pangin','Payum','Rebo-Perging','Riga','Rumgong','Siang','Tato','Yomcha'],
+'Arunachal Pradesh_Tawang':['B.Supply','Damteng','Gispu','Jang','Kitpi','Lhou','Lumla','Mukto','Sakpret','Tawang','Temple Gompa','Thingbu','Zemithang'],
+'Arunachal Pradesh_Tirap':['Borduria','Dadam','Deomali','Kaimai','Kapu','Khela','Kheti','Khonsa','Lazu','Namsang','Namsang Mukh','Narottam Nagar','Nginu','Niausa','Panchou','Senewa','Soha','Thinsa','Tirap','Tissa','Tupi','Valley View','Wakka'],
+'Arunachal Pradesh_Upper Siang':['Geku','Gelling','Karko','Mariyang','Migg','Shimong','Singa','Tuting','Upper Siang','Yingkiong'],
+'Arunachal Pradesh_Upper Subansiri':['Daporijo','Dumporijo','Giba','Lemiking','Lepajaring','Lower Subansiri','Maro','Muri','Nacho','Sippi','Siyum','Tabarijo','Taksing','Taliha','Upper Subansiri'],
+'Arunachal Pradesh_West Kameng':['Bhalukpong','Bomdila','Dirang','Kalaktang','Nafra','Rupa','Shergaon','Singchung','West Kameng'],
+'Arunachal Pradesh_West Siang':['Aalo','Giba','Jengging','Lepa Rada','Liromoba','Ryo','West Siang'],
+'Assam_Bajali':['Bajali','Patacharkuchi','Pathsala'],
+'Assam_Baksa':['Baksa','Musalpur','Salbari'],
+'Assam_Barpeta':['Barpeta','Barpeta Road','Howli','Patacharkuchi','Pathsala','Sarbhog','Sarthebari'],
+'Assam_Biswanath':['Biswanath','Gohpur'],
+'Assam_Bongaigaon':['Abhayapuri','Bongaigaon'],
+'Assam_Cachar':['Cachar','Lakhipur','Silchar'],
+'Assam_Charaideo':['Charaideo','Moranhat','Sonari'],
+'Assam_Chirang':['Basugaon','Bijni','Chirang','Kajalgaon'],
+'Assam_Darrang':['Darrang','Dhekiajuli','Duni','Kharupetia','Mangaldoi','Namkhola'],
+'Assam_Dhemaji':['Dhemaji','Jonai','Silapathar'],
+'Assam_Dhubri':['Agomani','Bilasipara','Chapar','Dhubri','Gauripur','Golokganj','Sapatgram'],
+'Assam_Dibrugarh':['Chabua','Dibrugarh','Naharkatia'],
+'Assam_Dima Hasao':['Dima Hasao','Haflong','Mahur','Maibong','Umrangso'],
+'Assam_Goalpara':['Goalpara','Lakhipur'],
+'Assam_Golaghat':['Bokakhat','Borpathar','Dergaon','Golaghat','Sarupathar'],
+'Assam_Hailakandi':['Hailakandi','Lala'],
+'Assam_Hojai':['Hojai','Lanka','Lumding'],
+'Assam_Jorhat':['Jorhat','Mariani','Teok','Titabor'],
+'Assam_Kamrup Metropolitan':['Guwahati','Kamrup Metropolitan','North Guwahati'],
+'Assam_Kamrup':['Amingaon','Kamrup','Palashbari','Rangia'],
+'Assam_Karbi Anglong':['Bokajan','Diphu','Dokmoka','Donkamokam','Hamren','Howraghat','Karbi Anglong'],
+'Assam_Karimganj':['Badarpur','Karimganj','Sribhumi'],
+'Assam_Kokrajhar':['Gossaigaon','Kokrajhar'],
+'Assam_Lakhimpur':['Bihpuria','Dhakuakhana','Lakhimpur','North Lakhimpur'],
+'Assam_Majuli':['Garmurh','Majuli'],
+'Assam_Morigaon':['Bhuragaon','Jagiroad','Morigaon'],
+'Assam_Nagaon':['Doboka','Kampur','Nagaon','Roha'],
+'Assam_Nalbari':['Nalbari','Tihu'],
+'Assam_Sivasagar':['Amguri','Nazira','Sivasagar'],
+'Assam_Sonitpur':['Dhekiajuli','Gohpur','Jamugurihat','Rangapara','Sonitpur','Tezpur'],
+'Assam_South Salmara-Mankachar':['Hatsingimari','Mankachar','South Salmara-Mankachar'],
+'Assam_Tamulpur':['Goreswar','Tamulpur'],
+'Assam_Tinsukia':['Digboi','Doomdooma','Margherita','Tinsukia'],
+'Assam_Udalguri':['Tangla','Udalguri'],
+'Assam_West Karbi Anglong':['Baithalangso','Dongkamukam','Hamren','Shikdamakha','Umswai','West Karbi Anglong'],
+'Bihar_Araria':['Forbesganj','Jogbani','Araria'],
+'Bihar_Aurangabad':['Daudnagar','Nabinagar','Aurangabad'],
+'Bihar_Begusarai':['Barauni','Teghra','Begusarai'],
+'Bihar_Bhagalpur':['Bhagalpur','Naugachia','Sultanganj','Kahalgaon','Pirpainti'],
+'Bihar_Darbhanga':['Benipur','Hayaghat','Darbhanga'],
+'Bihar_EastChamparan':['EastChamparan','Raxaul','Motihari','Bettiah','Areraj'],
+'Bihar_Gaya':['Bodh Gaya','Tekari','Sherghati','Nemasarai','Gaya'],
+'Bihar_Jamui':['Sikandra','Jamui'],
+'Bihar_Katihar':['Barsoi','Manihari','Katihar'],
+'Bihar_Kishanganj':['Bahadurganj','Thakurganj','Kishanganj'],
+'Bihar_Madhubani':['Jainagar','Benipatti','Madhubani'],
+'Bihar_Munger':['Jamalpur','Khagaria','Munger'],
+'Bihar_Muzaffarpur':['Motipur','Kanti','Mushahari','Muzaffarpur'],
+'Bihar_Nalanda':['Rajgir','Bihar Sharif','Islampur','Hilsa','Nalanda'],
+'Bihar_Patna':['Danapur','Phulwari Sharif','Bihta','Maner','Barh','Bakhtiarpur','Patna'],
+'Bihar_Purnia':['Forbesganj','Purnia'],
+'Bihar_Rohtas':['Rohtas','Sasaram'],
+'Bihar_Samastipur':['Dalsinghsarai','Rosera','Samastipur'],
+'Bihar_Saran':['Chhapra','Marhaura','Saran','Sonpur'],
+'Bihar_Siwan':['Maharajganj','Raghunathpur','Siwan'],
+'Bihar_Vaishali':['Vaishali','Mahnar','Hajipur'],
+'Bihar_West Champaran':['Bagaha','Bettiah','Narkatiaganj','West Champaran'],
+'Chhattisgarh_Balod':['Balod','Dallirajhara','Gunderdehi','Gurur'],
+'Chhattisgarh_Baloda Bazar':['Baloda Bazar','Bhatapara','Kasdol','Palari'],
+'Chhattisgarh_Balrampur':['Balrampur','Kusmi','Rajpur','Shankargarh'],
+'Chhattisgarh_Bemetara':['Bemetara','Berla','Saja','Than-Khamharia'],
+'Chhattisgarh_Bijapur':['Awapalli','Bijapur','Bhopalpatnam','Madded'],
+'Chhattisgarh_Bilaspur':['Bilaspur','Bilha','Ratanpur','Takhatpur'],
+'Chhattisgarh_Dantewada':['Barsur','Dantewada','Geedam','Katekalyan'],
+'Chhattisgarh_Dhamtari':['Dhamtari','Kurud','Magarlod','Nagri'],
+'Chhattisgarh_Durg':['Bhilai','Durg','Pulgaon','Risali'],
+'Chhattisgarh_Gaurela Pendra Marwahi':['Gaurela Pendra Marwahi','Gaurela','Marwahi','Pendra'],
+'Chhattisgarh_Janjgir-Champa':['Akaltara','Champa','Janjgir','Janjgir-Champa','Naila'],
+'Chhattisgarh_Kanker':['Antagarh','Charama','Kanker','Pakhanjur'],
+'Chhattisgarh_Kondagaon':['Farasgaon','Kondagaon','Keshkal','Makdi'],
+'Chhattisgarh_Korba':['Chhuri','Katghora','Korba','Pali'],
+'Chhattisgarh_Korea':['Baikunthpur','Chirmiri','Korea','Manendragarh','Sonhat'],
+'Chhattisgarh_Mahasamund':['Bagbahara','Mahasamund','Pithora','Saraipali'],
+'Chhattisgarh_Mungeli':['Jarhagaon','Mungeli','Lormi','Patharia'],
+'Chhattisgarh_Narayanpur':['Benoor','Koyalibeda','Narayanpur','Orchha'],
+'Chhattisgarh_Raigarh':['Kharsia','Lailunga','Raigarh','Sarangarh'],
+'Chhattisgarh_Raipur':['Arang','Naya Raipur','Raipur','Tilda'],
+'Chhattisgarh_Rajnandgaon':['Chhuikhadan','Dongargarh','Khairagarh','Rajnandgaon'],
+'Chhattisgarh_Sakti':['Adbhar','Jaijaipur','Malkharoda','Sakti'],
+'Chhattisgarh_Sukma':['Chhindgarh','Dornapal','Kontai','Sukma'],
+'Chhattisgarh_Surajpur':['Bishrampur','Odagi','Pratappur','Surajpur',],
+'Chhattisgarh_Surguja':['Ambikapur','Lakhanpur','Mainpat','Sitapur','Surguja'],
+'Dadra Nagar Haveli_Dadra Nagar Haveli':['Dadra Nagar Haveli','Khanvel','Masat','Naroli','Rakholi','Saily','Sili','Silvassa'],
+'Daman n Diu_Daman':['Bhimpore','Daman','Devka','Dunetha','Kachigam','Kadaiya','Marwad','Varkund'],
+'Daman n Diu_Diu':['Bucharwada','Diu','Fudam','Ghoghla','Vanakbara'],
+'Delhi_Central Delhi':['Central Delhi','Civil Lines','Daryaganj','Karol Bagh'],
+'Delhi_East Delhi':['East Delhi','Gandhi Nagar','Mayur Vihar','Preet Vihar'],
+'Delhi_New Delhi':['Chanakyapuri','Delhi Cantonment','New Delhi','Vasant Vihar'],
+'Delhi_North Delhi':['Alipur','Narela','North Delhi','Model Town'],
+'Delhi_North East Delhi':['Karawal Nagar','North East Delhi','Seelampur','Yamuna Vihar'],
+'Delhi_North West Delhi':['Kanjhawala','North West Delhi','Pitampura','Rohini'],
+'Delhi_Shahdara':['Seemapuri','Shahdara','Vivek Vihar'],
+'Delhi_South Delhi':['Hauz Khas','Mehrauli','Saket','South Delhi'],
+'Delhi_South East Delhi':['Defence Colony','Kalkaji','Sarita Vihar','South East Delhi'],
+'Delhi_South West Delhi':['Dwarka','Kapashera','Najafgarh','South West Delhi'],
+'Delhi_West Delhi':['Patel Nagar','Punjabi Bagh','Rajouri Garden','West Delhi'],
+'Goa_North Goa':['Aldona','Anjuna','Arambol','Bambolim','Bandora','Bardez','Bicholim','Borim','Calangute','Calapor','Candola','Candolim','Carapur','Chimbel','Colvale','Corlim','Cumbarjua','Curti','Goa Velha','Guirim','Jua','Mandrem','Mapusa','Marcaim','Mercurim','Moira','Morjim','Murda','Nerul','North Goa','Onda','Orgao','Pale','Panaji','Parcem','Penha de França','Pernem','Pilerne','Ponda','Priol','Quela','Reis Magos','Saligao','Salvador do Mundo','Sanquelim','Siolim','Socorro','Usgao','Valpoi'],
+'Goa_South Goa':['Aquem','Benaulim','Canacona','Chicalim','Chinchinim','Cortalim','Cuncolim','Curchorem-Cacora','Curtorim','Davorlim','Margao','Mormugao','Navelim','Nuvem','Quepem','Raia','Sancoale','Sanguem','Sanvordem','São José de Areal','South Goa','Varca','Verna','Xeldem'],
+'Gujarat_Ahmedabad':['Ahmedabad','Becharaji','Gandhinagar','Kalol','Kheda','Nadiad','Sanand'],
+'Gujarat_Amreli':['Amreli','Bhavnagar','Jafrabad','Lathi','Rajula','Savar Kundla'],
+'Gujarat_Anand':['Anand','Borsad','Khambhat','Nadiad','Petlad'],
+'Gujarat_Banas Kantha':['Banas Kantha','Amirgadh','Dantiwada','Deesa','Palanpur','Suigam','Tharad'],
+'Gujarat_Bharuch':['Bharuch','Ankleshwar','Jambusar','Karjan','Vagra'],
+'Gujarat_Bhavnagar':['Bhavnagar','Mahuva','Palitana','Sihor','Vallabhipur'],
+'Gujarat_Botad':['Botad','Barvala','Gadhada','Lathi','Ranpur'],
+'Gujarat_Chhota Udaipur':['Chhota Udaipur','Jetpur Pavi','Kawant','Pavi'],
+'Gujarat_Dahod':['Dahod','Devgadh Baria','Garbada','Limkheda'],
+'Gujarat_Dang':['Dang','Ahwa','Subir','Waghai'],
+'Gujarat_Gandhinagar':['Gandhinagar','Dehgam','Kalol','Mansa','Prantij'],
+'Gujarat_Junagadh':['Junagadh','Keshod','Manavadar','Somnath','Veraval'],
+'Gujarat_Kachchh':['Kachchh','Anjar','Bhuj','Gandhidham','Mandvi','Nakhatrana'],
+'Gujarat_Kheda':['Kheda','Matar','Mehmedabad','Nadiad'],
+'Gujarat_Mahesana':['Mahesana','Kadi','Unjha','Vijapur','Visnagar'],
+'Gujarat_Mahisagar':['Mahisagar','Balasinor','Lunawada','Virpur'],
+'Gujarat_Morbi':['Morbi','Halvad','Tankara','Wankaner'],
+'Gujarat_Narmada':['Narmada','Dediyapada','Rajpipla','Sagbara'],
+'Gujarat_Navsari':['Navsari','Gandevi','Valsad'],
+'Gujarat_Panch Mahals':['Panch Mahals','Godhra','Kalol','Lunawada','Morwa'],
+'Gujarat_Patan':['Patan','Harij','Radhanpur','Siddhpur'],
+'Gujarat_Porbandar':['Porbandar','Kutiyana','Ranavav'],
+'Gujarat_Rajkot':['Rajkot','Gondal','Jasdan','Kotharia','Upleta'],
+'Gujarat_Surat':['Surat','Bardoli','Navsari','Olpad'],
+'Gujarat_Surendranagar':['Surendranagar','Chotila','Dhrangadhra','Wadhwan'],
+'Gujarat_Tapi':['Tapi','Mandvi','Songadh','Uchchhal','Vyara'],
+'Gujarat_Vadodara':['Vadodara','Dabhoi','Karjan','Savli','Waghodia'],
+'Gujarat_Valsad':['Valsad','Daman','Pardi','Umbergaon'],
+'Haryana_Ambala':['Ambala','Barara','Mullana','Naraingarh','Saha','Shahzadpur'],
+'Haryana_Bhiwani':['Bahal','Bawani Khera','Bhiwani','Dinod','Jhumpa','Jui Khurd','Kairu','Loharu','Manheru','Rohnat','Siwani','Tosham'],
+'Haryana_Charkhi Dadri':['Achina','Badhra','Bond Kalan','Charkhi Dadri','Jhojhu Kalan'],
+'Haryana_Faridabad':['Badkhal','Balramgarh','Bhopani','Chhainsa','Faridabad','Jasana','Sikri','Tigaon','Tilpat'],
+'Haryana_Fatehabad':['Bhattu Kalan','Bhuna','Fatehabad','Jakhal Mandi','Ratia','Tohana'],
+'Haryana_Gurgaon':['Badshahpur','Farrukhnagar','Gurgaon','Kherki Daula','Manesar','Pataudi','Sohna'],
+'Haryana_Hisar':['Adampur','Balsamand','Barwala','Hansi','Hisar','Khedar','Kheri Jalab','Lohari Ragho','Mangali','Narnaund','Sisai','Uklana Mandi'],
+'Haryana_Jhajjar':['Bahadurgarh','Beri','Chhuchhakwas','Dighal','Jhajjar','Kablana','Kasni','Kheri Jasaur','Matanhail','Salhawas'],
+'Haryana_Jind':['Jind','Julana','Narwana','Pillu Khera','Safidon','Uchana'],
+'Haryana_Kaithal':['Cheeka','Dhand','Kaithal','Kalayat','Pundri','Rajound'],
+'Haryana_Karnal':['Assandh','Chirao','Gharaunda','Indri','Jundla','Kachhwa','Karnal','Kunjpura','Nilokheri','Nissing','Taraori'],
+'Haryana_Kurukshetra':['Babain','Barna','Kurukshetra','Ladwa','Pehowa','Shahbad','Thanesar'],
+'Haryana_Mahendragarh':['Ateli','Kanina','Mahendragarh','Nangal Chaudhary','Narnaul','Satnali'],
+'Haryana_Mewat':['Ferozepur Jhirka','Mewat','Pinangwan','Punhana','Taoru'],
+'Haryana_Nuh':['Ferozepur Jhirka','Nuh','Pinangwan','Punhana','Taoru'],
+'Haryana_Palwal':['Alawalpur','Hathin','Hodal','Palwal','Prithla'],
+'Haryana_Panchkula':['Kalka','Morni','Panchkula','Pinjore','Raipur Rani','Ramgarh'],
+'Haryana_Panipat':['Israna','Panipat','Samalkha'],
+'Haryana_Rewari':['Bawal','Dharuhera','Kosli','Kund','Rewari'],
+'Haryana_Rohtak':['Jassia','Kalanaur','Kharawar','Lahli','Meham','Rohtak','Sampla'],
+'Haryana_Sirsa':['Ellenabad','Kalanwali','Mandi Dabwali','Rania','Sirsa'],
+'Haryana_Sonipat':['Bayyanpur','Ganaur','Gohana','Kharkhoda','Kundli','Murthal','Sonipat'],
+'Haryana_Yamunanagar':['Bilaspur','Jagadhri','Radaur','Sadhaura','Bilaspur','Yamunanagar'],
+'Himachal Pradesh_Bilaspur':['Bharari','Bilaspur','Ghumarwin','Kalol','Naina Devi','Namhol','Talai'],
+'Himachal Pradesh_Chamba':['Bharmour','Chamba','Churah','Dalhousie','Kakira','Khajjiar','Pangi','Pukhri','Salooni','Sihunta','Tissa'],
+'Himachal Pradesh_Hamirpur':['Anu Kalan','Anu Khurd','Bani','Barsar','Basi','Bhatwara','Bhota','Chalokhar','Chauki','Darbeli','Dhatwal','Gajoh','Galore','Gharan','Hamirpur','Jateri','Jhanikar','Kadiar','Kamlah','Kohin','Nadaun','Tira Sujanpu'],
+'Himachal Pradesh_Kangra':['Baijnath','Dharamshala','Jwalamukhi','Kangra','Nagrota Bagwan','Nurpur','Palampur'],
+'Himachal Pradesh_Kinnaur':['Batseri','Chitkul','Kalpa','Kinnaur','Nako','Pooh','Rakchham','Reckong Peo','Sangla'],
+'Himachal Pradesh_Kullu':['Anni','Banjar','Bhuntar','Kasol','Kullu','Manali','Naggar','Nirmand'],
+'Himachal Pradesh_Lahaul Spiti':['Kaza','Keylong','Lahaul Spiti','Udaipur'],
+'Himachal Pradesh_Mandi':['Bhangrotu','Chail Chowk','Janjehli','Jogindernagar','Karsog','Kotli','Mandi','Padhar','Rewalsar','Sarkaghat','Sundar Nagar'],
+'Himachal Pradesh_Shimla':['Chaupal','Dhalli','Jubbal','Kotkhai','Kumarsain','Mashobra','Narkanda','Rampur Bushahr','Rohru','Sanjauli','Shimla','Summer Hill','Sunni','Theog'],
+'Himachal Pradesh_Sirmaur':['Dadahu','Kala Amb','Kamrau','Nahan','Paonta Sahib','Rajgarh','Renuka Ji','Sangrah','Shillai','Sirmaur'],
+'Himachal Pradesh_Solan':['Arki','Baddi','Dagshai','Kandaghat','Kasauli','Nalagarh','Parwanoo','Solan','Subathu'],
+'Himachal Pradesh_Una':['Amb','Bangana','Daulatpur Chowk','Gagret','Mehatpur Basdehra','Una'],
+'Jammu Kashmir_Anantnag':['Achabal','Anantnag','Bijbehara','Doru Verinag','Kokernag','Pahalgam','Qazigund'],
+'Jammu Kashmir_Bandipora':['Aloosa','Bandipora','Gurez','Hajin','Sumbal'],
+'Jammu Kashmir_Baramulla':['Baramulla','Gulmarg','Kunzer','Pattan','Sopore','Uri'],
+'Jammu Kashmir_Budgam':['Badgam','Beerwah','Budgam','Charari Sharief','Khag','Magam'],
+'Jammu Kashmir_Doda':['Bhaderwah','Doda','Gundna','Thathri'],
+'Jammu Kashmir_Ganderbal':['Badgam',,'Ganderbal','Kangan'],
+'Jammu Kashmir_Jammu':['Akhnoor','Arnia','Bari Brahmana','Bhalwal','Bishnah','Chowki Choura','Dansal','Ghou Manhasan','Jammu','Jourian','Khour','Nagrota','Ranbir Singh Pura'],
+'Jammu Kashmir_Kathua':['Bani','Barnoti','Bashohli','Billawar','Dinga Amb','Duggan','Ghagwal','Hiranagar','Kathua','Lakhenpur','Lohai Malhar','Mahanpur','Marheen','Nagri-Parole','Ramkote'],
+'Jammu Kashmir_Kishtwar':['Atholi','Drabshalla','Kishtwar'],
+'Jammu Kashmir_Kulgam':['Devsar','Frisal','Kulgam','Manzgam','Pahloo','Yaripora'],
+'Jammu Kashmir_Kupwara':['Handwara','Karnah','Keran','Kralpora','Kupwara','Langate','Machil','Sopore','Trehgam','Uri'],
+'Jammu Kashmir_Poonch':['Haveli','Mandi','Poonch','Surankote'],
+'Jammu Kashmir_Pulwama':['Awantipora',,'Kakapora','Litter','Pampore','Pulwama','Rajpora','Tral'],
+'Jammu Kashmir_Rajauri':['Budhal','Darhal','Kalakote','Manjakote','Nowshera','Pargwal','Rajauri','Sunderbani'],
+'Jammu Kashmir_Ramban':['Batote','Gool','Ramban'],
+'Jammu Kashmir_Reasi':['Bhambla','Jyotipuram','Katra','Pouni','Reasi','Talwara'],
+'Jammu Kashmir_Samba':['Bari Brahmana','Birpur','Chak Paras','Ghagwal','Gorah Salathian','Purmandal','Rahian','Samba','Vijaypur'],
+'Jammu Kashmir_Shopian':['Shopian'],
+'Jammu Kashmir_Srinagar':['Badgam','Baramulla','Hazratbal','Khan Sahib','Khonmoh','Pampore','Srinagar'],
+'Jammu Kashmir_Udhampur':['Chenani','Dudu','Ghordi Khas','Jyotipuram','Kud','Manwal','Panchari','Patnitop','Udhampur'],
+'Jharkhand_Bokaro':['Bermo','Bokaro','Chandankiyari','Chandrapura','Chira Chas','Dugda','Gomia','Kasmar','Nawadih','Peterwar','Telo'],
+'Jharkhand_Chatra':['Bachra','Chatra','Gidhaur','Hunterganj','Itkhori','Jori Kalan','Kunda','Tutilawa'],
+'Jharkhand_Deoghar':['Deoghar','Devipur','Jasidih','Madhupur','Mohanpur','Palojori','Sarath','Sarwan'],
+'Jharkhand_Dhanbad':['Baliapur','Chirkunda','Dhanbad','Egarkund','Gobindpur','Jharia','Maithon','Nirsa','Sindri','Topchanchi','Tundi'],
+'Jharkhand_Dumka':['Basukinath','Dudhani','Dumka','Purana Dumka','Rasikpur'],
+'Jharkhand_East Singhbhum':['Bagbera Colony','Baharagora','Chakulia','Chhota Gobindpur','Dhalbhumgarh','East Singhbhum','Ghatshila','Ghorabandha','Jamshedpur','Jugsalai','Mango','Musabani','Sarjamda'],
+'Jharkhand_Garhwa':['Bhandaria','Dandai','Dhurki','Garhwa','Manjhiaon','Meral','Ramna','Ranka','Sagma','Sinduria'],
+'Jharkhand_Giridih':['Bagodar','Bengabad','Dandidih','Deori','Dhanwar','Dumri','Gande','Gawan','Giridih','Jamua','Mahesh Mundi','Paratdih','Sirsia','Telodih','Tisri'],
+'Jharkhand_Godda':['Basantrai','Boarijor','Godda','Kundadah','Mahagama','Meharma','Pathargama','Poraiyahat','Sundarpahari','Thakurgangti'],
+'Jharkhand_Gumla':['Basia','Bharno','Bishunpur','Chainpur','Ghaghra','Gumla','Kamdara','Palkot','Raidih','Sisai'],
+'Jharkhand_Hazaribag':['Barhi','Barkagaon','Barkatha','Chalkusa','Charhi','Chauparan','Cherra','Churchu','Hazaribag','Ichak','Katkamsandi','Keredari','Konra','Marai Kalan','Meru','Okani-II','Padma'],
+'Jharkhand_Jamtara':['Fatehpur','Jamtara','Karmatanr','Kundahit','Mihijam','Nala','Narayanpur'],
+'Jharkhand_Khunti':['Dorma','Ganeor','Karra','Khunti','Murhu','Rania','Torpa'],
+'Jharkhand_Koderma':['Bekobar','Domchanch','Jhumri Telaiya','Koderma'],
+'Jharkhand_Latehar':['Balumath','Barwadih','Chandwa','Garu','Herhanj','Latehar','Mahuadanr','Manika','Netarhat'],
+'Jharkhand_Lohardaga':['Bhandra','Kairo','Kisko','Kuru','Lohardaga','Peshrar','Senha'],
+'Jharkhand_Pakur':['Amrapara','Hiranpur','Kumarpur','Litipara','Maheshpur','Pakur','Raghunandanpur','Sagrampur'],
+'Jharkhand_Palamu':['Hussainabad','Lesliganj','Medininagar','Palamu','Panki','Shahpur'],
+'Jharkhand_Ramgarh':['Ara','Barkakana','Barughutu','Bongabar','Chitarpur','Kedla','Kuju','Lapanga','Mandu','Marar','Orla','Patratu','Ramgarh','Seota','Sirka','Taping','Topa'],
+'Jharkhand_Ranchi':['Arsande','Bundu','Churi','Kanke','Khalari','Muri','Ranchi','Ratu','Ray','Tati','Tundul'],
+'Jharkhand_Sahibganj':['Barharwa','Berhait Bazar','Berhait Santali','Bhognadih','Borio','Rajmahal','Sahibganj'],
+'Jharkhand_Saraikela Kharsawan':['Adityapur','Chandil','Chota Gamharia','Kandra','Kopali','Kuchai','Saraikela Kharsawan','Sini'],
+'Jharkhand_Simdega':['Bano','Bansjor','Bolba','Jaldega','Kersai','Kolebira','Kurdeg','Pakartanr','Simdega','Thethaitangar'],
+'Jharkhand_West Singhbhum':['Bandgaon','Chaibasa','Chakradharpur','Jhinkpani','Khuntpani','Kiriburu','Manoharpur','Meghahatuburu','Noamundi','Tantnagar','West Singhbhum'],
+'Karnataka_Bagalkot':['Bagalkot','Badami','Bilgi','Hungund','Ilkal','Jamkhandi','Mahalingpur','Mudhol','Terdal'],
+'Karnataka_Bangalore':['Bangalore','Banashankari','Bannerghatta Road','Bellandur','BTM Layout','Devanahalli','Doddaballapura','Electronic City','Hebbal','Hoskote','HSR Layout','Indiranagar','Jayanagar','Koramangala','KR Puram','Marathahalli','Nelamangala','Rajajinagar','Sarjapur Road','Whitefield','Yelahanka'],
+'Karnataka_Belgaum':['Athani','Bailhongal','Belgaum','Chikodi','Gokak','Hukkeri','Khanapur','Nipani','Ramdurg','Savadatti'],
+'Karnataka_Bellary':['Bellary','Donimalai','Kampli','Sandur','Siruguppa'],
+'Karnataka_Bidar':['Aurad','Basavakalyan','Bhalki','Bidar','Chitgoppa','Humnabad'],
+'Karnataka_Bijapur':['Basavana Bagewadi','Bijapur','Indi','Muddebihal','Sindagi','Talikota','Vijayapura'],
+'Karnataka_Chamrajnagar':['Chamrajnagar','Gundlupet','Kollegal','Yelandur'],
+'Karnataka_Chickmagalur':['Chickmagalur','Kadur','Koppa','Mudigere','Narasimharajapura','Sringeri','Tarikere'],
+'Karnataka_Chikballapur':['Bagepalli','Chikballapur','Chintamani','Gauribidanu','Gudibanda','Sidlaghatta'],
+'Karnataka_Chitradurga':['Challakere','Chitradurga','Hiriyur','Holalkere','Hosadurga','Molakalmuru'],
+'Karnataka_Dakshina Kannada':['Bantwal','Belthangady','Dakshina Kannada','Mangaluru','Moodabidri','Puttur','Sullia','Ullal'],
+'Karnataka_Davangere':['Channagiri','Davangere','Harihar','Honnali','Jagalur'],
+'Karnataka_Dharwad':['Annigeri','Dharwad','Hubballi','Kundgol','Navalgund'],
+'Karnataka_Gadag':['Gadag','Gadag-Betageri','Gajendragad','Lakshmeshwar','Mundargi','Nargund'],
+'Karnataka_Gulbarga':['Afzalpur','Chincholi','Chitapur','Gulbarga','Sedam','Shahabad','Wadi'],
+'Karnataka_Hassan':['Arsikere','Belur','Channarayapatna','Hassan','Holenarasipur','Sakleshpur'],
+'Karnataka_Haveri':['Byadgi','Hangal','Haveri','Hirekerur','Ranebennur','Savanur'],
+'Karnataka_Kalaburagi':['Afzalpur','Chincholi','Chitapur','Kalaburagi','Sedam','Shahabad','Wadi'],
+'Karnataka_Kodagu':['Gonikoppal','Kodagu','Kushalnagar','Madikeri','Somwarpet','Virajpet'],
+'Karnataka_Kolar':['Bangarpet','Bethamangala','KGF','Kolar','Malur','Mulbagal','Srinivaspur'],
+'Karnataka_Koppal':['Gangavathi','Koppal','Kushtagi','Yelburga'],
+'Karnataka_Mandya':['Krishnarajpet','Maddur','Malavalli','Mandya','Nagamangala','Pandavapura','Srirangapatna'],
+'Karnataka_Mysore':['Bogadi','Heggadadevankote','Hunsur','Krishnarajanagara','Mysore','Nanjangud','Tirumakudalu Narasipura'],
+'Karnataka_North Kannada':['Ankola','Bhatkal','Dandeli','Haliyal','Karwar','Kumta','Sirsi','North Kannada','Yellapur'],
+'Karnataka_Raichur':['Devadurga','Lingsugur','Manvi','Raichur','Sindhanur'],
+'Karnataka_Ramanagara':['Channapatna','Kanakapura','Magadi','Ramanagara'],
+'Karnataka_Shimoga':['Bhadravati','Shikaripur','Shimoga','Sorab','Tirthahalli'],
+'Karnataka_Tumkur':['Gubbi','Koratagere','Kunigal','Madhugiri','Pavagada','Sira','Tiptur','Tumkur','Turuvekere'],
+'Karnataka_Udupi':['Brahmavar','Karkala','Kundapura','Udupi'],
+'Karnataka_Uttara Kannada':['Ankola','Bhatkal','Dandeli','Haliyal','Karwar','Kumta','Sirsi','Uttara Kannada','Yellapur'],
+'Karnataka_Vijayanagara':['Hosapete','Hagaribommanahalli','Harapanahalli','Kudligi','Vijayanagara'],
+'Karnataka_Vijayapura':['Basavana Bagewadi','Bijapur','Indi','Muddebihal','Sindagi','Talikota','Vijayapura'],
+'Karnataka_Yadgir':['Gurmitkal','Shahapur','Surpur','Yadgir'],
+'Kerala_Alappuzha':['Aroor','Alappuzha','Chengannur','Cherthala','Haripad','Kayamkulam','Mavelikkara','Muhamma','Thumpoly','Thuravoor'],
+'Kerala_Ernakulam':['Aluva','Angamaly','Ernakulam','Kochi','Kalady','Kolenchery','Koothattukulam','Kothamangalam','Muvattupuzha','Paravur','Perumbavoor','Piravom','Pukkattupadi','Thrippunithura'],
+'Kerala_Idukki':['Adimali','Idukki','Kattappana','Kumily','Marayur','Munnar','Nedumkandam','Peermade','Thodupuzha','Vandiperiyar'],
+'Kerala_Kannur':['Irikkur','Iritty','Kannur','Koothuparamba','New Mahe','Payyanur','Taliparamba','Thalassery'],
+'Kerala_Kasargod':['Bekal','Manjeshwaram','Kanhangad','Kasargod','Nileshwaram'],
+'Kerala_Kollam':['Chavara','Karunagappalli','Kollam','Kottarakkara','Kundara','Paravur','Punalur'],
+'Kerala_Kottayam':['Athirampuzha','Changanassery','Erattupetta','Erumely','Ettumanoor','Kaduthuruthy','Kanjirappally','Kottayam','Kuravilangad','Manarcaud','Mundakayam','Pala','Ponkunnam','Poonjar','Puthuppally','Ramapuram','Uzhavoor','Vagamon','Vaikom'],
+'Kerala_Kozhikode':['Balussery','Koduvally','Kozhikode','Koyilandy','Mukkam','Perambra','Ramanattukara','Thamarassery','Thiruvambadi','Vadakara'],
+'Kerala_Malappuram':['Edappal','Karippur','Kondotti','Kottakkal','Kuttippuram','Malappuram','Manjeri','Nilambur','Parappanangadi','Perinthalmanna','Ponnani','Tirur'],
+'Kerala_Palakkad':['Alathur','Chittur-Thathamangalam','Kalpathy','Kanjikode','Kozhinjampara','Malampuzha','Mannarkkad','Nelliampathi','Nemmara','Ottappalam','Palakkad','Pattambi','Shoranur','Vadakkencherry'],
+'Kerala_Pathanamthitta':['Adoor','Konni','Mallapally','Pandalam','Pathanamthitta','Ranni','Thiruvalla'],
+'Kerala_Thrissur':['Chalakudy','Chavakkad','Guruvayoor','Irinjalakuda','Kodakara','Kodungallur','Koratty','Kunnamkulam','Ollur','Puthukkad','Thrissur','Wadakkancherry'],
+'Kerala_Trivandrum':['Attingal','Balaramapuram','Kazhakoottam','Kovalam','Nedumangad','Neyyattinkara','Parassala','Trivandrum','Varkala','Vizhinjam'],
+'Kerala_Wayanad':['Ambalavayal','Kalpetta','Mananthavady','Meppadi','Panamaram','Pulpally','Sultan Bathery','Valavayal','Vythiri','Wayanad'],
+'Ladakh_Kargil':['Kargil','Padum','Sankoo'],
+'Ladakh_Leh':['Diskit','Khaltsi','Leh','Nubra','Shey'],
+'Lakshadweep_Lakshadweep':['Agatti','Amini','Androth','Bangaram','Bitra','Chetlat','Kadmat','Kalpeni','Kiltan','Lakshadweep','Minicoy'],
+'Madhya Pradesh_Agar Malwa':['Agar','Agar Malwa','Nalkheda','Susner'],
+'Madhya Pradesh_Alirajpur':['Alirajpur','Bhavra','Jobat','Udaigarh'],
+'Madhya Pradesh_Anuppur':['Amarkantak','Anuppur','Jaithari','Kotma','Venkatnagar'],
+'Madhya Pradesh_Ashoknagar':['Ashoknagar','Chanderi','Isagarh','Mungaoli','Shadora'],
+'Madhya Pradesh_Balaghat':['Balaghat','Baihar','Katangi','Lanji','Tirodi','Waraseoni'],
+'Madhya Pradesh_Barwani':['Anjad','Barwani','Pansemal','Rajpur','Sendhwa'],
+'Madhya Pradesh_Betul':['Amla','Betul','Bhainsdehi','Multai','Sarni'],
+'Madhya Pradesh_Bhind':['Bhind','Gohad','Lahar','Mehgaon','Mihona'],
+'Madhya Pradesh_Bhopal':['Berasia','Bhopal','Phanda Kala','Huzur'],
+'Madhya Pradesh_Burhanpur':['Burhanpur','Khaknar','Nepanagar','Shahpur'],
+'Madhya Pradesh_Chhatarpur':['Bijawar','Chhatarpur','Khajuraho','Nowgong','Rajnagar'],
+'Madhya Pradesh_Chhindwara':['Amarwara','Chhindwara','Chourai','Damua','Junnardeo','Parasia'],
+'Madhya Pradesh_Damoh':['Batiyagarh','Damoh','Hatta','Jabera','Patharia'],
+'Madhya Pradesh_Datia':['Bhander','Datia','Indergarh','Seondha'],
+'Madhya Pradesh_Dewas':['Bagli','Dewas','Hatpipalya','Kannod','Khategaon','Sonkatch'],
+'Madhya Pradesh_Dhar':['Badnawar','Dhar','Manawar','Pithampur','Sardarpur'],
+'Madhya Pradesh_Dindori':['Bajag','Dindori','Karanjiya','Mehadwani','Shahpura'],
+'Madhya Pradesh_Guna':['Aron','Chachaura Binaganj','Guna','Kumbhraj','Raghogarh Vijaypur'],
+'Madhya Pradesh_Gwalior':['Antari','Bhitarwar','Bilaua','Dabra','Gwalior','Morar','Tekanpur'],
+'Madhya Pradesh_Harda':['Harda','Khirkiya','Timarni'],
+'Madhya Pradesh_Hoshangabad':['Babai','Hoshangabad','Itarsi','Pipariya','Sohagpur'],
+'Madhya Pradesh_Indore':['Depalpur','Indore','Mhow','Rau','Sanwer'],
+'Madhya Pradesh_Jabalpur':['Jabalpur','Majholi','Panagar','Sihora'],
+'Madhya Pradesh_Jhabua':['Jhabua','Meghnagar','Petlawad','Ranapur','Thandla'],
+'Madhya Pradesh_Katni':['Badwara','Bahoriband','Barhi','Katni','Vijayraghavgarh'],
+'Madhya Pradesh_Khandwa':['Harsud','Khandwa','Mundi','Mandhata','Pandhana'],
+'Madhya Pradesh_Khargone':['Barwaha','Bhikangaon','Kasrawad','Khargone','Sanawad'],
+'Madhya Pradesh_Mandla':['Bichhiya','Ghughri','Mandla','Nainpur'],
+'Madhya Pradesh_Mandsaur':['Bhanpura','Garoth','Malhargarh','Mandsaur','Pipliya Mandi','Shamgarh','Sitamau'],
+'Madhya Pradesh_Morena':['Ambah','Joura','Kailaras','Morena','Porsa'],
+'Madhya Pradesh_Narmadapuram':['Babai','Itarsi','Narmadapuram','Pipariya','Sohagpur'],
+'Madhya Pradesh_Narsinghpur':['Gadarwara','Gotegaon','Kareli','Narsinghpur','Tendukheda'],
+'Madhya Pradesh_Neemuch':['Diken','Jawad','Jiran','Manasa','Neemuch','Rampura','Ratangarh','Singoli'],
+'Madhya Pradesh_Niwari':['Niwari','Orchha','Prithvipur'],
+'Madhya Pradesh_Panna':['Ajaigarh','Amanganj','Devendranagar','Gunour','Panna','Sausar'],
+'Madhya Pradesh_Raisen':['Begumganj','Gairatganj','Mandideep','Obedullaganj','Raisen','Sanchi','Sultanpur','Udaipura'],
+'Madhya Pradesh_Rajgarh':['Biaora','Khilchipur','Narsinghgarh','Rajgarh','Sarangpur'],
+'Madhya Pradesh_Ratlam':['Alot','Jaora','Piploda','Ratlam','Sailana'],
+'Madhya Pradesh_Rewa':['Baikunthpur','Mangawan','Rewa','Teonthar'],
+'Madhya Pradesh_Sagar':['Deori','Rehli','Sagar'],
+'Madhya Pradesh_Satna':['Amarpatan','Kothi','Nagod','Satna'],
+'Madhya Pradesh_Sehore':['Ashta','Ichhawar','Nasrullaganj','Rehti','Sehore'],
+'Madhya Pradesh_Seoni':['Barghat','Chhapara','Ghansor','Lakhnadon','Seoni'],
+'Madhya Pradesh_Shahdol':['Beohari','Burhar','Dhanpuri','Jaisinghnagar','Shahdol'],
+'Madhya Pradesh_Shajapur':['Akodia','Kalapipal','Shajapur','Shujalpur'],
+'Madhya Pradesh_Sheopur':['Baroda','Karahal','Sheopur','Vijaypur'],
+'Madhya Pradesh_Shivpuri':['Karera','Khaniyadhana','Kolaras','Narwar','Pichhore','Shivpuri'],
+'Madhya Pradesh_Sidhi':['Churhat','Majhauli','Rampur Naikin','Sidhi'],
+'Madhya Pradesh_Singrauli':['Chitrangi','Deosar','Morwa','Singrauli','Waidhan'],
+'Madhya Pradesh_Tikamgarh':['Baldeogarh','Jatara','Niwari','Orchha','Palera','Prithvipur','Tikamgarh'],
+'Madhya Pradesh_Ujjain':['Badnagar','Mahidpur','Nagda','Tarana','Ujjain'],
+'Madhya Pradesh_Umaria':['Chandia','Nowrozabad','Pali','Umaria'],
+'Madhya Pradesh_Vidisha':['Basoda','Ganj Basoda','Kurwai','Sironj','Vidisha'],
+'Maharashtra_Ahilyanagar':['Ahilyanagar','Jamkhed','Kopargaon','Newasa','Pathardi','Rahata','Rahuri','Sangamner','Shrigonda','Shrirampur'],
+'Maharashtra_Ahmednagar':['Ahmednagar','Jamkhed','Kopargaon','Newasa','Pathardi','Rahata','Rahuri','Sangamner','Shrigonda','Shrirampur'],
+'Maharashtra_Akola':['Akola','Akot','Balapur','Barshitakli','Murtizapur','Telhara'],
+'Maharashtra_Amravati':['Achalpur','Amravati','Chandur Bazar','Daryapur','Morshi','Warud'],
+'Maharashtra_Aurangabad':['Aurangabad','Kannad','Paithan','Sillod','Vaijapur'],
+'Maharashtra_Beed':['Ambajogai','Beed','Dharur','Kaij','Majalgaon','Parli','Shirur Kasar'],
+'Maharashtra_Bhandara':['Bhandara','Lakhandur','Mohadi','Pauni','Sakoli','Tumsar'],
+'Maharashtra_Buldhana':['Buldhana','Chikhli','Deulgaon Raja','Jalgaon Jamod','Khamgaon','Lonar','Malkapur','Mehkar','Nandura','Shegaon'],
+'Maharashtra_Chandrapur':['Ballarpur','Brahmapuri','Chandrapur','Ghugus','Mul','Rajura','Warora'],
+'Maharashtra_Chhatrapati Sambhajinagar':['Chhatrapati Sambhajinagar','Kannad','Paithan','Sillod','Vaijapur'],
+'Maharashtra_Dhule':['Dhule','Dondaicha','Sakri','Shirpur'],
+'Maharashtra_Gadchiroli':['Aheri','Armori','Gadchiroli','Sironcha'],
+'Maharashtra_Gondia':['Amgaon','Arjuni Morgaon','Gondia','Tirora'],
+'Maharashtra_Hingoli':['Basmath','Hingoli','Kalamnuri'],
+'Maharashtra_Jalgaon':['Chopda','Bhusawal','Chalisgaon','Dharangaon','Erandol','Jalgaon','Jamner','Yawal'],
+'Maharashtra_Jalna':['Bhokardan','Jalna','Partur'],
+'Maharashtra_Kolhapur':['Gadhinglaj','Ichalkaranji','Jaysingpur','Kagal','Kolhapur','Kurundvad','Murgud','Panhala'],
+'Maharashtra_Latur':['Ausa','Latur','Nilanga','Renapur'],
+'Maharashtra_Mumbai':['Andheri','Andheri East','Andheri West','Bandra','Bandra East','Bandra West','Bhandup','Borivali','Chembur','Dadar','Dahisar','Ghatkopar','Goregaon','Jogeshwari','Kandivali','Kanjurmarg','Khar','Kurla','Kurla East','Kurla West','Latur','Malad','Mahim','Matunga','Mulund','Mulund East','Mulund West','Mumbai','Parel','Santacruz','Sion','Vidyavihar','Vikhroli','Vile Parle'],
+'Maharashtra_Nagpur':['Hingna','Kalameshwar','Kamptee','Nagpur','Narkhed','Ramtek','Saoner','Umred'],
+'Maharashtra_Nanded':['Deglur','Hadgaon','Kinwat','Loha','Mukhed','Nanded'],
+'Maharashtra_Nandurbar':['Nandurbar','Shahada','Taloda'],
+'Maharashtra_Nashik':['Igatpuri','Malegaon','Manmad','Nashik','Satana','Sinnar'],
+'Maharashtra_Osmanabad':['Kalamb','Osmanabad','Paranda'],
+'Maharashtra_Palghar':['Boisar','Dahanu','Palghar','Vasai-Virar'],
+'Maharashtra_Parbhani':['Gangakhed','Jintur','Manwath','Parbhani','Pathri','Sonpeth'],
+'Maharashtra_Pune':['Baramati','Chakan','Daund','Hadapsar','Hinjewadi','Indapur','Junnar','Pimpri-Chinchwad','Pune','Wakad'],
+'Maharashtra_Raigad':['Alibag','Karjat','Khopoli','Mahad','Panvel','Raigad','Roha'],
+'Maharashtra_Ratnagiri':['Guhagar','Rajapur','Chiplun','Dapoli','Khed','Ratnagiri'],
+'Maharashtra_Sangli':['Islampur','Jat','Miraj','Sangli','Tasgaon'],
+'Maharashtra_Satara':['Karad','Mahabaleshwar','Panchgani','Phaltan','Satara','Wai'],
+'Maharashtra_Sindhudurg':['Kankavli','Kudal','Malvan','Sawantwadi','Sindhudurg'],
+'Maharashtra_Solapur':['Akkalkot','Barshi','Karmala','Mangalwedha','Pandharpur','Solapur'],
+'Maharashtra_Thane':['Ambarnath','Badlapur','Bhiwandi','Dombivli','Kalyan','Mira-Bhayandar','Murbad','Navi Mumbai','Shahapur','Thane','Ulhasnagar'],
+'Maharashtra_Wardha':['Arvi','Hinganghat','Pulgaon','Sindi','Wardha'],
+'Maharashtra_Washim':['Karanja','Mangrulpir','Risod','Washim'],
+'Maharashtra_Yavatmal':['Digras','Ghatanji','Pusad','Umarkhed','Wani','Yavatmal'],
+'Manipur_Bishnupur':['Bishnupur','Khoijuman','Kumbi','Kwakta','Moirang','Nambol','Oinam','Phubala'],
+'Manipur_Chandel':['Chakpikarong','Chandel','Khengjoy','Komlathabi'],
+'Manipur_Churachandpur':['Churachandpur','Henglep','Kangvai','Mualnuam','Saikot','Samulamlan','Sangaikot','Singngat','Tuibong'],
+'Manipur_Imphal East':['Andro','Imphal East','Keirao Bitra','Phaknung','Porompat','Top Chingtha'],
+'Manipur_Imphal West':['Imphal West','Keishamthong','Lamphelpat','Lamshang','Langjing','Mongshangei','Patsoi','Uripok','Wangoi'],
+'Manipur_Jiribam':['Borobekra','Jiribam'],
+'Manipur_Kakching':['Kakching','Pallel','Sugnu','Wabagai'],
+'Manipur_Kamjong':['Chadong','Kamjong','Ningthi','Phungyar','Riha'],
+'Manipur_Kangpokpi':['Kangpokpi','Leimakhong','Saikul'],
+'Manipur_Noney':['Noney'],
+'Manipur_Pherzawl':['Parbung','Pherzawl','Senvon','Thanlon'],
+'Manipur_Senapati':['Lairouching','Mao','Paomata','Purul','Senapati','Songsong','Tadubi'],
+'Manipur_Tamenglong':['Chiuluan','Duigailong','Duiluan','Namtiram','Tamei','Tamenglong','Tousem'],
+'Manipur_Tengnoupal':['Machi','Moreh','Tengnoupal'],
+'Manipur_Thoubal':['Charangpat','Heirok','Lilong','Thoubal','Wangjing','Yairipok'],
+'Manipur_Ukhrul':['Chingai','Jessami','Lungchong Meiphai','Ukhrul'],
+'Meghalaya_East Garo Hills':['Dambo Rongjeng','East Garo Hills','Samanda','Songsak','Williamnagar'],
+'Meghalaya_East Jaintia Hills':['East Jaintia Hills','Khliehriat','Lad Rymbai','Lumshnong','Mookhep','Moolamylliang','Mynkre','Saipung','Sutnga','Wapung'],
+'Meghalaya_East Khasi Hills':['Cherrapunjee','Diengpasoh','East Khasi Hills','Laitkynsew','Laitumkhrah','Mawlai','Mawphlang','Mawsynram','Nongmynsong','Nongthymmai','Pynursla','Shillong'],
+'Meghalaya_Eastern West Khasi Hills':['Eastern West Khasi Hills','Mairang','Mawthadraishan'],
+'Meghalaya_North Garo Hills':['Bajengdoba','Dainadubi','Kharkutta','Mendipathar','North Garo Hills','Resubelpara'],
+'Meghalaya_Ri Bhoi':['Mawhati','Mawlasnai','Nongpoh','Patharkhmah','Ri Bhoi','Umiam','Umroi'],
+'Meghalaya_South Garo Hills':['Baghmara','Chokpot','Gasuapara','Rongara','Siju','South Garo Hills'],
+'Meghalaya_South West Garo Hills':['Ampati','Mahendraganj','South West Garo Hills'],
+'Meghalaya_South West Khasi Hills':['Mawkyrwat','Rangthong','Ranikor','South West Khasi Hills'],
+'Meghalaya_West Garo Hills':['Batabari','Dadenggere','Dalu','Gambegre','Selsella','Tikrikilla','Tura','West Garo Hills'],
+'Meghalaya_West Jaintia Hills':['Amlarem','Dawki','Jowai','Nongtalang','West Jaintia Hills'],
+'Meghalaya_West Khasi Hills':['Nongstoin','Rambrai','Ri Muliang','West Khasi Hills'],
+'Mizoram_Aizawl':['Aizawl','Baktawng','Darlawn','Phulmawi','Reiek','Sairang','Seling','Thingsulthliah'],
+'Mizoram_Champhai':['Champhai','Khawbung'],
+'Mizoram_Hnahthial':['Darzo','Hnahthial','Muallianpui'],
+'Mizoram_Khawzawl':['Biate','Kawlkulh','Khawhai','Khawzawl'],
+'Mizoram_Kolasib':['Bairabi','Bilkhawthlir','Kolasib','Lungdai','North Kawnpui','Vairengte'],
+'Mizoram_Lawngtlai':['Hmawngbuchhuah','Kamalanagar','Lawngtlai','Sangau','Zochachhuah'],
+'Mizoram_Lunglei':['Bunghmun','Lunglei','Lungsen','Tlabung'],
+'Mizoram_Mamit':['Kawrtethawveng','Lengpui','Mamit','West Phaileng','Zawlnuam'],
+'Mizoram_Saitual':['Ngopa','Phullen','Saitual'],
+'Mizoram_Serchhip':['Chhiahtlang','North Vanlaiphai','Serchhip','Thenzawl'],
+'Mizoram_Siaha':['Ainak','Chakhei','Phalhrang','Phura','Rawmibawk','Siaha','Thingsen','Tipa','Tuipui Ferry','Tuisumpui'],
+'Nagaland_Chumoukedima':['Chumoukedima','Diphupar','Medziphema'],
+'Nagaland_Dimapur':['Dimapur','Kuda','Purana Bazar','Rangapahar'],
+'Nagaland_Kiphire':['Kiphire','Pungro','Seyochung','Sitimi'],
+'Nagaland_Kohima':['Jakhama','Khuzama','Kigwema','Kohima','Viswema'],
+'Nagaland_Longleng':['Longleng','Tamlu'],
+'Nagaland_Meluri':['Meluri'],
+'Nagaland_Mokokchung':['Alichen','Alongkima Hq','Changtongya','Chuchuyimlang','Longkhum','Mangkolemba','Mokokchung','Tuli','Tzudikong'],
+'Nagaland_Mon':['Aboi','Angjangyang','Hunta','Mon','Monyakshu','Naginimora','Shangnyu','Tizit','Tobu','Wakching'],
+'Nagaland_Niuland':['Niuland'],
+'Nagaland_Noklak':['Noklak'],
+'Nagaland_Peren':['Athibung','Jalukie','Ngwalwa','Nsong','Peren','Tening Hq'],
+'Nagaland_Phek':['Chetheba Hq','Chizami Hq','Chozuba','Khezhakeno','Khuza','Pfutsero','Phek','Phokhungri','Phor','Sakraba','Sekruzu','Zuketsa'],
+'Nagaland_Shamator':['Shamator'],
+'Nagaland_Tseminyu':['Tseminyu','Tsogin'],
+'Nagaland_Tuensang':['Chare','Chessore','Chingmei','Longkhim','Ngoungchung','Nokhu','Sangsangnyu','Tuensang'],
+'Nagaland_Wokha':['Aitepyong','Baghty','Chukitong','Ralan','Wokha'],
+'Nagaland_Zunheboto':['Aghunato','Akuluto','Atoizu','Pughoboto','Satakha','Zunheboto'],
+'Orissa_Angul':['Angul','Athmallik','Ghantapada','Jarapada','Jhimiripali','Nalconagar','Ogi','Pallahara','Talcher'],
+'Orissa_Balangir':['Balangir','Bangomunda','Kantabanji','Loisingara','Patnagarh','Titilagarh','Tusra'],
+'Orissa_Baleswar':['Baleswar','Chandipur','Chaumukha','Dagara','Jaleswar','Nilagiri','Rupsa','Talasari'],
+'Orissa_Bargarh':['Attabira','Bardol','Bargarh','Barpali','Bhatli','Bijepur','Jharbandh','Padmapur'],
+'Orissa_Bhadrak':['Basudevpur','Bhadrak','Chandabali','Dhamnagar','Dhamra'],
+'Orissa_Boudh':['Boudh','Purunakatak'],
+'Orissa_Cuttack':['Athagad','Badamba','Banki','Belagachhia','Charbatia','Choudwar','Cuttack','Dadhapatna','Narasinghpur','Nuapatna','Salepur'],
+'Orissa_Deogarh':['Barkote','Deogarh','Reamal'],
+'Orissa_Dhenkanal':['Bhuban','Dhenkanal','Dudurkote','Hindol','Indipur','Kamakhyanagar','Saranga'],
+'Orissa_Gajapati':['Gajapati','Kashinagar','Mohana','Paralakhemundi'],
+'Orissa_Ganjam':['Asika','Berhampur','Bhanjanagar','Buguda','Chhatrapur','Chikiti','Digapahandi','Ganjam','Gopalpur','Hinjilicut','Kabisuryanagar','Khallikote','Kodala','Makundapur','Polasara','Purusottampur','Rambha','Sheragada','Surada'],
+'Orissa_Jagatsinghapur':['Jagatsinghapur','Paradeep','Raghunathpur','Tirtol'],
+'Orissa_Jajpur':['Anjira','Barchana','Brahmabarada','Byasanagar','Chandikhole','Jajpur','Kabatabandha','Kaliapani','Kalinganagar','Panikoili','Sayadpur','Sukinda'],
+'Orissa_Jharsuguda':['Bandhabahal','Belpahar','Brajarajnagar','Bundia','Jharsuguda'],
+'Orissa_Kalahandi':['Bhawanipatna','Dharamgarh','Jaipatna','Junagarh','Kalahandi','Kesinga','Kokasara','Lanjigarh'],
+'Orissa_Kandhamal':['Balliguda','Daringbadi','G.Udayagiri','Kandhamal','Phulbani','Raikia','Sarangada','Tikabali','Tumudibandha'],
+'Orissa_Kendrapara':['Aul','Karilopatna','Kendrapara','Pattamundai','Rajkanika'],
+'Orissa_Kendujhar':['Anandapur','Balagoda','Bangura','Barbil','Daitari','Jhumpura','Joda','Kendujhar','Khalana','Patna','Telkoi'],
+'Orissa_Khordha':['Balipatapur','Balugaon','Banapur','Bhakarsahi','Bhubaneswar','Jatani','Khordha'],
+'Orissa_Koraput':['Borigumma','Damanjodi','Dumuriput','Jeypore','Koraput','Kotpad','Semiliguda','Sunabeda'],
+'Orissa_Malkangiri':['Balimela','Malkangiri','Mathili'],
+'Orissa_Mayurbhanj':['Bahalda','Bangriposi','Baripada','Gorumahisani','Jashipur','Jharpokharia','Karanjia','Mayurbhanj','Rairangpur','Thakurmunda','Udala'],
+'Orissa_Nabarangapur':['Chandahandi','Khatiguda','Nabarangapur','Papadahandi','Umerkote'],
+'Orissa_Nayagarh':['Kantilo','Khandapada','Nayagarh','Odagaon','Ranapur'],
+'Orissa_Nuapada':['Boden','Khariar','Komna','Nuapada','Sagunbhadi','Sinapali'],
+'Orissa_Puri':['Birapratappur','Brahmagiri','Gop','Kakatpur','Konark','Nimapada','Pipili','Puri','Satapada'],
+'Orissa_Rayagada':['Chandili','Chatikona','Durgi','Gudari','Gunupur','Jaykaypur','Kashipur','Kujendri','Kumudabali','Muniguda','Rayagada','Therubali'],
+'Orissa_Sambalpur':['Bhojpur','Burla','Hirakud','Kuchinda','Lapanga','Redhakhol','Sambalpur'],
+'Orissa_Subarnapur':['Binika','Birmaharajpur','Subalaya','Subarnapur','Tarbha'],
+'Orissa_Sundergarh':['Biramitrapur','Lattikata','Rajgangpur','Rourkela','Sundergarh','Tensa'],
+'Pondicherry_Karaikal':['Karaikal','Kottucherry','Nedungadu','Neravy','Thirunallar','Tirumalairayanpattinam'],
+'Pondicherry_Mahe':['Chalakkara','Cherukallayi','Palloor','Pandakkal','Mahe'],
+'Pondicherry_Pondicherry':['Ariyankuppam','Kurumbapet','Manavely','Odiampet','Pondicherry','Uzhavarkarai','Villianur'],
+'Pondicherry_Yanam':['Darialatippa','Farampeta','Kanakalapeta','Kurasampeta','Mettakur','Savithri Nagar','Yanam'],
+'Punjab_Amritsar':['Ajnala','Amritsar','Baba Bakala','Jandiala Guru','Majitha','Ramdass','Rajasansi','Rayya','Verka'],
+'Punjab_Barnala':['Barnala','Dhanaula','Handiaya','Tapa'],
+'Punjab_Bathinda':['Bathinda','Bhucho Mandi','Maur','Rampura Phul','Raman','Talwandi Sabo'],
+'Punjab_Faridkot':['Faridkot','Jaitu','Kotkapura'],
+'Punjab_Fatehgarh Sahib':['Amloh','Bassi Pathana','Fatehgarh Sahib','Khamanon','Mandi Gobindgarh','Sirhind'],
+'Punjab_Fazilka':['Abohar','Fazilka','Jalalabad'],
+'Punjab_Ferozepur':['Ferozepur','Guru Har Sahai','Zira'],
+'Punjab_Gurdaspur':['Batala','Dera Baba Nanak','Dhariwal','Gurdaspur','Qadian'],
+'Punjab_Hoshiarpur':['Dasuya','Garhshankar','Mahilpur','Hoshiarpur'],
+'Punjab_Jalandhar':['Adampur','Jalandhar','Kartarpur','Nakodar','Nurmahal','Phillaur'],
+'Punjab_Kapurthala':['Bhulath','Dhilwan','Kapurthala','Phagwara','Sultanpur Lodhi'],
+'Punjab_Ludhiana':['Doraha','Jagraon','Khanna','Ludhiana','Machhiwara','Payal','Raikot','Samrala'],
+'Punjab_Malerkotla':['Ahmedgarh','Amargarh','Malerkotla'],
+'Punjab_Mansa':['Bareta','Bhikhi','Budhlada','Mansa','Sardulgarh'],
+'Punjab_Moga':['Baghapurana','Dharamkot','Moga','Nihal Singh Wala'],
+'Punjab_Mohali':['Banur','Dera Bassi','Kharar','Kurali','Mohali','Zirakpur'],
+'Punjab_Nawanshahr':['Balachaur','Banga','Nawanshahr','Rahon'],
+'Punjab_Pathankot':['Dhar Kalan','Narot Jaimal Singh','Pathankot','Sujanpur'],
+'Punjab_Patiala':['Ghanaur','Nabha','Patiala','Patran','Rajpura','Samana','Sanour'],
+'Punjab_Rupnagar':['Anandpur Sahib','Morinda','Nangal','Rupnagar'],
+'Punjab_Sahibzada Ajit Singh Nagar':['Banur','Dera Bassi','Kharar','Kurali','Sahibzada Ajit Singh Nagar','Zirakpur'],
+'Punjab_Sangrur':['Bhawanigarh','Dhuri','Lehragaga','Longowal','Moonak','Sangrur','Sunam'],
+'Punjab_Shaheed Bhagat Singh Nagar':['Balachaur','Banga','Nawanshahr','Rahon','Shaheed Bhagat Singh Nagar'],
+'Punjab_Sri Muktsar Sahib':['Gidderbaha','Malout','Sri Muktsar Sahib'],
+'Punjab_Tarn Taran':['Bhikhiwind','Khadoor Sahib','Patti','Tarn Taran'],
+'Rajasthan_Ajmer':['Ajmer','Kekri','Kishangarh','Nasirabad','Pushkar','Sarwar'],
+'Rajasthan_Alwar':['Alwar','Behror','Bhiwadi','Khairthal','Kotkasim','Rajgarh','Tijara'],
+'Rajasthan_Banswara':['Anandpuri','Bagidora','Banswara','Garhi','Ghatol','Kushalgarh','Talwara'],
+'Rajasthan_Baran':['Anta','Atru','Baran','Chhabra','Mangrol'],
+'Rajasthan_Barmer':['Balotra','Barmer','Baytoo','Chohtan','Gudamalani','Pachpadra','Siwana'],
+'Rajasthan_Bharatpur':['Bayana','Bharatpur','Bhusawar','Deeg','Kaman','Nadbai','Weir'],
+'Rajasthan_Bhilwara':['Asind','Banera','Bhilwara','Bijoliya','Jahazpur','Mandal'],
+'Rajasthan_Bikaner':['Bikaner','Deshnok','Dungargarh','Khajuwala','Kolayat','Nokha'],
+'Rajasthan_Bundi':['Bundi','Hindoli','Keshoraipatan','Nainwa','Talera'],
+'Rajasthan_Chittorgarh':['Badi Sadri','Begun','Chittorgarh','Gangrar','Kapasan','Nimbahera','Rawatbhata'],
+'Rajasthan_Churu':['Churu','Sadulpur','Ratangarh','Sardarshahar','Sujangarh','Taranagar'],
+'Rajasthan_Dausa':['Bandikui','Dausa','Lalsot','Mahwa','Sikrai'],
+'Rajasthan_Dholpur':['Baseri','Bari','Dholpur','Rajakher','Saipau'],
+'Rajasthan_Dungarpur':['Aspur','Bichhiwara','Dungarpur','Sagwara','Simalwara'],
+'Rajasthan_Hanumangarh':['Bhadra','Hanumangarh','Nohar','Pilibanga','Rawatsar','Sangaria','Tibbi'],
+'Rajasthan_Jaipur':['Bassi','Chomu','Jamwa Ramgarh','Jaipur','Phulera','Sanganer','Shahpura'],
+'Rajasthan_Jaisalmer':['Bhaniyana','Fatehgarh','Jaisalmer','Pokaran'],
+'Rajasthan_Jalore':['Ahore','Bhinmal','Jalore','Sanchore','Sayla'],
+'Rajasthan_Jhalawar':['Aklera','Bhawani Mandi','Jhalawar','Khanpur','Pirawa'],
+'Rajasthan_Jhunjhunu':['Chirawa','Jhunjhunu','Malsisar','Mandawa','Nawalgarh','Pilani','Surajgarh'],
+'Rajasthan_Jodhpur':['Bhopalgarh','Bilara','Jodhpur','Luni','Osian','Phalodi','Pipar City'],
+'Rajasthan_Karauli':['Hindaun','Karauli','Mandrayal','Sapotra','Todabhim'],
+'Rajasthan_Kota':['Digod','Kaithun','Kota','Pipalda','Ramganj Mandi','Sangod'],
+'Rajasthan_Nagaur':['Degana','Mundwa','Nagaur'],
+'Rajasthan_Pali':['Bali','Falna','Marwar Junction','Pali','Rani','Sojat','Sumerpur'],
+'Rajasthan_Pratapgarh':['Arnod','Chhoti Sadri','Dhariyawad','Peepalkhoont','Pratapgarh'],
+'Rajasthan_Rajsamand':['Amet','Bhim','Deogarh','Kumbhalgarh','Nathdwara','Rajsamand','Railmagra'],
+'Rajasthan_Sawai Madhopur':['Bamanwas','Bonli','Gangapur City','Khandar','Sawai Madhopur'],
+'Rajasthan_Sikar':['Dhod','Fatehpur','Lachhmangarh','Losal','Neem Ka Thana','Reengus','Sikar'],
+'Rajasthan_Sirohi':['Abu Road','Mount Abu','Pindwara','Sheoganj','Sirohi'],
+'Rajasthan_Sri Ganganagar':['Gajsinghpur','Karanpur','Padampur','Raisinghnagar','Sadulshahar','Sri Ganganagar','Suratgarh'],
+'Rajasthan_Tonk':['Deoli','Malpura','Niwai','Todaraisingh','Tonk','Uniara'],
+'Rajasthan_Udaipur':['Gogunda','Jhadol','Kherwara','Mavli','Udaipur','Vallabhnagar'],
+'Sikkim_East Sikkim':['East Sikkim','Kumrek','Majitar','Makha','Ranipool','Rangpo','Rhenock','Rongli','Sherathang','Singtam'],
+'Sikkim_Gangtok':['Gangtok','Kumrek','Majitar','Makha','Ranipool','Rangpo','Rhenock','Rongli','Sherathang','Singtam'],
+'Sikkim_Gyalshing':['Gyalshing','Hee Burmiok','Legship','Nayabazar','Pelling','Rinchenpong','Tashiding','Yuksom'],
+'Sikkim_Mangan':['Chungthang','Dzongu','Lachen','Lachung','Mangan','Phodong','Singhik'],
+'Sikkim_Namchi':['Damthang','Jorethang','Namchi','Namthang','Ravangla','Yangang'],
+'Sikkim_North Sikkim':['Chungthang','Dzongu','Lachen','Lachung','North Sikkim','Phodong','Singhik'],
+'Sikkim_Pakyong':['Dzuluk','Pakyong','Rongli','Rorathang'],
+'Sikkim_Soreng':['Dentam','Sombaria','Soreng'],
+'Sikkim_South Sikkim':['Damthang','Jorethang','Namchi','Namthang','Ravangla','South Sikkim','Yangang'],
+'Sikkim_West Sikkim':['Gyalshing','Hee Burmiok','Legship','Nayabazar','Pelling','Rinchenpong','Tashiding','West Sikkim','Yuksom'],
+'Tamil Nadu_Ariyalur':['Ariyalur','Jayankondam','Sendurai','Thirumanur','Udayarpalayam'],
+'Tamil Nadu_Chengalpattu':['Chengalpattu','Madurantakam','Maraimalai Nagar','Pallavaram','Pammal','Sembakkam','Tambaram','Thiruporur'],
+'Tamil Nadu_Chennai':['Alandur','Ambattur','Anna Nagar','Chennai','Egmore','Guindy','Mylapore','Perambur','Sholinganallur','T. Nagar','Velachery'],
+'Tamil Nadu_Coimbatore':['Annur','Coimbatore','Gudalur','Kinathukadavu','Madukkarai','Mettupalayam','Perur','Pollachi','Sulur','Valparai'],
+'Tamil Nadu_Cuddalore':['Bhuvanagiri','Chidambaram','Cuddalore','Kattumannarkoil','Kurinjipadi','Nellikuppam','Panruti','Thittakudi','Vadalur','Virudhachalam'],
+'Tamil Nadu_Dharmapuri':['Bommidi','Dharmapuri','Harur','Kadathur','Marandahalli','Nallampalli','Pappireddipatti','Pennagaram'],
+'Tamil Nadu_Dindigul':['Dindigul','Kodaikanal','Palani','Vedasandur'],
+'Tamil Nadu_Erode':['Anthiyur','Bhavani','Chennasamudram','Erode','Gobichettipalayam','Modakurichi','Nambiyur','Sathyamangalam'],
+'Tamil Nadu_Kallakurichi':['Chinnasalem','Kallakurichi','Manalurpet','Sankarapuram','Thiyagadurgam','Tirukoilur','Ulundurpet','Vadakkanandal'],
+'Tamil Nadu_Kanchipuram':['Kanchipuram','Kundrathur','Mamallapuram','Sriperumbudur','Uthiramerur','Walajabad'],
+'Tamil Nadu_Kanyakumari':['Nagercoil','Kanyakumari','Marthandam','Kulasekaram','Pazhugal','Padmanabhapuram','Thingalnagar','Thuckalay','Boothapandi','Colachel','Karungal','Palliyadi','Aralvaimozhi','Killiyoor','Kaliakkavilai','Melpuram','Suchindram','Verkilambi','Eraniel'],
+'Tamil Nadu_Karur':['Aravakurichi','Karur','Krishnarayapuram','Kulithalai','Manmangalam','Pugalur','Thanthoni'],
+'Tamil Nadu_Krishnagiri':['Bargur','Denkanikottai','Hosur','Kaveripattinam','Kelamangalam','Krishnagiri','Mathigiri','Nagojanahalli','Pochampalli','Rayakottai','Samanthamalai','Shoolagiri','Singarapettai','Thally','Uthangarai'],
+'Tamil Nadu_Madurai':['Avaniapuram','Elumalai','Madurai','Melur','Peraiyur','Sholavandan','Thirumangalam','Usilampatti','Vadipatti'],
+'Tamil Nadu_Mayiladuthurai':['Kuthalam','Mayiladuthurai','Sirkazhi','Tharangambadi'],
+'Tamil Nadu_Nagapattinam':['Karaikal','Kilvelur','Nagapattinam','Sirkazhi','Vedaranyam'],
+'Tamil Nadu_Namakkal':['Komarapalayam','Namakkal','Pallipalayam','Paramathi Velur','Rasipuram','Tiruchengode'],
+'Tamil Nadu_Nilgiris':['Coonoor','Gudalur','Kotagiri','Nilgiris','Ooty','Wellington Cantonment'],
+'Tamil Nadu_Perambalur':['Alathur','Kunnam','Perambalur','Veppanthattai'],
+'Tamil Nadu_Pudukkottai':['Alangudi','Aranthangi','Illuppur','Keeranur','Ponnamaravathi','Pudukkottai','Thirumayam'],
+'Tamil Nadu_Ramanathapuram':['Kilakarai','Paramakudi','Ramanathapuram','Rameswaram'],
+'Tamil Nadu_Ranipet':['Arakkonam','Arcot','Melvisharam','Ranipet','Sholinghur'],
+'Tamil Nadu_Salem':['Attur','Edappadi','Gangavalli','Idappadi','Kolathur','Mettur','Narasimhapatti','Omalur','Salem','Sankagiri','Valapady','Yercaud'],
+'Tamil Nadu_Sivaganga':['Devakottai','Kalaiyarkoil','Karaikudi','Manamadurai','Sivaganga','Tiruppuvanam'],
+'Tamil Nadu_Tenkasi':['Kadayanallur','Puliyangudi','Sankarankovil','Shenkottai','Surandai','Tenkasi','Vadakarai'],
+'Tamil Nadu_Thanjavur':['Adirampattinam','Kumbakonam','Orathanadu','Pattukkottai','Thanjavur','Thiruvaiyaru','Vallam'],
+'Tamil Nadu_Theni':['Andipatti','Bodinayakanur','Chinnamanur','Gudalur','Kambam','Periyakulam','Theni','Uthamapalayam'],
+'Tamil Nadu_Thoothukudi':['Arumuganeri','Ettayapuram','Kayalpattinam','Kovilpatti','Kurumbur','Nazareth','Ottapidaram','Sattankulam','Srivaikuntam','Thoothukudi','Tiruchendur','Vilathikulam'],
+'Tamil Nadu_Tiruchirappalli':['Lalgudi','Manapparai','Srirangam','Tiruchirappalli','Thuraiyur','Thuvakudi'],
+'Tamil Nadu_Tirunelveli':['Ambasamudram','Cheranmahadevi','Kalakkad','Moolakulam','Nanguneri','Palayamkottai','Tirunelveli','Vikramasingapuram'],
+'Tamil Nadu_Tirupattur':['Ambur','Jolarpet','Tirupattur','Udayendiram','Vaniyambadi'],
+'Tamil Nadu_Tirupur':['Avinashi','Dharapuram','Kangayam','Madathukulam','Oothukuli','Palladam','Tirupur','Udumalaipettai'],
+'Tamil Nadu_Tiruvallur':['Avadi','Gummidipoondi','Pallipattu','Ponneri','Poonamallee','Tiruvallur','Tiruttani'],
+'Tamil Nadu_Tiruvannamalai':['Arani','Chengam','Cheyyar','Polur','Tiruvannamalai','Vandavasi'],
+'Tamil Nadu_Tiruvarur':['Kodavasal','Koothanallur','Mannargudi','Nannilam','Thiruthuraipoondi','Tiruvarur','Valangaiman'],
+'Tamil Nadu_Vellore':['Anaicut','Gudiyatham','Katpadi','Konavattam','Odugathur','Pallikonda','Pernambut','Vellore'],
+'Tamil Nadu_Viluppuram':['Gingee','Thirukkoyilur','Tindivanam','Ulundurpet','Vanur','Viluppuram'],
+'Tamil Nadu_Virudhunagar':['Aruppukkottai','Rajapalayam','Sivakasi','Virudhunagar'],
+'Telangana_Adilabad':['Adilabad','Bhainsa','Ichoda','Kagaznagar','Utnoor'],
+'Telangana_Bhadradri Kothagudem':['Bhadrachalam','Bhadradri Kothagudem','Kothagudem','Manuguru','Palwancha','Yellandu'],
+'Telangana_Hanamkonda':['Hanamkonda','Parkal'],
+'Telangana_Hyderabad':['Amberpet','Ameerpet','Asif Nagar','Bahadurpura','Bandlaguda','Charminar','Golconda','Himayatnagar','Hyderabad','Khairatabad','Marredpally','Musheerabad','Nampally','Saidabad','Secunderabad','Shaikpet','Tirumalagiri'],
+'Telangana_Jagtial':['Dharmapuri','Jagtial','Korutla','Metpally','Raikal'],
+'Telangana_Jangaon':['Jangaon'],
+'Telangana_Jayashankar Bhupalpally':['Jayashankar Bhupalpally','Bhupalpally','Ghanpur','Mulugu'],
+'Telangana_Jogulamba Gadwal':['Alampur','Gadwal','Jogulamba Gadwal','Ieeja','Waddepalle'],
+'Telangana_Kamareddy':['Banswada','Kamareddy','Yellareddy'],
+'Telangana_Karimnagar':['Choppadandi','Huzurabad','Jammikunta','Karimnagar','Kothapalli'],
+'Telangana_Khammam':['Khammam','Madhira','Sathupalli','Wyra'],
+'Telangana_Komaram Bheem Asifabad':['Asifabad','Kagaznagar','Komaram Bheem Asifabad'],
+'Telangana_Mahabubabad':['Dornakal','Mahabubabad','Maripeda','Thorrur'],
+'Telangana_Mahabubnagar':['Badepalle','Bhoothpur','Devarakadra','Jadcherla','Kalwakurthy','Kothakota','Mahabubnagar'],
+'Telangana_Mancherial':['Bellampalle','Chennur','Kyathanpally','Luxettipet','Mancherial','Mandamarri','Naspur'],
+'Telangana_Medak':['Medak','Narsapur','Ramayampet','Toopran'],
+'Telangana_Medchal-Malkajgiri':['Dammaiguda','Dundigal','Ghatkesar','Gundla Pochampalli','Kompally','Medchal','Medchal-Malkajgiri','Nagaram','Pocharam','Thumkunta'],
+'Telangana_Mulugu':['Mulugu'],
+'Telangana_Nagarkurnool':['Achampet','Kalwakurthy','Kollapur','Nagarkurnool'],
+'Telangana_Nalgonda':['Chandur','Chityal','Devarakonda','Haliya','Miryalaguda','Nakrekal','Nalgonda','Nandikonda'],
+'Telangana_Narayanpet':['Kosgi','Makthal','Narayanpet'],
+'Telangana_Nirmal':['Bhainsa','Khanapur','Nirmal'],
+'Telangana_Nizamabad':['Armoor','Bheemgal','Bodhan','Nizamabad'],
+'Telangana_Peddapalli':['Manthani','Peddapalli','Sultanabad'],
+'Telangana_Rajanna Sircilla':['Rajanna Sircilla','Sircilla','Vemulawada'],
+'Telangana_Rangareddy':['Adibatla','Amangal','Chevella','Ibrahimpatnam','Jalpally','Manikonda','Moinabad','Narsingi','Pedda Amberpet','Rangareddy','Shadnagar','Shamshabad','Shankarpally','Tukkuguda'],
+'Telangana_Sangareddy':['Ameenpur','Andole-Jogipet','IDA Bollaram','Narayankhed','Sangareddy','Sadasivpet','Tellapur','Zaheerabad'],
+'Telangana_Siddipet':['Cheriyal','Dubbaka','Gajwel','Husnabad','Siddipet'],
+'Telangana_Suryapet':['Huzurnagar','Kodad','Neredcherla','Suryapet','Thirumalagiri'],
+'Telangana_Vikarabad':['Kodangal','Parigi','Tandur','Vikarabad'],
+'Telangana_Wanaparthy':['Amarchinta','Atmakur','Kothakota','Pebbair','Wanaparthy'],
+'Telangana_Warangal':['Narsampet','Wardhannapet','Warangal'],
+'Telangana_Yadadri Bhuvanagiri':['Aler','Bhongir','Choutuppal','Mothkur','Pochampally','Yadagirigutta','Yadadri Bhuvanagiri'],
+'Tripura_Dhalai':['Ambassa','Chawmanu','Dhalai','Gandacherra','Kamala Sagar','Kamalpur','Longtharai Valley','Manu','Salema'],
+'Tripura_Gomati':['Amarpur','Belonia','Birganj','Gomati','Kakraban','Rajnagar','Santirbazar','Udaipur'],
+'Tripura_Khowai':['Baijalbari','Kalyanpur','Khowai','Teliamura'],
+'Tripura_North Tripura':['Dharmanagar','Jampui Hills','Kanchanpur','Kumarghat','North Tripura','Panisagar'],
+'Tripura_Sipahijala':['Bishalgarh','Jampuijala','Melaghar','Sipahijala','Sonamura'],
+'Tripura_South Tripura':['Bagafa','Belonia','Hrishyamukh','Rajapur','Sabroom','Santirbazar','South Tripura'],
+'Tripura_Unakoti':['Chailengta','Kailashahar','Kumarghat','Unakoti'],
+'Tripura_West Tripura':['Agartala','Bishalgarh','Jirania','Mohanpur','Ranirbazar','Sidhai Mohanpur','West Tripura'],
+'Utarakhand_Almora':['Almora','Bhowali','Dwarahat','Jageshwar','Ranikhet'],
+'Utarakhand_Bageshwar':['Bageshwar','Kapkote'],
+'Utarakhand_Chamoli':['Badrinath','Chamoli','Gauchar','Gopeshwar','Joshimath','Karnaprayag','Nandaprayag','Pipalkoti'],
+'Utarakhand_Champawat':['Banbasa','Champawat','Tanakpur'],
+'Utarakhand_Dehradun':['Chakrata','Dehradun','Doiwala','Herbertpur','Mussoorie','Rishikesh','Vikasnagar'],
+'Utarakhand_Haridwar':['Bahadarabad','Haridwar','Jhabrera','Laksar','Manglaur','Roorkee'],
+'Utarakhand_Nainital':['Bhimtal','Haldwani-Kathgodam','Kaladhungi','Nainital','Ramnagar'],
+'Utarakhand_Pauri Garhwal':['Devprayag','Dugadda','Kotdwar','Pauri Garhwal','Satpuli','Srinagar'],
+'Utarakhand_Pithoragarh':['Berinag','Dharchula','Didihat','Gangolihat','Munsiyari','Pithoragarh'],
+'Utarakhand_Rudraprayag':['Kedarnath','Rudraprayag','Tilwara','Ukhimath'],
+'Utarakhand_Tehri Garhwal':['Chamba','Ghansali','Narendranagar','New Tehri','Tehri Garhwal'],
+'Utarakhand_Udham Singh Nagar':['Bajpur','Gadarpur','Jaspur','Kashipur','Khatima','Kichha','Pantnagar','Rudrapur','Sitarganj','Udham Singh Nagar'],
+'Utarakhand_Uttarkashi':['Barkot','Purola','Uttarkashi'],
+'Uttar Pradesh_Agra':['Achhnera','Agra','Etmadpur','Fatehabad','Kiraoli','Kheragarh'],
+'Uttar Pradesh_Aligarh':['Aligarh','Atrauli','Gabhana','Iglas','Khair'],
+'Uttar Pradesh_Allahabad':['Allahabad','Bara','Karchhana','Koraon','Meja','Phulpur','Soraon'],
+'Uttar Pradesh_Ambedkar Nagar':['Akbarpur','Ambedkar Nagar','Hanswar','Jalalpur','Rajesultanpur','Tanda'],
+'Uttar Pradesh_Amethi':['Amethi','Gauriganj','Jagdishpur','Musafirkhana','Tiloi'],
+'Uttar Pradesh_Amroha':['Amroha','Dhanaura','Gajraula','Hasanpur','Naugawan Sadat'],
+'Uttar Pradesh_Auraiya':['Achhalda','Auraiya','Bidhuna','Erwakatra','Phaphund'],
+'Uttar Pradesh_Ayodhya':['Ayodhya','Bikapur','Milkipur','Rudauli','Sohawal'],
+'Uttar Pradesh_Azamgarh':['Azamgarh','Mehnagar','Mubarakpur','Nizamabad'],
+'Uttar Pradesh_Bagpat':['Bagpat','Baraut','Chhaprauli','Khekra','Pilana'],
+'Uttar Pradesh_Bahraich':['Bahraich','Kaiserganj','Nanpara','Payagpur','Risia'],
+'Uttar Pradesh_Ballia':['Ballia','Bansdih','Belthara Road','Rasra','Sikanderpur'],
+'Uttar Pradesh_Balrampur':['Balrampur','Gainsari','Pachperwa','Tulsipur','Utraula'],
+'Uttar Pradesh_Banda':['Atarra','Baberu','Banda','Naraini','Tindwari'],
+'Uttar Pradesh_Barabanki':['Barabanki','Haidergarh','Ramsanehighat','Zaidpur'],
+'Uttar Pradesh_Bareilly':['Aonla','Baheri','Bareilly','Faridpur','Nawabganj'],
+'Uttar Pradesh_Basti':['Babhnan','Basti','Bhanpur','Harraiya'],
+'Uttar Pradesh_Bhadohi':['Aurai','Bhadohi','Gopiganj','Gyanpur','Suriyawan'],
+'Uttar Pradesh_Bijnor':['Bijnor','Chandpur','Dhampur','Najibabad','Nagina'],
+'Uttar Pradesh_Budaun':['Alapur','Budaun','Bilsi','Dataganj','Sahaswan'],
+'Uttar Pradesh_Bulandshahr':['Anupshahr','Bulandshahr','Khurja','Shikarpur','Sikandrabad'],
+'Uttar Pradesh_Chandauli':['Chakia','Chandauli','Dhanapur','Mughalsarai','Sakaldiha'],
+'Uttar Pradesh_Chitrakoot':['Chitrakoot','Karwi','Rajapur'],
+'Uttar Pradesh_Deoria':['Barhaj','Bhatpar Rani','Deoria','Rudrapur','Salempur'],
+'Uttar Pradesh_Etah':['Aliganj','Etah','Jaithara','Jalesar',],
+'Uttar Pradesh_Etawah':['Bharthana','Chakarnagar','Etawah','Jaswantnagar','Lakhna'],
+'Uttar Pradesh_Faizabad':['Bikapur','Faizabad','Milkipur','Rudauli','Sohawal'],
+'Uttar Pradesh_Farrukhabad':['Farrukhabad','Fatehgarh','Kaimganj','Kamalganj','Kampil','Shamsabad'],
+'Uttar Pradesh_Fatehpur':['Bahua','Bindki','Fatehpur','Jahanabad','Khaga'],
+'Uttar Pradesh_Firozabad':['Firozabad','Jasrana','Shikohabad','Sirsaganj','Tundla'],
+'Uttar Pradesh_Gautam Buddha Nagar':['Dadri','Dankaur','Greater Noida','Gautam Buddha Nagar','Jewar','Noida'],
+'Uttar Pradesh_Ghaziabad':['Ghaziabad','Loni','Modinagar','Muradnagar','Vasundhara'],
+'Uttar Pradesh_Ghazipur':['Aunrihar','Bahadurganj','Dildarnagar','Ghazipur','Jakhania','Muhammadabad','Saidpur','Zamania'],
+'Uttar Pradesh_Gonda':['Colonelganj','Gonda','Katra Bazar','Mankapur','Tarabganj'],
+'Uttar Pradesh_Gorakhpur':['Bansgaon','Chauri Chaura','Gorakhpur','Khajni','Sahjanwa'],
+'Uttar Pradesh_Hamirpur':['Hamirpur','Kurara','Maudaha','Rath','Sarila'],
+'Uttar Pradesh_Hapur':['Dhaulana','Garhmukteshwar','Hapur','Pilkhua'],
+'Uttar Pradesh_Hardoi':['Bilgram','Hardoi','Pihani','Sandila','Shahabad'],
+'Uttar Pradesh_Hathras':['Hathras','Mursan','Sadabad','Sasni','Sikandra Rao'],
+'Uttar Pradesh_Jalaun':['Jalaun','Kalpi','Konch','Madhogarh','Orai'],
+'Uttar Pradesh_Jaunpur':['Jaunpur','Kerakat','Machhlishahr','Mariahu','Shahganj'],
+'Uttar Pradesh_Jhansi':['Babina','Chirgaon','Erich','Garautha','Gursarai','Jhansi','Mauranipur','Samthar','Moth'],
+'Uttar Pradesh_Kannauj':['Chhibramau','Kannauj','Saurikh','Tirwa'],
+'Uttar Pradesh_Kanpur Dehat':['Bilhaur','Bhognipur','Kanpur Dehat','Rura','Sikandra'],
+'Uttar Pradesh_Kanpur Nagar':['Bithoor','Ghatampur','Kanpur Nagar','Kalyanpur','Sarsaul'],
+'Uttar Pradesh_Kanpur':['Bithoor','Bhitargaon','Chakeri','Kalyanpur','Kanpur'],
+'Uttar Pradesh_Kasganj':['Ganj Dundwara','Kasganj','Patiyali','Sahawar','Soron'],
+'Uttar Pradesh_Kaushambi':['Chail','Karari','Kaushambi','Manjhanpur','Sarai Akil','Sirathu'],
+'Uttar Pradesh_Kushinagar':['Hata','Kasia','Kushinagar','Padrauna','Ramkola','Tamkuhi Raj'],
+'Uttar Pradesh_Lakhimpur Kheri':['Dhaurahara','Gola Gokarannath','Lakhimpur Kheri','Mohammadi','Palia Kalan'],
+'Uttar Pradesh_Lalitpur':['Lalitpur','Madawara','Mehroni','Talbehat'],
+'Uttar Pradesh_Lucknow':['Bakshi Ka Talab','Chinhat','Kakori','Lucknow','Malihabad','Mohanlalganj'],
+'Uttar Pradesh_Maharajganj':['Maharajganj','Nautanwa','Paniyara','Pharenda','Siswa Bazar'],
+'Uttar Pradesh_Mahoba':['Charkhari','Kabrai','Kulpahar','Mahoba'],
+'Uttar Pradesh_Mainpuri':['Bhogaon','Karhal','Kishni','Mainpuri'],
+'Uttar Pradesh_Mathura':['Chhata','Goverdhan','Mathura','Mant','Vrindavan'],
+'Uttar Pradesh_Mau':['Ghosi','Kopaganj','Mau','Muhammadabad Gohna','Ratanpura'],
+'Uttar Pradesh_Meerut':['Bahsuma','Kithaur','Mawana','Meerut','Sardhana'],
+'Uttar Pradesh_Mirzapur':['Ahraura','Chunar','Marihan','Mirzapur','Vindhyachal'],
+'Uttar Pradesh_Moradabad':['Bilari','Kanth','Kundarki','Thakurdwara','Moradabad'],
+'Uttar Pradesh_Muzaffarnagar':['Budhana','Charthawal','Jansath','Khatauli','Muzaffarnagar'],
+'Uttar Pradesh_Pilibhit':['Amaria','Bisalpur','Jahanabad','Pilibhit','Puranpur'],
+'Uttar Pradesh_Pratapgarh':['Antu','Atheha','Bela Pratapgarh','Heeraganj','Pratapgarh','Katra Medniganj','Kunda','Mangraura','Patti','Raniganj','Vishwanathganj'],
+'Uttar Pradesh_Prayagraj':['Bara','Karchhana','Koraon','Meja','Prayagraj','Phulpur','Soraon'],
+'Uttar Pradesh_RaeBareli':['Dalmau','Harchandpur','Lalganj','RaeBareli','Unchahar'],
+'Uttar Pradesh_Rampur':['Bilaspur','Milak','Rampur','Suar'],
+'Uttar Pradesh_Saharanpur':['Behat','Chhutmalpur','Deoband','Gangoh','Nakur','Saharanpur'],
+'Uttar Pradesh_Sambhal':['Bahjoi','Chandausi','Gunnaur','Sambhal','Sirsi'],
+'Uttar Pradesh_Sant Kabir Nagar':['Dhanghata','Khalilabad','Mehdawal','Sant Kabir Nagar'],
+'Uttar Pradesh_Shahjahanpur':['Jalalabad','Powayan','Shahjahanpur','Tilhar'],
+'Uttar Pradesh_Shamli':['Banat','Jhinjhana','Kairana','Shamli','Thanabhawan'],
+'Uttar Pradesh_Shravasti':['Bhinga','Ikauna','Sirsiya','Shravasti'],
+'Uttar Pradesh_Siddharthnagar':['Barhni','Domariyaganj','Itwa','Naugarh','Shohratgarh','Siddharthnagar'],
+'Uttar Pradesh_Sitapur':['Biswan','Laharpur','Mahmudabad','Misrikh','Sidhauli','Sitapur'],
+'Uttar Pradesh_Sonbhadra':['Anpara','Chopan','Dudhi','Ghorawal','Obra','Robertsganj','Sonbhadra'],
+'Uttar Pradesh_Sultanpur':['Kadipur','Koeripur','Lambhua','Sultanpur'],
+'Uttar Pradesh_Unnao':['Bangarmau','Hasanganj','Purwa','Safipur','Unnao'],
+'Uttar Pradesh_Varanasi':['Arajiline','Cholapur','Harhua','Kashipur','Pindra','Rajatalab','Varanasi'],
+'West Bengal_Alipurduar':['Alipurduar','Birpara','Falakata','Jaigaon','Kalchini','Madarihat'],
+'West Bengal_Bankura':['Bankura','Bishnupur','Chhatna','Indas','Khatra','Onda','Ranibandh','Simlapal','Sonamukhi'],
+'West Bengal_Bardhaman':['Bardhaman','Galsi','Kalna','Katwa','Memari'],
+'West Bengal_Birbhum':['Birbhum','Bolpur','Rampurhat','Suri'],
+'West Bengal_Cooch Behar':['Cooch Behar','Dinhata','Mathabhanga','Mekhliganj','Sitalkuchi','Tufanganj'],
+'West Bengal_Dakshin Dinajpur':['Balurghat','Bansihari','Dakshin Dinajpur','Gangarampur','Hili','Kushmandi'],
+'West Bengal_Darjeeling':['Bijanbari','Darjeeling','Kurseong','Mirik','Siliguri','Sukna','Takdah'],
+'West Bengal_East Medinipur':['East Medinipur','Egra','Haldia','Mahishadal','Nandakumar','Panskura','Tamluk'],
+'West Bengal_Hooghly':['Arambagh','Bansberia','Bhadreswar','Chandannagar','Chinsurah','Dankuni','Hooghly','Konnagar','Serampore','Tarakeswar','Uttarpara'],
+'West Bengal_Howrah':['Andul','Bagnan','Bally','Domjur','Howrah','Sankrail','Shibpur','Uluberia'],
+'West Bengal_Jalpaiguri':['Banarhat','Dhupguri','Jalpaiguri','Malbazar','Maynaguri'],
+'West Bengal_Jhargram':['Gopiballavpur','Jhargram','Nayagram'],
+'West Bengal_Kalimpong':['Algarah','Kalimpong','Lava','Pedong'],
+'West Bengal_Kolkata':['Kolkata'],
+'West Bengal_Malda':['Chanchal','Gazole','Kaliachak','Malda','Manikchak','Old Malda'],
+'West Bengal_Murshidabad':['Beldanga','Berhampore','Bhagawangola','Domkal','Jangipur','Jiaganj','Kandi','Lalgola','Murshidabad'],
+'West Bengal_Nadia':['Chakdaha','Haringhata','Karimpur','Kalyani','Krishnanagar','Nadia','Ranaghat','Santipur','Tehatta'],
+'West Bengal_North 24 Parganas':['Ashoknagar Kalyangarh','Barasat','Basirhat','Bongaon','Dum Dum','Habra','Kanchrapara','Madhyamgram','New Barrackpore','North 24 Parganas','North Dum Dum','South Dum Dum'],
+'West Bengal_North Dinajpur':['Chopra','Islampur','Itahar','Kaliaganj','North Dinajpur','Raiganj'],
+'West Bengal_Paschim Bardhaman':['Asansol','Barakar','Durgapur','Jamuria','Neamatpur','Paschim Bardhaman'],
+'West Bengal_Paschim Medinipur':['Chandrakona','Ghatal','Kharagpur','Midnapore','Paschim Medinipur','Salboni'],
+'West Bengal_Purba Bardhaman':['Galsi','Kalna','Katwa','Memari','Purba Bardhaman'],
+'West Bengal_Purba Medinipur':['Egra','Haldia','Mahishadal','Nandakumar','Panskura','Purba Medinipur','Tamluk'],
+'West Bengal_Purulia':['Adra','Balarampur','Jhalda','Purulia','Raghunathpur'],
+'West Bengal_South 24 Parganas':['Baruipur','Bhangar','Canning','Diamond Harbour','Gosaba','Joynagar Majilpur','Kakdwip','Rajpur Sonarpur','South 24 Parganas'],
+'West Bengal_South Dinajpur':['Balurghat','Bansihari','Gangarampur','Hili','Kushmandi','South Dinajpur'],
+'West Bengal_Uttar Dinajpur':['Chopra','Islampur','Itahar','Kaliaganj','Raiganj','Uttar Dinajpur'],
+'West Bengal_West Medinipur':['Chandrakona','Ghatal','Kharagpur','Midnapore','Salboni','West Medinipur']
+};
+function initLocMenu(){
+try{
+var options='<li><a>Select State</a></li>';
+for(var ele in arrStaDis){
+options+='<li '+((g_sess_state && ele==g_sess_state) ? 'class="active"' : '')+'><a>'+ele+'</a></li>';
+}
+$('.setStateMenu').html(options);
+$(".setStateMenu a").click(function(){
+setSettings($(this).text());
+});
+}catch(e){
+}
+}
+function setS(state,city,town,selVal){
+if(!state) return false;
+var txtSelS = (typeof(gTxtSelStaStr) == "string") ? gTxtSelStaStr : 'Select State';
+var options='<option value="">'+txtSelS+'</option>';
+for(var ele in arrStaDis){
+options+='<option value="'+ele+'" ';
+if(selVal && selVal==ele) options+='selected="selected"';
+options+='>'+ele+'</option>';
+}
+$(state).html(options);
+setC(state,city,town);
+}
+function setC(state,city,town,selVal){
+if(!state || !city) return false;
+var txtSelC = (typeof(gTxtSelCtyStr) == "string") ? gTxtSelCtyStr : 'Select City';
+var options='<option value="">'+txtSelC+'</option>';
+var mdlArr=arrStaDis[$(state).val()];
+if(mdlArr){
+for(var k=0;k < mdlArr.length;k++){
+options+='<option value="'+mdlArr[k]+'" ';
+if(selVal && selVal==mdlArr[k]) options+='selected="selected"';
+options+='>'+mdlArr[k]+'</option>';
+}
+}
+$(city).html(options);
+setT(state,city,town);
+}
+function setT(state,city,town,selVal){
+if(!state || !city || !town) return false;
+var options='<option value="">Select Town</option>';
+var i=$(state).val()+"_"+$(city).val();
+if(arrDisTwn[i] && arrDisTwn[i].length > 0){
+$('.townT').fadeIn('slow');
+$(town).fadeIn('slow');
+for(var j=0;j < arrDisTwn[i].length;j++){
+options+='<option value="'+arrDisTwn[i][j]+'" ';
+if(selVal && selVal==arrDisTwn[i][j]) options+='selected="selected" ';
+options+='>'+arrDisTwn[i][j]+'</option>';
+}
+}else{
+$('.townT').fadeOut('slow');
+$(town).fadeOut('slow');
+}
+$(town).html(options);
+}
+function setB(company,selVal){
+if(!company) return false;
+var txtSelB = (typeof(gTxtSelCmpStr) == "string") ? gTxtSelCmpStr : 'Select Brand';
+var options='<option value="">'+txtSelB+'</option>';
+for(var ele in arrModel){
+options+='<option value="'+ele+'" ';
+if(selVal && selVal==ele) options+='selected="selected"';
+options+='>'+ele+'</option>';
+}
+var mdlArr=arrModel[$(company).val()];
+if(mdlArr && mdlArr.length==0)
+$('.item-model-box').css('visibility','hidden');
+else
+$('.item-model-box').css('visibility','visible');
+if($(company).val()=='Other' || selVal=='Other' ||(mdlArr && mdlArr.length==0)){
+$('.other-full-name').text('');
+$('.other-box').fadeIn('slow');
+}
+$(company).html(options);
+}
+function priceWid_setB(company,selVal){
+if(!company) return false;
+var txtSelB = (typeof(gTxtSelCmpStr) == "string") ? gTxtSelCmpStr : 'Select Brand';
+var options='<option value="">'+txtSelB+'</option>';
+for(var ele in priceWid_arrModel){
+options+='<option value="'+ele+'" ';
+if(selVal && selVal==ele) options+='selected="selected"';
+options+='>'+ele+'</option>';
+}
+$(company).html(options);
+}
+function setM(company,model,version,bYear,selVal){
+if(!company || !model) return false;
+var txtSelM = (typeof(gTxtSelMdlStr) == "string") ? gTxtSelMdlStr : 'Select Model';
+var options='<option value="">'+txtSelM+'</option>';
+var mdlArr=arrModel[$(company).val()];
+if(mdlArr){
+for(var k=0;k < mdlArr.length;k++){
+options+='<option value="'+mdlArr[k]+'" ';
+if(selVal && selVal==mdlArr[k]) options+='selected="selected"';
+options+='>'+mdlArr[k]+'</option>';
+}
+}
+if(mdlArr && mdlArr.length==0)
+$('.item-model-box').css('visibility','hidden');
+else
+$('.item-model-box').css('visibility','visible');
+if($(company).val()=='Other' || $(model).val()=='Other' || selVal=='Other' ||(mdlArr && mdlArr.length==0)){
+$('.other-full-name').text('');
+$('.other-box').fadeIn('slow');
+}else{
+$('.other-box').hide();
+}
+$(model).html(options);
+setV(company,model,version,bYear,null);
+}
+function setV(company,model,version,bYear,selVal){
+if(!company || !model || !version) return false;
+var txtSelV = (typeof(gTxtSelVerStr) == "string") ? gTxtSelVerStr : 'Select Version';
+var options='<option value="">'+txtSelV+'</option>';
+var i=$(company).val()+"_"+$(model).val();
+if(arrVersion[i] && arrVersion[i].length > 0){
+$('.vv').fadeIn('slow');
+$(version).fadeIn('slow');
+for(var j=0;j < arrVersion[i].length;j++){
+options+='<option value="'+arrVersion[i][j]+'" ';
+if(selVal && selVal==arrVersion[i][j]) options+='selected="selected" ';
+options+='>'+arrVersion[i][j]+'</option>';
+}
+}else{
+$('.vv').fadeOut('slow');
+$(version).fadeOut('slow');
+}
+$(version).html(options);
+var mdlArr=arrModel[$(company).val()];
+if(mdlArr && mdlArr.length==0)
+$('.item-model-box').css('visibility','hidden');
+else
+$('.item-model-box').css('visibility','visible');
+if($(company).val()=='Other' || $(model).val()=='Other' || $(version).val()=='Other' || selVal=='Other' ||(mdlArr && mdlArr.length==0)){
+$('.other-full-name').text('');
+$('.other-box').fadeIn('slow');
+}else{
+$('.other-box').hide();
+}
+setItemProps(company,model,version,bYear);
+}
+function setVer(company,model,version,bYear){
+if(!version) return false;
+if($(version).val()=='Other'){
+$('.other-full-name').text('');
+$('.other-box').fadeIn('slow');
+}else{
+$('.other-box').hide();
+}
+if(company && model) setItemProps(company,model,version,bYear);
+}
+function setItemProps(company,model,version,bYear){
+return false;
+if(!company || !model || !version) return false;
+var engC='';
+var buyY=1955;
+var endY=2025;
+var mo=itemProps[$(company).val()+'_'+$(model).val()];
+var ve=itemProps[$(company).val()+'_'+$(model).val()+'_'+$(version).val()];
+if(mo && mo.c) engC=mo.c;
+if(ve && ve.c) engC=ve.c;
+$('#engCapacity').val(engC || $('#engCapacity').val() );
+if(mo && mo.y) buyY=mo.y;
+if(ve && ve.y) buyY=ve.y;
+if(mo && mo.e) endY=mo.e;
+if(ve && ve.e) endY=ve.e;
+if(bYear) populateNos(bYear,buyY,endY,$(bYear).val());
+if(typeof(filterBuyYear)=='function') filterBuyYear();
+if(typeof(priceWid_filterBuyYear)=='function') priceWid_filterBuyYear();
+if(typeof(showCCFormat)=='function') showCCFormat();
+}
+function setFullName(company,model,version,other){
+if(!company || !model || !version || !other) return false;
+$('.other-full-name').text(strReplaceChars($(company).val()+' '+$(model).val()+' '+$(version).val()+' '+$(other).val(),['Other'],''));
+}
+function goToItem(){var d=$.trim($('#itemById').val());if(d && !isNaN(parseInt(d))){location.href='/id/'+d;} else{alert('Please enter a valid '+iNameBig+' ID');$('#itemById').focus();}return false;}
+function strReplaceChars(str,strArr,replacement){
+var replacement=replacement || '';
+try{
+$.each(strArr,function(i,ch){
+var tmp=str.split(ch);
+str=tmp.join(replacement);
+});
+}catch(e){
+}
+return str;
+}
+function formatNum(num){
+try{
+if(num && isNo(num)){
+var num=trim(num+'');
+sA=num.split("");
+switch(num.length){
+case 4:num=sA[0]+","+sA[1]+sA[2]+sA[3];break;
+case 5:num=sA[0]+sA[1]+","+sA[2]+sA[3]+sA[4];break;
+case 6:num=sA[0]+","+sA[1]+sA[2]+","+sA[3]+sA[4]+sA[5];break;
+case 7:num=sA[0]+sA[1]+","+sA[2]+sA[3]+","+sA[4]+sA[5]+sA[6];break;
+case 8:num=sA[0]+","+sA[1]+sA[2]+","+sA[3]+sA[4]+","+sA[5]+sA[6]+sA[7];break;
+case 9:num=sA[0]+sA[1]+","+sA[2]+sA[3]+","+sA[4]+sA[5]+","+sA[6]+sA[7]+sA[8];break;
+}
+}else{
+num='';
+}
+}catch(e){
+}
+return num ? num :'';
+}
+function getSEOUrl(str){
+try{
+str = $.trim(str).toLowerCase();
+str = str.replace(/[^a-zA-Z0-9 ]/g, ' ');
+str = str.replace( /\s+/g, ' ' );
+str = $.trim(str);
+str = str.replace(/\s+/g, '-');
+return str;
+}catch(e){
+}
+}
+function supShtNoOther(str){
+try{
+if(str=='Other' || str =='other' || str == null) str = '';
+str = getSEOUrl(str);
+str = str.replace(/-/g, "");
+return str;
+}catch(e){
+}
+}
+function seoShtNoOther(str){
+try{
+if(str=='Other' || str =='other' || str == null) str = '';
+str = getSEOUrl(str);
+return str;
+}catch(e){
+}
+}
+function confirmDelComm(){return confirm("Are you sure you want to delete?");}
+function editComm(b,u){
+try {
+$f = $('<form method="post" action="/adm/u.php" class="formEditCom"><input type="hidden" name="r" value="'+u+'" /><textarea name="c" maxlength="4000">'+b.parent().siblings('div.commBody').html()+'</textarea><input type="submit" value="Update" /> <input type="button" class="right" value="x" onClick="$(this).parent().remove()" /></form>');
+b.parent().append($f);
+}catch(e){
+}
+return false;
+}
+$(function(){
+try{
+var target=document.getElementById("captchaTD");
+if(typeof target.onselectstart !="undefined")//IE
+target.onselectstart=function(){return false};
+else //All other route(ie:Opera)
+target.onmousedown=function(){return false};
+}catch(e){}
+});
+function showRestComments(){
+$(".restComments,.restCommBox").toggle();
+}
+function showRestWPComments(){
+$(".restCommBox").toggle();
+$(".commentlist").css("max-height","none");
+$(".commentlist").css("overflow","auto");
+}
+function setSettings(sta){
+if(trim(sta)){
+if(sta=='Select State') sta='';
+$.ajax({
+url:"/set-settings.php",
+cache:0,
+data:"st="+trim(sta),
+timeout:30000,
+success:function(rst){
+if(sta == rst) {
+var cUrl=location.href;
+if(cUrl.indexOf("?st=") !== -1 || cUrl.indexOf("&st=") !== -1) {
+if(cUrl.indexOf("?st=") !== -1) cUrl = strReplaceChars(cUrl,["?st="],"?st="+sta+"&oldst=");
+if(cUrl.indexOf("&st=") !== -1) cUrl = strReplaceChars(cUrl,["&st="],"&st="+sta+"&oldst=");
+if(cUrl.indexOf("&ct=") !== -1) cUrl = strReplaceChars(cUrl,["&ct="],"&ct=&oldct=");
+if(cUrl.indexOf("&page=") !== -1) cUrl = strReplaceChars(cUrl,["&page="],"&page=1&oldpage=");
+}
+location.href=cUrl;
+} else {
+location.reload();
+}
+},
+error:function(){
+}
+});
+}
+}
+function chkDlrMailForm(){
+var cname,cemail,canswer,cnumber,cmodel;
+with(window.document.testDriveForm){
+cname = dlrBname;
+cemail = dlrBemail;
+canswer = answer;
+cnumber = dlrBphone;
+cmodel = dlrBitemName;
+}
+if(!check(cname)){cname.focus();return false;}
+if(!trim(cname.value)){alert('Please enter your Name.');cname.focus();return false;}
+/*
+if(!trim(cemail.value)){alert('Please enter your Email');cemail.focus();return false;}
+if(!isEmail(trim(cemail.value))){alert('Please enter a valid e-mail addess.');cemail.focus();return false;}
+*/
+if(!trim(cnumber.value)){alert('Please enter your Mobile number');cnumber.focus();return false;}
+if(isNaN(cnumber.value) || cnumber.value.length != 10){alert('Please enter your valid 10 digit Mobile Number');cnumber.focus();return false;}
+if(!check(cmodel)){cmodel.focus();return false;}
+if(!trim(cmodel.value)){alert('Please enter the model.');cmodel.focus();return false;}
+if(!trim(canswer.value)){alert('Please enter the numbers.');canswer.focus();return false;}
+cname.value = trim(cname.value);
+cemail.value = trim(cemail.value);
+canswer.value = trim(canswer.value);
+cnumber.value = trim(cnumber.value);
+cmodel.value = trim(cmodel.value);
+return true;
+}
+function chkTestDriveForm(){
+var cname,cemail,cnumber,cstate,ccity,canswer;
+with(window.document.testDriveForm){
+cname = dlrBname;
+cemail = dlrBemail;
+cnumber = dlrBphone;
+cstate = dlrBstat;
+ccity = dlrBcity;
+canswer = answer;
+}
+if(!check(cname)){cname.focus();return false;}
+if(!trim(cname.value)){alert('Please enter your Name.');cname.focus();return false;}
+/*
+if(!trim(cemail.value)){alert('Please enter your Email');cemail.focus();return false;}
+if(!isEmail(trim(cemail.value))){alert('Please enter a valid e-mail addess.');cemail.focus();return false;}
+*/
+if(!trim(cnumber.value)){alert('Please enter your Mobile number');cnumber.focus();return false;}
+if(isNaN(cnumber.value) || cnumber.value.length != 10){alert('Please enter your valid 10 digit Mobile Number');cnumber.focus();return false;}
+if(!trim(cstate.value)){alert('Please select your State');cstate.focus();return false;}
+if(!trim(ccity.value) && trim(cstate.value) != 'Chandigarh'){alert('Please select your City');ccity.focus();return false;}
+if(!trim(canswer.value)){alert('Please enter the numbers.');canswer.focus();return false;}
+cname.value  = trim(cname.value);
+cemail.value = trim(cemail.value);
+cnumber.value = trim(cnumber.value);
+cstate.value = trim(cstate.value);
+ccity.value = trim(ccity.value);
+canswer.value = trim(canswer.value);
+return true;
+}
+function chkRTServiceForm(){
+var cname,cemail,cnumber,cstate,ccity,canswer;
+with(window.document.rtServiceForm){
+cname = usrBname;
+cemail = usrBemail;
+cnumber = usrBphone;
+cstate = usrBstat;
+ccity = usrBcity;
+canswer = answer;
+}
+if(!check(cname)){cname.focus();return false;}
+if(!trim(cname.value)){alert('Please enter your Name.');cname.focus();return false;}
+if(!trim(cemail.value)){alert('Please enter your Email');cemail.focus();return false;}
+if(!isEmail(trim(cemail.value))){alert('Please enter a valid e-mail addess.');cemail.focus();return false;}
+if(!trim(cnumber.value)){alert('Please enter your Mobile number');cnumber.focus();return false;}
+if(!trim(cstate.value)){alert('Please select your State');cstate.focus();return false;}
+if(!trim(ccity.value) && trim(cstate.value) != 'Chandigarh'){alert('Please select your City');ccity.focus();return false;}
+if(!trim(canswer.value)){alert('Please enter the numbers.');canswer.focus();return false;}
+cname.value  = trim(cname.value);
+cemail.value = trim(cemail.value);
+cnumber.value = trim(cnumber.value);
+cstate.value = trim(cstate.value);
+ccity.value = trim(ccity.value);
+canswer.value = trim(canswer.value);
+return true;
+}
+function chkLoanBookForm(formID){
+var $cname   = $(formID + ' .usrBname');
+var $cemail  = $(formID + ' .usrBemail');
+var $cnumber = $(formID + ' .usrBphone');
+var $cstate  = $(formID + ' .usrBstat');
+var $ccity   = $(formID + ' .usrBcity');
+var $canswer = $(formID + ' .answer');
+$cname.val(trim($cname.val()));
+$cemail.val(trim($cemail.val()));
+$cnumber.val(trim($cnumber.val()));
+$cstate.val(trim($cstate.val()));
+$ccity.val(trim($ccity.val()));
+$canswer.val(trim($canswer.val()));
+if( !jQcheck($cname) || !jQcheck($cnumber) || !jQcheck($ccity) ) return false;
+if(!$cname.val()){alert('Please enter your Name.');$cname.focus();return false;}
+/*
+if(!$cemail.val()){alert('Please enter your Email');$cemail.focus();return false;}
+if(!isEmail($cemail.val())){alert('Please enter a valid e-mail addess.');$cemail.focus();return false;}
+*/
+if(!$cnumber.val() || isNaN($cnumber.val()) || $cnumber.val().length != 10){alert('Please enter your valid 10 digit Mobile Number');$cnumber.focus();return false;}
+if(!$cstate.val()){alert('Please select your State');$cstate.focus();return false;}
+if(!$ccity.val() && $cstate.val() != 'Chandigarh'){alert('Please select your City');$ccity.focus();return false;}
+if(!$canswer.val()){alert('Please enter the numbers.');$canswer.focus();return false;}
+$(formID).submit();
+}
+function chkRTOServiceForm(formID){
+var $cname   = $(formID + ' .usrBname');
+var $cemail  = $(formID + ' .usrBemail');
+var $cnumber = $(formID + ' .usrBphone');
+var $cserv  = $(formID + ' .usrBserv');
+var $caddrs  = $(formID + ' .usrBaddrs');
+//var $cstate  = $(formID + ' .usrBstat');
+var $ccity   = $(formID + ' .usrBcity');
+var $canswer = $(formID + ' .answer');
+$cname.val(trim($cname.val()));
+$cemail.val(trim($cemail.val()));
+$cnumber.val(trim($cnumber.val()));
+$cserv.val(trim($cserv.val()));
+$caddrs.val(trim($caddrs.val()));
+//$cstate.val(trim($cstate.val()));
+$ccity.val(trim($ccity.val()));
+$canswer.val(trim($canswer.val()));
+if( !jQcheck($cname) || !jQcheck($cnumber) || !jQcheck($cserv) || !jQcheck($caddrs) || !jQcheck($ccity) ) return false;
+if(!$cname.val()){alert('Please enter your Name.');$cname.focus();return false;}
+if(!$cemail.val()){alert('Please enter your Email');$cemail.focus();return false;}
+if(!isEmail($cemail.val())){alert('Please enter a valid e-mail addess.');$cemail.focus();return false;}
+if(!$cnumber.val()){alert('Please enter your Mobile number');$cnumber.focus();return false;}
+//if(!$cstate.val()){alert('Please select your State');$cstate.focus();return false;}
+//if(!$ccity.val() && $cstate.val() != 'Chandigarh'){alert('Please select your City');$ccity.focus();return false;}
+if(!$ccity.val()){alert('Please select your City');$ccity.focus();return false;}
+if(!$canswer.val()){alert('Please enter the numbers.');$canswer.focus();return false;}
+$(formID).submit();
+}
+function chkUsedEnqMail(){
+var cname,cemail,cnumber,canswer,cdetail;
+with(window.document.sendMail){
+cname = name;
+cemail = customer_mail;
+cnumber = phoneNo;
+canswer = answer;
+cdetail = detail;
+}
+if(!check(cdetail)){cdetail.focus();return false;}
+if(!trim(cdetail.value)){alert('Please enter the message.');cdetail.focus();return false;}
+if(!check(cname)){cname.focus();return false;}
+if(!trim(cname.value)){alert('Please enter your Name.');cname.focus();return false;}
+if(!trim(cemail.value)){alert('Please enter your email');cemail.focus();return false;}
+if(!isEmail(trim(cemail.value))){alert('Please enter a valid e-mail addess.');cemail.focus();return false;}
+if(!trim(cnumber.value)){alert('Please enter your Mobile number');cnumber.focus();return false;}
+if(!trim(canswer.value)){alert('Please enter the numbers.');canswer.focus();return false;}
+cname.value  = trim(cname.value);
+cemail.value = trim(cemail.value);
+cnumber.value = trim(cnumber.value);
+canswer.value = trim(canswer.value);
+cdetail.value = trim(cdetail.value);
+return true;
+}
+function chkBuyerInfo(){
+var cname,cemail,cnumber,canswer;
+with(window.document.buyerForm){
+cname = name;
+cemail = customer_mail;
+cnumber = phoneNo;
+canswer = answer;
+}
+if(!check(cname)){cname.focus();return false;}
+if(!trim(cname.value)){alert('Please enter your Name.');cname.focus();return false;}
+if(!trim(cnumber.value)){alert('Please enter your Mobile number');cnumber.focus();return false;}
+if(isNaN(cnumber.value) || cnumber.value.length != 10){alert('Please enter your valid 10 digit Mobile Number');cnumber.focus();return false;}
+if(!trim(cemail.value)){alert('Please enter your email');cemail.focus();return false;}
+if(!isEmail(trim(cemail.value))){alert('Please enter a valid e-mail addess.');cemail.focus();return false;}
+if(!trim(canswer.value)){alert('Please enter the numbers.');canswer.focus();return false;}
+cname.value  = trim(cname.value);
+cemail.value = trim(cemail.value);
+cnumber.value = trim(cnumber.value);
+canswer.value = trim(canswer.value);
+return true;
+}
+function showOnlyDigits($tObj){
+try{
+var orgVal=$.trim($tObj.val());
+if(orgVal){
+orgVal=$.trim(orgVal.replace(/[^0-9]/i,''));
+$($tObj).val(orgVal);
+}
+}catch(e){
+}
+}
+function showOnlyDigitsOpt($tObj,prvw,pfx,sfx,doFormat){
+try{
+var orgVal=$.trim($tObj.val());
+if(orgVal){
+orgVal=$.trim(orgVal.replace(/[^0-9]/i,''));
+$($tObj).val(orgVal);
+var newVal = (orgVal && doFormat) ? formatNum(orgVal) : '';
+if(prvw) $(prvw).text(newVal ? (pfx + newVal + sfx) : '');
+}
+}catch(e){
+}
+}
+var trackOutboundLink = function(url,new_window){
+gtag('event','click',{
+'event_category':'outbound',
+'event_label':url,
+'transport_type':'beacon',
+'event_callback':function(){if(!new_window){document.location=url;}}
+});
+}
+function checkCommTmpForm(){
+var cemail;
+with(window.document.commAddForm) {
+cname  = comm_user_name;
+cemail  = comm_user_mail;
+canswer = comm_answer;
+cdetail = comm_comments;
+}
+cdetail.value = strReplaceChars(cdetail.value, ['http://','https://','www.'],'');
+if(!check(cname)) {
+cname.focus();
+return false;
+}
+if(!check(cdetail)) {
+cdetail.focus();
+return false;
+}
+if(!trim(cname.value)) {
+alert("Please enter your Name");
+cname.focus();
+return false;
+}
+if(!trim(cemail.value)) {
+alert("Please enter your email");
+cemail.focus();
+return false;
+}
+if(!isEmail(trim(cemail.value)))	{
+alert("Please enter a valid e-mail addess.");
+cemail.focus();
+return false;
+}
+if(!trim(cdetail.value)) {
+alert("Please enter the comments");
+cdetail.focus();
+return false;
+}
+if(!trim(canswer.value)) {
+alert("Please enter the numbers.");
+canswer.focus();
+return false;
+}
+cname.value = trim(cname.value);
+cemail.value = trim(cemail.value);
+canswer.value = trim(canswer.value);
+cdetail.value = trim(cdetail.value);
+return true;
+}
+function preiceWid_getSrchLink(stat, comp, modl, vers, year, link){
+var a = '?';
+link=trim(link || '/bike-prices.php');
+stat=trim(stat || '');
+comp=trim(comp || '');
+modl=trim(modl || '');
+vers=trim(vers || '');
+year=trim(year || '');
+if(stat){link += a + 'st=' + stat;a = '&';}
+if(comp){link += a + 'cp=' + comp;a = '&';}
+if(modl){link += a + 'ml=' + modl;a = '&';}
+if(vers){link += a + 'vr=' + vers;a = '&';}
+if(year){link += a + 'yr=' + year;a = '&';}
+return link;
+}
+function preiceWid_advSrch(){
+if(!$('#priceWid_comp').val()){
+alert('Please select the Brand');
+$('#priceWid_comp').focus();
+return false;
+}
+if(!$('#priceWid_modl').val()){
+alert('Please select the Model');
+$('#priceWid_modl').focus();
+return false;
+}
+if(!$('#priceWid_vern').val() && $('#priceWid_vern option').length > 1){
+alert('Please select the Version');
+$('#priceWid_vern').focus();
+return false;
+}
+if(!$('#priceWid_stat').val()){
+alert('Please select the State');
+$('#priceWid_stat').focus();
+return false;
+}
+if(!$('#priceWid_year').val()){
+alert('Please select the Year of Manufacture');
+$('#priceWid_year').focus();
+return false;
+}
+var kmData = trim($('#priceWid_km').val()) ? trim($('#priceWid_km').val()) : '';
+if(!kmData || !isNo(kmData)) {
+alert('Pleas enter valid KMs run. Only numbers are allowed. Special characters like comma are not allowed. Eg: 20500');
+$('#priceWid_km').focus();
+return false;
+}
+location.href = preiceWid_getSrchLink($('#priceWid_stat').val(), $('#priceWid_comp').val(), $('#priceWid_modl').val(), $('#priceWid_vern').val(), $('#priceWid_year').val(), '/bike-prices.php') + (kmData ? ('&km=' + kmData) : '');
+}
+function priceWid_removeOth(){
+try{
+$('#priceWid_modl option[value="Other"], #priceWid_vern option[value="Other"]').remove();
+} catch(e){
+}
+}
+function priceWid_filterBuyYear(){
+try{
+$('#priceWid_year option[value="2025"]').remove();
+var curY = $('#priceWid_year').val();
+var endY = $('#priceWid_year option').filter(':first').val();
+if($('#priceWid_year option').filter(':last').val() == '1955') populateNos("#priceWid_year", 1965 , endY , curY);
+} catch(e){
+}
+}
+function priceWid_showKMsFormat() {
+try{
+var orgVal = $.trim($('#priceWid_km').val());
+if(orgVal) {
+orgVal = $.trim( orgVal.replace(/[^0-9]/i, '') );
+$('#priceWid_km').val(orgVal);
+}
+var newVal = orgVal ? formatNum(orgVal) : '';
+$('#preiceWid_kmDisplayTxt').text(newVal ? newVal + ' kms' : '');
+}catch(e){}
+}
+function priceWid_Init(){
+try {
+priceWid_setB('#priceWid_comp',null);
+setM('#priceWid_comp','#priceWid_modl','#priceWid_vern','#priceWid_year',null);
+setV('#priceWid_comp','#priceWid_modl','#priceWid_vern','#priceWid_year',null);
+setS('#priceWid_stat','',null,g_sess_state);
+populateNos('#priceWid_year',1965,2024,null);
+setItemProps('#priceWid_comp','#priceWid_modl','#priceWid_vern','#priceWid_year');
+$('#priceWid_modl option[value="Other"], #priceWid_vern option[value="Other"]').remove();
+} catch(e){
+}
+}
+function owlCarousel_Init(){
+$(".slider-style1").owlCarousel({
+loop:true,
+margin:10,
+navigation:true,
+pagination:false,
+nav:true,
+items:4,
+responsive:{
+0:{items:2},
+482:{items:2},
+768:{items:3},
+992:{items:4},
+1200:{items:4},
+2000:{items:4}
+}
+});
+$(".slider-style2").owlCarousel({
+loop:true,
+margin:10,
+navigation:true,
+pagination:false,
+nav:true,
+items:3,
+responsive:{
+0:{items:1},
+482:{items:2},
+768:{items:2},
+992:{items:2},
+1200:{items:2},
+2000:{items:2}
+}
+});
+$(".slider-style5").owlCarousel({
+loop:true,
+margin:0,
+navigation:true,
+pagination:false,
+nav:true,
+items:1,
+autoplay:true,
+autoplayTimeout:2000,
+responsive:{
+0:{items:1},
+482:{items:1},
+768:{items:1},
+992:{items:1},
+1200:{items:1},
+2000:{items:1}
+}
+});
+}
+$(function(){
+$('.krtGalry .imgBox').click(function(){
+try {
+if($(this).hasClass('imBig')){
+$('.krtGalry div').removeClass('imBig');
+var nim = $(this).attr('_nim');
+$('.krtGalry .' + nim).hide().addClass('imBig').fadeIn('slow');
+}else {
+$('.krtGalry div').removeClass('imBig');
+$(this).hide().addClass('imBig').fadeIn('slow');
+}
+document.querySelector('.krtGalry .imBig').scrollIntoView({behavior:'smooth'});
+} catch(e){
+}
+});
+});

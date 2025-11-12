@@ -1,0 +1,65 @@
+var newArrModel={
+'motorcycles':['Aprilia','Avantura Choppers','Bajaj','Benelli','Big Dog','BMW','CFMoto','Ducati','Emflux','FB Mondial','Harley Davidson','Hero','Honda','Husqvarna','Hyosung','Indian','Jawa','Kawasaki','KOMAKI','KTM','Lundafei','Mahindra','Menza','Moto Guzzi','MV Agusta','Norton','Regal Raptor','Revolt','Rowwet','Royal Enfield','SR Motor','Suzuki','SWM','Triumph','TVS','Ultraviolette','Yamaha'],
+'scooters':['AltiGreen','Amo','Ampere','Aprilia','Ather','Avera','Bahubali','Bajaj','BattRE','Benling','BGauss','bird','CEEON INDIA','Crayon Motors','Deltic','EeVe','ElecTorq','Evolet','Exalta','Gemopai','Gkon','Gugu','Hashiko','Hero','Hero Electric','Hind Motocorp','Honda','INDOM','Kabira Mobility','KOMAKI','Li-Ions Elektrik','Lundafei','M2GO','Mahindra','Mantra','Merico','NDS Eco Motors','Nexzu','NSW','Okinawa','Oreva','Ormax','Pure EV','Rowwet','SN Solar','Suzuki','Techo Electra','TNR','Tunwal','TVS','Ujaas','Varcas','Vespa','Victory','Vier','XXPlore','Yamaha','YObykes'],
+'atv':['Evolet','Polaris','Suzuki'],
+'electric':['29 Motors','AltiGreen','Amo','Ampere','Ather','Avera','Bahubali','Bajaj','BattRE','Benling','BGauss','bird','CEEON INDIA','Crayon Motors','Deltic','Detel','DeXpress','EeVe','ElecTorq','Emflux','Evolet','Exalta','Felidae','Geekay','Gemopai','Gkon','GoZero','Greendzine Tech','Greenvolt Mobility','Gugu','Hashiko','Hero Cycles','Hero Electric','Hind Motocorp','INDOM','Kabira Mobility','KOMAKI','Lectro','Li-Ions Elektrik','LightSpeed','Limitless','Lundafei','M2GO','Mantra','Menza','Merico','NDS Eco Motors','Nexzu','NSW','ODO','Okinawa','Oreva','Ormax','Pi Beam','Polarity','Pure EV','Revolt','Roulik','Rowwet','SN Solar','Spero','SR Motor','Svitch','Techo Electra','Tezlaa','TNR','Toroid','Tunwal','TVS','Ujaas','Ultraviolette','Varcas','Victory','Vier','XXPlore','YObykes'],
+'mopeds':['Detel','DeXpress','Greendzine Tech','Pure EV','Techo Electra','Tunwal','TVS']
+};
+
+function changeType() {
+var selType = $('#itemType').val();
+location.href = '/new/' + selType + '/';
+}
+
+function setBrand(selVal) {
+var selType = $('#itemType').val();
+var options='<option value="">Select Brand</option>';
+var mdlArr=newArrModel[selType];
+if(mdlArr){
+for(var k=0;k < mdlArr.length;k++){
+options+='<option value="'+getSEOUrl(mdlArr[k])+'" ';
+if(selVal && selVal==getSEOUrl(mdlArr[k])) options+='selected="selected"';
+options+='>'+mdlArr[k]+'</option>';
+}
+}
+$('#company').html(options);
+}
+
+function getSearchLinkAdv(itemType, comp, ccrange) {
+link = '/new/';
+var a = '?';
+itemType = trim(itemType || '');
+comp = trim(comp || '');
+ccrange = trim(ccrange || '');
+if(itemType) {link += itemType+'/';}
+if(comp)     {link += comp+'/';}
+if(ccrange) {link += '?ccrange=' + ccrange;}
+return link;
+}
+
+function advSearch() {
+try {
+var checkedPrice = [];
+$('#ccRange input:checked').each(function (){
+if($(this).val()!='') checkedPrice.push($(this).val());
+$('#ccRange').val(checkedPrice.join(':'));
+});
+var sortbyCcChk = $('#ccRange').val() ? $('#ccRange').val() : '';
+location.href = getSearchLinkAdv($('#itemType').val(), $('#company').val(), sortbyCcChk);
+} catch(e) {
+}
+}
+
+function resetCompany() {
+$('#company').val('');
+advSearch();
+}
+
+function resetCc() {
+$('#ccRange input').attr('checked',false);
+advSearch();
+}
+
+$('#ccRange input').click(function () {
+advSearch();
+});
